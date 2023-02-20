@@ -12,7 +12,8 @@ const HeaderContainer = styled.div`
   position: relative;
 `;
 const HeaderWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
   border: 1.5px solid #ffffff;
@@ -32,7 +33,6 @@ const BrandImage = styled.img`
 const HeaderLink = styled(Link)`
   list-style: none;
   text-decoration: none;
-  font-family: sans-serif;
   color: #252525;
   padding: 0.5rem;
   transition: 0.5s ease;
@@ -69,7 +69,6 @@ const UserAuthWrapper = styled.div`
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
-  console.log(showMenu);
   return (
     <HeaderContainer>
       <Container>
@@ -84,8 +83,8 @@ const Header = () => {
             </HeaderLink>
           </UserAuthWrapper>
           <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />
+          {showMenu && <DropDown />}
         </HeaderWrapper>
-        {showMenu && <DropDown />}
       </Container>
     </HeaderContainer>
   );

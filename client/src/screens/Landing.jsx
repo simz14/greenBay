@@ -4,15 +4,12 @@ import { Container } from "../components/Container";
 import styled from "styled-components";
 import shoppingImage from "../assets/shoppingImage.png";
 import Button from "../components/Button";
-import { useState } from "react";
 
 const LandingContainer = styled.div`
   width: 100%;
-  justify-content: center;
 `;
 const Description = styled.div`
   padding-right: 4rem;
-  font-family: sans-serif;
   font-size: xx-large;
   font-weight: 700;
   align-self: self-start;

@@ -23,9 +23,9 @@ const LogoImage = styled.img`
 const Links = styled.div`
   display: flex;
   gap: 1rem;
+  font-size: small;
   & a {
     color: #529070;
-    font-family: sans-serif;
   }
   @media (max-width: 510px) {
     font-size: xx-small;

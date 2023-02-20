@@ -8,7 +8,7 @@ const DropWrapper = styled.div`
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  background-color: #ffffffda;
+  background-color: #ffffff;
   justify-self: end;
   top: 5rem;
   padding: 1rem;
@@ -20,7 +20,6 @@ const DropWrapper = styled.div`
 `;
 const Link = styled(NavLink)`
   text-decoration: none;
-  font-family: sans-serif;
   font-size: small;
   font-weight: 600;
   color: #252525;
