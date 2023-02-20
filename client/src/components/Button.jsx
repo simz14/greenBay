@@ -16,10 +16,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ buttonName }) => {
+const Button = ({ buttonName, onClick }) => {
   return (
     <div>
-      <StyledButton>{buttonName}</StyledButton>
+      <StyledButton onClick={onClick}>{buttonName}</StyledButton>
     </div>
   );
 };

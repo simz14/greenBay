@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
+import DropDown from "./DropDown";
 import { Container } from "./Container";
 import { Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
+import { useState } from "react";
 
 const HeaderContainer = styled.div`
   width: 100%;
   justify-content: center;
+  position: relative;
 `;
 const HeaderWrapper = styled.div`
   display: flex;
@@ -64,6 +67,9 @@ const UserAuthWrapper = styled.div`
 `;
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  console.log(showMenu);
   return (
     <HeaderContainer>
       <Container>
@@ -77,8 +83,9 @@ const Header = () => {
               Register
             </HeaderLink>
           </UserAuthWrapper>
-          <MenuIcon />
+          <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />
         </HeaderWrapper>
+        {showMenu && <DropDown />}
       </Container>
     </HeaderContainer>
   );
