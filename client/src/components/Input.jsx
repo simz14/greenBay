@@ -4,8 +4,8 @@ const StyledInput = styled.input`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px 0 5px 25px;
-  margin-bottom: 1rem;
+  padding: 10px 0 10px 25px;
+  margin: 1rem 0 1rem 0;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 10px;

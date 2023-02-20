@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Container } from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { useState } from "react";
 import { fetchRegister } from "../services/register";
+import greenShape from "../assets/greenShape.jpg";
 
 const RegisterContainer = styled.div`
   width: 100%;
@@ -18,16 +19,32 @@ const RegisterWrapper = styled.div`
 
 const InfoWrapper = styled.div``;
 
+const rotation = keyframes`
+   from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+`;
+const StyledImg = styled.img`
+  width: 30rem;
+  position: fixed;
+  z-index: -9999;
+  top: 10rem;
+  left: 5rem;
+  transform: rotate(150deg);
+  animation: rotation 10s infinite linear;
+  animation-name: ${rotation};
+`;
+
 const InputsWrapper = styled.div`
   display: grid;
-  width: 100%;
   margin: auto;
   width: fit-content;
-  height: 100%;
   justify-self: center;
-  background-color: #c2e8d5;
   border-radius: 15px;
-  padding: 2rem;
+  padding: 5rem;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
 `;
 
@@ -46,6 +63,7 @@ const Register = () => {
       <Container>
         <RegisterWrapper>
           <InfoWrapper>
+            <StyledImg src={greenShape} />
             <h1> Welcome to GreenBay!</h1>
             <p>Sign up to continue</p>
           </InfoWrapper>
