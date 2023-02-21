@@ -1,5 +1,6 @@
 const { db } = require("../data/connection");
 const { DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 const User = db.define(
   "User",
@@ -33,7 +34,7 @@ const User = db.define(
       validate: {
         checkLength() {
           if (this.password.length < 8) {
-            throw new Error("Password must be atleast 8 character long!");
+            throw new Error("Password needs 8 characters!!");
           }
         },
       },
@@ -43,4 +44,11 @@ const User = db.define(
     timestamps: false,
   }
 );
+
+User.beforeCreate(async (user, options) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(user.password, salt);
+  user.password = hashedPassword;
+});
+
 module.exports = { User };

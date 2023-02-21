@@ -11,11 +11,12 @@ const StyledInput = styled.input`
   border-radius: 10px;
 `;
 
-const Input = ({ onChange, value, type, placeholder }) => {
+const Input = ({ onChange, onBlur, value, type, placeholder }) => {
   return (
     <div>
       <StyledInput
         onChange={onChange}
+        onBlur={onBlur}
         value={value}
         type={type}
         placeholder={placeholder}

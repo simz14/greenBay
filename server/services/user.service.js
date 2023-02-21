@@ -20,10 +20,10 @@ const addUser = async (data) => {
         });
       }
     } else {
-      throw new Error("Email already exists");
+      throw new Error("Email already exists!");
     }
   } else {
-    throw new Error("Username already exists");
+    throw new Error("Username already exists!");
   }
 };
 
