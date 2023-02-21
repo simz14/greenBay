@@ -15,7 +15,9 @@ const addUser = async (data) => {
           password: password,
         });
       } catch (err) {
-        throw new Error(err.message.split(":")[1]);
+        err.errors.map((e) => {
+          throw new Error(e.message);
+        });
       }
     } else {
       throw new Error("Email already exists");

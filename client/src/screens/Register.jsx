@@ -15,34 +15,23 @@ const RegisterContainer = styled.div`
 const RegisterWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding: 0 5rem 0 5rem;
 `;
 
 const InfoWrapper = styled.div``;
 
-const rotation = keyframes`
-   from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-`;
 const StyledImg = styled.img`
   width: 30rem;
   position: fixed;
   z-index: -9999;
   top: 10rem;
-  left: 5rem;
-  transform: rotate(150deg);
-  animation: rotation 10s infinite linear;
-  animation-name: ${rotation};
+  right: 5rem;
 `;
 
 const InputsWrapper = styled.div`
   display: grid;
-  margin: auto;
   width: fit-content;
-  justify-self: center;
+  justify-self: end;
   border-radius: 15px;
   padding: 5rem;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
@@ -53,8 +42,10 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleRegisterClick = () => {
-    fetchRegister({ email, username, password });
+  const handleRegisterClick = async () => {
+    const response = await fetchRegister({ username, email, password });
+    const message = await response.json();
+    console.log(message.message);
   };
 
   return (
