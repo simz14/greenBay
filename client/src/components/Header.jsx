@@ -9,7 +9,8 @@ import { useState } from "react";
 const HeaderContainer = styled.div`
   width: 100%;
   justify-content: center;
-  position: relative;
+  position: sticky;
+  top: 0;
 `;
 const HeaderWrapper = styled.div`
   display: grid;

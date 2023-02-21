@@ -34,7 +34,7 @@ const User = db.define(
       validate: {
         checkLength() {
           if (this.password.length < 8) {
-            throw new Error("Password needs 8 characters!!");
+            throw new Error("Password needs 8 characters!");
           }
         },
       },

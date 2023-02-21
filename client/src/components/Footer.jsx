@@ -3,16 +3,17 @@ import logo from "../assets/logo.svg";
 import styled from "styled-components";
 
 const FooterContainer = styled.div`
-  position: fixed;
-  left: 0;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  height: 1rem;
 `;
 
 const FooterWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 `;
 const LogoImage = styled.img`
   height: 1.5rem;
