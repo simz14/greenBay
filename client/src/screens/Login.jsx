@@ -5,17 +5,17 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { useState } from "react";
-import { fetchRegister } from "../services/register";
 import { validateEmail, validatePassword } from "../utils/validation";
 import greenShape from "../assets/greenShape.jpg";
-import { BiUser, BiEnvelope, BiLockAlt } from "react-icons/bi";
+import { BiEnvelope, BiLockAlt } from "react-icons/bi";
+import { fetchLogin } from "../services/login";
 
-const RegisterContainer = styled.div`
+const LoginContainer = styled.div`
   width: 100%;
   padding-bottom: 0.5rem;
 `;
 
-const RegisterWrapper = styled.div`
+const LoginWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0 5rem 0 5rem;
@@ -102,14 +102,13 @@ const EroorMessage = styled.p`
   }
 `;
 
-const Register = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleRegisterClick = async () => {
-    const response = await fetchRegister({ username, email, password });
+  const handleLoginClick = async () => {
+    const response = await fetchLogin({ email, password });
     const message = await response.json();
     setErrorMsg((prev) => (prev = message.message));
   };
@@ -131,25 +130,17 @@ const Register = () => {
   };
 
   return (
-    <RegisterContainer>
+    <LoginContainer>
       <Header />
       <Container>
-        <RegisterWrapper>
+        <LoginWrapper>
           <InfoWrapper>
-            <h1> Welcome to GreenBay!</h1>
-            <p>Sign up to continue</p>
+            <h1> Welcome back!</h1>
+            <p>Sign in to continue</p>
           </InfoWrapper>
           <InputsWrapper>
-            {" "}
             <StyledImg src={greenShape} />
-            <h1>Register</h1>
-            <Input
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-              type="text"
-              placeholder="username"
-              icon={<BiUser />}
-            />
+            <h1>Login</h1>
             <Input
               onChange={(e) => setEmail(e.target.value)}
               onBlur={() => handleEmailBlur()}
@@ -166,17 +157,14 @@ const Register = () => {
               placeholder="password"
               icon={<BiLockAlt />}
             />
-            <Button
-              onClick={() => handleRegisterClick()}
-              buttonName="Sign up"
-            />
+            <Button onClick={() => handleLoginClick()} buttonName="Sign in" />
             {errorMsg.length > 0 && <EroorMessage>{errorMsg}</EroorMessage>}
           </InputsWrapper>
-        </RegisterWrapper>
+        </LoginWrapper>
       </Container>
       <Footer />
-    </RegisterContainer>
+    </LoginContainer>
   );
 };
 
-export default Register;
+export default Login;
