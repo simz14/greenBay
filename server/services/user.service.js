@@ -1,5 +1,6 @@
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
+const { createJwt } = require("../middlewares/tokenCreation");
 
 const addUserService = async (data) => {
   const { username, email, password } = data;
@@ -39,7 +40,9 @@ const checkUserService = async (data) => {
     if (!(await valid)) {
       throw new Error("Incorrect password!");
     }
-    return "Successful";
+    console.log(user.isAdmin);
+    const usersJwt = createJwt(user.id, user.username, user.isAdmin);
+    return usersJwt;
   } else {
     throw new Error("Incorrect email adress!");
   }

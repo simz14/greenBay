@@ -39,6 +39,10 @@ const User = db.define(
         },
       },
     },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,

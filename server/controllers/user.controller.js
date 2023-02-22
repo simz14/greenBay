@@ -17,8 +17,8 @@ const userController = {
 
   async checkUser(req, res) {
     try {
-      await checkUserService(req.body);
-      res.status(200);
+      const serviceResult = await checkUserService(req.body);
+      res.status(200).send({ jwt: serviceResult });
     } catch (err) {
       res.status(400).send({ message: err.message });
     }

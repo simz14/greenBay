@@ -1,14 +1,16 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { redirect } from "react-router-dom";
 import { Container } from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { useState } from "react";
+
 import { validateEmail, validatePassword } from "../utils/validation";
+import { fetchLogin } from "../services/login";
 import greenShape from "../assets/greenShape.jpg";
 import { BiEnvelope, BiLockAlt } from "react-icons/bi";
-import { fetchLogin } from "../services/login";
 
 const LoginContainer = styled.div`
   width: 100%;
@@ -109,8 +111,13 @@ const Login = () => {
 
   const handleLoginClick = async () => {
     const response = await fetchLogin({ email, password });
-    const message = await response.json();
-    setErrorMsg((prev) => (prev = message.message));
+    const data = await response.json();
+    console.log(data);
+    if (!data.jwt) {
+      setErrorMsg((prev) => (prev = data.message));
+    } else {
+      window.localStorage.setItem("token", data.jwt);
+    }
   };
 
   const handleEmailBlur = () => {
