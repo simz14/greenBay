@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container } from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import Input from "../components/Input";
-
 import { validateEmail, validatePassword } from "../utils/validation";
 import { fetchLogin } from "../services/login";
 import greenShape from "../assets/greenShape.jpg";
@@ -108,15 +107,16 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
 
   const handleLoginClick = async () => {
     const response = await fetchLogin({ email, password });
     const data = await response.json();
-    console.log(data);
     if (!data.jwt) {
       setErrorMsg((prev) => (prev = data.message));
     } else {
       window.localStorage.setItem("token", data.jwt);
+      navigate("/home");
     }
   };
 

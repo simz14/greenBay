@@ -11,16 +11,16 @@ const userController = {
         .status(201)
         .send({ message: "Successful registration, please sign in!" });
     } catch (err) {
-      res.status(422).send({ message: err.message });
+      res.status(422).json({ message: err.message });
     }
   },
 
   async checkUser(req, res) {
     try {
       const serviceResult = await checkUserService(req.body);
-      res.status(200).send({ jwt: serviceResult });
+      res.status(200).json({ jwt: serviceResult });
     } catch (err) {
-      res.status(400).send({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
   },
 };

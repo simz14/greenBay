@@ -1,9 +1,10 @@
 import { createContext } from "React";
 import { useEffect, useState } from "react";
+import { userAuth } from "../utils/auth";
 
-const UserContext = createContext(null);
+export const UserContext = createContext(null);
 
-const UserProvider = (props) => {
+export const UserProvider = (props) => {
   const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
@@ -20,6 +21,7 @@ const UserProvider = (props) => {
   useEffect(() => {
     setContext();
   }, []);
+
   return (
     <UserContext.Provider
       value={{
@@ -35,5 +37,3 @@ const UserProvider = (props) => {
     </UserContext.Provider>
   );
 };
-
-export default UserProvider;

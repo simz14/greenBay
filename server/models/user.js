@@ -41,6 +41,7 @@ const User = db.define(
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: false,
     },
   },

@@ -40,7 +40,6 @@ const checkUserService = async (data) => {
     if (!(await valid)) {
       throw new Error("Incorrect password!");
     }
-    console.log(user.isAdmin);
     const usersJwt = createJwt(user.id, user.username, user.isAdmin);
     return usersJwt;
   } else {
