@@ -1,3 +1,4 @@
+import React from "react";
 import { Route, Routes } from "react-router";
 import Landing from "./screens/Landing";
 import Login from "./screens/Login";

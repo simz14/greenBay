@@ -1,3 +1,4 @@
+import React from "react";
 import { Container } from "./Container";
 import logo from "../assets/logo.svg";
 import styled from "styled-components";

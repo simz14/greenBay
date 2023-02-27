@@ -1,6 +1,5 @@
-import { createContext } from "React";
-import { useEffect, useState } from "react";
-import { userAuth } from "../utils/auth";
+import React, { useEffect, useState, createContext } from "react";
+import { userAuth } from "../utils/auth.js";
 
 export const UserContext = createContext(null);
 
