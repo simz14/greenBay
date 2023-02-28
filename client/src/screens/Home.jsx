@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { fetchProducts } from "../services/products";
+import Product from "../components/Product";
+import { CartContext } from "../context/CartContext";
 
-const ContentWrapper = styled.div``;
+const ContentWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,23 +24,19 @@ const Home = () => {
     };
     fetchData();
   }, []);
-  console.log(products);
+
+  console.log(cartItems);
   return (
     <div>
-      <Header showAuth={false} />
+      <Header showAuth={false} cartItems={cartItems} />
       <Container>
         <ContentWrapper>
           {products.map((item) => {
-            return (
-              <div>
-                <h1>{item.title}</h1>
-                <p>{item.description}</p>
-                <span>{item.price}</span>
-              </div>
-            );
+            return <Product key={item.id} item={item} />;
           })}
         </ContentWrapper>
       </Container>
+      <Footer />
     </div>
   );
 };

@@ -4,9 +4,10 @@ import logo from "../assets/logo.svg";
 import DropDown from "./DropDown";
 import { Container } from "./Container";
 import { Link, useNavigate } from "react-router-dom";
-import { BiMenu, BiLogOut } from "react-icons/bi";
+import { BiMenu, BiLogOut, BiCartAlt } from "react-icons/bi";
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import Cart from "./Cart";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -71,6 +72,12 @@ const LogOutIcon = styled(BiLogOut)`
   cursor: pointer;
   transform: rotate(180deg);
 `;
+
+const CartIcon = styled(BiCartAlt)`
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+`;
 const UserAuthWrapper = styled.div`
   display: flex;
   gap: 1rem;
@@ -81,8 +88,9 @@ const Icons = styled.div`
   gap: 1rem;
 `;
 
-const Header = ({ showAuth }) => {
+const Header = ({ showAuth, cartItems }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showCart, setShowCart] = useState(false);
   const { setUserId, setUsername, setIsAdmin } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -102,7 +110,10 @@ const Header = ({ showAuth }) => {
             </UserAuthWrapper>
           )}
           <Icons>
-            <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />
+            <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />{" "}
+            {!showAuth && (
+              <CartIcon onClick={() => setShowCart((prev) => !prev)} />
+            )}
             {!showAuth && (
               <LogOutIcon
                 onClick={() => {
@@ -116,6 +127,7 @@ const Header = ({ showAuth }) => {
             )}
           </Icons>
           {showMenu && <DropDown />}
+          {showCart && <Cart />}
         </HeaderWrapper>
       </Container>
     </HeaderContainer>
