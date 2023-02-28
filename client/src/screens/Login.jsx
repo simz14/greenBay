@@ -139,7 +139,7 @@ const Login = () => {
 
   return (
     <LoginContainer>
-      <Header />
+      <Header showAuth={true} />
       <Container>
         <LoginWrapper>
           <InfoWrapper>

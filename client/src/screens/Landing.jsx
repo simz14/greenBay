@@ -80,7 +80,7 @@ const GreenP = styled.h2`
 const Landing = () => {
   return (
     <LandingContainer>
-      <Header />
+      <Header showAuth={true} />
       <Container>
         <WelcomeWrapper>
           <Description>

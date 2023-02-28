@@ -3,9 +3,10 @@ import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import DropDown from "./DropDown";
 import { Container } from "./Container";
-import { Link } from "react-router-dom";
-import { BiMenu } from "react-icons/bi";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BiMenu, BiLogOut } from "react-icons/bi";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -63,13 +64,27 @@ const MenuIcon = styled(BiMenu)`
   width: 1.5rem;
   cursor: pointer;
 `;
+
+const LogOutIcon = styled(BiLogOut)`
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  transform: rotate(180deg);
+`;
 const UserAuthWrapper = styled.div`
   display: flex;
   gap: 1rem;
 `;
 
-const Header = () => {
+const Icons = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const Header = ({ showAuth }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const { setUserId, setUsername, setIsAdmin } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <HeaderContainer>
@@ -78,13 +93,28 @@ const Header = () => {
           <HeaderLink className="logo" to="/home">
             <BrandImage src={logo} />
           </HeaderLink>
-          <UserAuthWrapper>
-            <HeaderLink to="/login">Login</HeaderLink>
-            <HeaderLink className="register" to="/register">
-              Register
-            </HeaderLink>
-          </UserAuthWrapper>
-          <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />
+          {showAuth && (
+            <UserAuthWrapper>
+              <HeaderLink to="/login">Login</HeaderLink>
+              <HeaderLink className="register" to="/register">
+                Register
+              </HeaderLink>
+            </UserAuthWrapper>
+          )}
+          <Icons>
+            <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />
+            {!showAuth && (
+              <LogOutIcon
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  setUserId(null),
+                    setUsername(null),
+                    setIsAdmin(null),
+                    navigate("/login");
+                }}
+              />
+            )}
+          </Icons>
           {showMenu && <DropDown />}
         </HeaderWrapper>
       </Container>
