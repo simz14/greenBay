@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
+import Button from "./Button";
 
 const ProductWrapper = styled.div`
   padding: 1rem;
   margin: 1rem;
-  cursor: pointer;
   justify-content: center;
   display: grid;
 `;
@@ -16,11 +16,21 @@ const ProductImage = styled.img`
 
 const Product = ({ item }) => {
   const { setCartItems } = useContext(CartContext);
+
+  const handleClick = () => {
+    setCartItems((prev) => [...prev, { ...item, amount: 1 }]);
+  };
+
   return (
-    <ProductWrapper onClick={() => setCartItems((prev) => [...prev, item])}>
+    <ProductWrapper>
       <ProductImage src={item.images[0]} />
-      <p>{item.price + "€"}</p>
       <p>{item.title}</p>
+      <p>{item.price + "€"}</p>
+      <Button
+        itemId={item.id}
+        buttonName={"Add to cart"}
+        onClick={handleClick}
+      />
     </ProductWrapper>
   );
 };

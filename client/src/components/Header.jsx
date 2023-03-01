@@ -8,6 +8,7 @@ import { BiMenu, BiLogOut, BiCartAlt } from "react-icons/bi";
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import Cart from "./Cart";
+import { CartContext } from "../context/CartContext";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -88,10 +89,23 @@ const Icons = styled.div`
   gap: 1rem;
 `;
 
-const Header = ({ showAuth, cartItems }) => {
+const CartCount = styled.span`
+  display: inline-block;
+
+  border-radius: 9px;
+  font-size: 10px;
+  background: #ff0000;
+  color: #fff;
+  padding: 0px 4px;
+  vertical-align: top;
+  margin-left: -10px;
+`;
+
+const Header = ({ showAuth }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const { setUserId, setUsername, setIsAdmin } = useContext(UserContext);
+  const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
 
   return (
@@ -112,7 +126,10 @@ const Header = ({ showAuth, cartItems }) => {
           <Icons>
             <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />{" "}
             {!showAuth && (
-              <CartIcon onClick={() => setShowCart((prev) => !prev)} />
+              <div>
+                <CartIcon onClick={() => setShowCart((prev) => !prev)} />
+                <CartCount> {cartItems.length}</CartCount>
+              </div>
             )}
             {!showAuth && (
               <LogOutIcon

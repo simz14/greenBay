@@ -14,7 +14,7 @@ const ContentWrapper = styled.div`
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +25,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-  console.log(cartItems);
   return (
     <div>
       <Header showAuth={false} cartItems={cartItems} />
