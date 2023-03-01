@@ -12,7 +12,7 @@ const ContentWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
 `;
 
-const Home = () => {
+const Products = () => {
   const [products, setProducts] = useState([]);
   const { cartItems } = useContext(CartContext);
 
@@ -40,4 +40,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Products;

@@ -5,8 +5,9 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import { UserProvider } from "./context/UserContext";
 import { PrivateRoute } from "./components/PrivateRoute";
-import Home from "./screens/Home";
+import Products from "./screens/Products";
 import { CartProvider } from "./context/CartContext";
+import About from "./screens/About";
 
 function App() {
   return (
@@ -16,13 +17,14 @@ function App() {
           <Route key="Landing" exact path="/" element={<Landing />} />
           <Route key="Register" path="/register" element={<Register />} />
           <Route key="Login" path="/login" element={<Login />} />
+          <Route key="About" path="/about" element={<About />} />
 
           <Route
-            key="Home"
-            path="/home"
+            key="Products"
+            path="/products"
             element={
               <PrivateRoute>
-                <Home />
+                <Products />
               </PrivateRoute>
             }
           />

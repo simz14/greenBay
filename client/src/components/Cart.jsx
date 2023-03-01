@@ -33,10 +33,6 @@ const ProductWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
-
-  & img {
-    height: 10rem;
-  }
 `;
 
 const EmptyCartWrapper = styled.div`
