@@ -5,13 +5,23 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { fetchProducts } from "../services/products";
 import Product from "../components/Product";
+import FilterForm from "../components/FilterForm";
 import { CartContext } from "../context/CartContext";
 
-const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+const PorductsWrapper = styled.div`
+  width: 100%;
 `;
 
+const ProductsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+`;
+
+const Content = styled.div`
+  display: grid;
+  grid-column: 2/5;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+`;
 const Products = () => {
   const [products, setProducts] = useState([]);
   const { cartItems } = useContext(CartContext);
@@ -24,19 +34,26 @@ const Products = () => {
     };
     fetchData();
   }, []);
+  /*products.map((item) => {
+    console.log(item.category);
+  });*/
 
   return (
-    <div>
+    <PorductsWrapper>
       <Header showAuth={false} cartItems={cartItems} />
       <Container>
-        <ContentWrapper>
-          {products.map((item) => {
-            return <Product key={item.id} item={item} />;
-          })}
-        </ContentWrapper>
+        <ProductsWrapper>
+          <FilterForm />
+
+          <Content>
+            {products.map((item) => {
+              return <Product key={item.id} item={item} />;
+            })}
+          </Content>
+        </ProductsWrapper>
       </Container>
       <Footer />
-    </div>
+    </PorductsWrapper>
   );
 };
 

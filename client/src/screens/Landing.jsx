@@ -5,6 +5,7 @@ import { Container } from "../components/Container";
 import styled from "styled-components";
 import shoppingImage from "../assets/shoppingImage.png";
 import Button from "../components/Button";
+import { useNavigate } from "react-router";
 
 const LandingContainer = styled.div`
   width: 100%;
@@ -78,6 +79,7 @@ const GreenP = styled.h2`
 `;
 
 const Landing = () => {
+  const navigate = useNavigate();
   return (
     <LandingContainer>
       <Header showAuth={true} />
@@ -90,7 +92,10 @@ const Landing = () => {
               At GreenBay you can buy clothes, houshold products and more
               anytime at one place.
             </span>
-            <Button buttonName="Go Shopping" />
+            <Button
+              onClick={() => navigate("/products")}
+              buttonName="Go Shopping"
+            />
           </Description>
 
           <ImageWrapper>

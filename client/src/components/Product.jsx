@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
-import Button from "./Button";
+import ButtonProduct from "./ButtonProduct";
 
 const ProductWrapper = styled.div`
   padding: 1rem;
@@ -26,7 +26,7 @@ const Product = ({ item }) => {
       <ProductImage src={item.images[0]} />
       <p>{item.title}</p>
       <p>{item.price + "€"}</p>
-      <Button
+      <ButtonProduct
         itemId={item.id}
         buttonName={"Add to cart"}
         onClick={handleClick}
