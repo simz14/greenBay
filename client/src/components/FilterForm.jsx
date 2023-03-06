@@ -5,6 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import Button from "../components/Button";
 import { fetchProducts } from "../services/products";
+import { fetchCategories } from "../services/categories";
 
 const FormContainer = styled.div`
   position: relative;
@@ -12,7 +13,6 @@ const FormContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -9999;
 `;
 
 const FormWrapper = styled.div`
@@ -28,21 +28,13 @@ const Box = styled(FormControlLabel)`
 `;
 const FilterForm = () => {
   const [categories, setCategories] = useState([]);
-  const [checked, setChecked] = useState([]);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetchProducts();
-      const data = await response.json();
-      let categories = [];
-      data.products.map((product) => {
-        if (!categories.includes(product.category)) {
-          categories.push(product.category);
-        }
-      });
-      setCategories(categories);
+    const getCategories = async () => {
+      const response = await fetchCategories();
+      setCategories(response);
     };
-    getProducts();
+    getCategories();
   }, []);
 
   return (
@@ -55,7 +47,8 @@ const FilterForm = () => {
               <Box
                 key={Math.random() * 7}
                 control={<Checkbox sx={{ color: "#73c69c" }} />}
-                label={category}
+                label={category.category}
+                value={category.category}
                 sx={{ fontSize: 0.5 }}
               />
             );

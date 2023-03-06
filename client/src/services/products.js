@@ -1,4 +1,7 @@
+import { fetchCategories } from "./categories";
+
 export const fetchProducts = async () => {
-  const products = await fetch("https://dummyjson.com/products?limit=200");
-  return products;
+  const allProducts = await fetch("https://dummyjson.com/products?limit=100");
+  const data = await allProducts.json();
+  return data;
 };

@@ -7,6 +7,7 @@ import { fetchProducts } from "../services/products";
 import Product from "../components/Product";
 import FilterForm from "../components/FilterForm";
 import { CartContext } from "../context/CartContext";
+import { ProductsContext } from "../context/ProductsContext";
 
 const PorductsWrapper = styled.div`
   width: 100%;
@@ -23,20 +24,8 @@ const Content = styled.div`
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 `;
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useContext(ProductsContext);
   const { cartItems } = useContext(CartContext);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetchProducts();
-      const data = await response.json();
-      setProducts(data.products);
-    };
-    fetchData();
-  }, []);
-  /*products.map((item) => {
-    console.log(item.category);
-  });*/
 
   return (
     <PorductsWrapper>
