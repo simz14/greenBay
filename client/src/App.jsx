@@ -7,34 +7,37 @@ import { ProductsProvider } from "./context/ProductsContext";
 import { UserProvider } from "./context/UserContext";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { CartProvider } from "./context/CartContext";
+import { CategoriesProvider } from "./context/CategoriesContext";
 import Products from "./screens/Products";
 
 import About from "./screens/About";
 
 function App() {
   return (
-    <ProductsProvider>
-      <UserProvider>
-        <CartProvider>
-          <Routes>
-            <Route key="Landing" exact path="/" element={<Landing />} />
-            <Route key="Register" path="/register" element={<Register />} />
-            <Route key="Login" path="/login" element={<Login />} />
-            <Route key="About" path="/about" element={<About />} />
+    <CategoriesProvider>
+      <ProductsProvider>
+        <UserProvider>
+          <CartProvider>
+            <Routes>
+              <Route key="Landing" exact path="/" element={<Landing />} />
+              <Route key="Register" path="/register" element={<Register />} />
+              <Route key="Login" path="/login" element={<Login />} />
+              <Route key="About" path="/about" element={<About />} />
 
-            <Route
-              key="Products"
-              path="/products"
-              element={
-                <PrivateRoute>
-                  <Products />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </CartProvider>
-      </UserProvider>
-    </ProductsProvider>
+              <Route
+                key="Products"
+                path="/products"
+                element={
+                  <PrivateRoute>
+                    <Products />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </CartProvider>
+        </UserProvider>
+      </ProductsProvider>
+    </CategoriesProvider>
   );
 }
 

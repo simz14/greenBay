@@ -3,8 +3,7 @@ export const fetchCategories = async () => {
   const data = await categories.json();
   let dataAndId = [];
   for (let i = 0; i < data.length; i++) {
-    dataAndId.push({ id: i + 1, category: data[i] });
+    dataAndId.push({ id: i + 1, category: data[i], checked: false });
   }
-
   return dataAndId;
 };

@@ -1,41 +1,38 @@
-import { createContext, useEffect, useState } from "react";
-import { fetchCategories } from "../services/categories";
+import { createContext, useContext, useEffect, useState } from "react";
 import { fetchProducts } from "../services/products";
+import { CategoriesContext } from "./CategoriesContext";
 
-export const ProductsContext = createContext([]);
+export const ProductsContext = createContext(null);
 
 export const ProductsProvider = (props) => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const { categories } = useContext(CategoriesContext);
+
+  const returnId = (product) => {
+    let categoryID;
+    for (let i = 0; i < categories.length; i++) {
+      if (categories[i].category === product.category) {
+        categoryID = categories[i].id;
+        break;
+      }
+    }
+    return categoryID;
+  };
+  const getProducts = async () => {
+    const response = await fetchProducts();
+    setProducts(
+      response.products.map((product) => {
+        return {
+          ...product,
+          categoryId: returnId(product),
+        };
+      })
+    );
+  };
 
   useEffect(() => {
-    const getCategories = async () => {
-      const data = await fetchCategories();
-      setCategories(data);
-    };
-
-    const returnId = (product) => {
-      for (let i = 0; i < categories.length; i++) {
-        if (categories[i].category === product.category) {
-          return categories[i].id;
-        }
-      }
-    };
-
-    const getProducts = async () => {
-      const response = await fetchProducts();
-      setProducts(
-        response.products.map((product) => {
-          return {
-            ...product,
-            catgoryId: () => returnId(product),
-          };
-        })
-      );
-    };
-    getCategories();
     getProducts();
-  }, []);
+  }, [categories]);
 
   return (
     <ProductsContext.Provider value={{ products, setProducts }}>
