@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -6,6 +6,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Accordion from "@mui/material/Accordion";
 import { AccordionSummary, Slider, Typography } from "@mui/material";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { ProductsContext } from "../context/ProductsContext";
 
 const FormContainer = styled.div`
   position: relative;
@@ -27,6 +28,11 @@ const Box = styled(FormControlLabel)`
   font-size: 0.5rem;
 `;
 const FilterForm = ({ setCategories, categories }) => {
+  const { minMax, setMinMax } = useContext(ProductsContext);
+  const handleChange = (e, newValue) => {
+    setMinMax(newValue);
+  };
+
   return (
     <FormContainer>
       <FormWrapper>
@@ -72,11 +78,14 @@ const FilterForm = ({ setCategories, categories }) => {
             <Typography>Price</Typography>
           </AccordionSummary>
           <Slider
-            getAriaLabel={() => "Temperature range"}
-            defaultValue={175}
-            min={0}
-            max={250}
+            min={minMax[0]}
+            max={minMax[1]}
+            step={5}
+            value={minMax}
+            onChange={handleChange}
             valueLabelDisplay="auto"
+            size="small"
+            sx={{ color: "#73c69c" }}
           />
         </Accordion>
       </FormWrapper>

@@ -25,7 +25,7 @@ const Content = styled.div`
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 `;
 const Products = () => {
-  const { products } = useContext(ProductsContext);
+  const { minMax, setMinMax, products } = useContext(ProductsContext);
   const { categories, setCategories } = useContext(CategoriesContext);
   const { cartItems } = useContext(CartContext);
   const [filters, setFilters] = useState([]);
@@ -37,9 +37,10 @@ const Products = () => {
         checked.push(category.id);
       }
     });
+
     setFilters(checked);
   }, [categories]);
-  console.log(products);
+
   return (
     <PorductsWrapper>
       <Header showAuth={false} cartItems={cartItems} />
