@@ -129,7 +129,7 @@ const Header = ({ showAuth }) => {
             {!showAuth && (
               <div>
                 <CartIcon onClick={() => setShowCart((prev) => !prev)} />
-                <CartCount> {cartItems.length}</CartCount>
+                <CartCount> {cartItems && cartItems.length}</CartCount>
               </div>
             )}
             {!showAuth && (

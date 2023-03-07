@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 import emptyCart from "../assets/empty.gif";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { getTotal } from "../utils/getTotal";
+import { BiX } from "react-icons/bi";
 
 const CartWrapper = styled.div`
   display: grid;
@@ -31,10 +34,21 @@ const CartWrapper = styled.div`
 
 const ProductWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: center;
+  gap: 1rem;
+`;
+const ImageWrapper = styled.div`
+  display: grid;
+  grid-column: 1/3;
 `;
 
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
 const EmptyCartWrapper = styled.div`
   display: grid;
   justify-items: center;
@@ -42,42 +56,75 @@ const EmptyCartWrapper = styled.div`
 `;
 
 const Cart = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
+
+  const changeHandle = (itemId, amount) => {
+    setCartItems(
+      cartItems.map((item) => {
+        if (item.id === itemId) {
+          item.amount = amount;
+        }
+        return item;
+      })
+    );
+  };
+
+  const removeHandle = (itemId) => {
+    setCartItems(cartItems.filter((item) => item.id !== itemId));
+  };
 
   return (
     <CartWrapper>
-      {cartItems.length < 1 ? (
+      {cartItems && cartItems.length < 1 ? (
         <EmptyCartWrapper>
           <p>Your cart is empty</p>
           <img src={emptyCart} />
         </EmptyCartWrapper>
       ) : (
-        cartItems.map((item) => {
-          return (
-            <ProductWrapper key={item.id * Math.random()}>
-              <div>
-                <img src={item.images[0]} />
-              </div>
-              <div>
-                <p>{item.title}</p>
-                <p>{item.price + "€"}</p>
-                <select onChange={(e) => (item.amount = e.target.value)}>
-                  <option value={item.amount}>{item.amount}</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-              </div>
-            </ProductWrapper>
-          );
-        })
+        <div>
+          {cartItems &&
+            cartItems.map((item) => {
+              return (
+                <ProductWrapper key={item.id * Math.random()}>
+                  <ImageWrapper>
+                    <img src={item.images[0]} />
+                  </ImageWrapper>
+                  <div>
+                    <p>{item.title}</p>
+                    <p>{item.price + "€"}</p>
+                    <FormControl
+                      id="demo-simple-select-label"
+                      sx={{ maxWidth: 100 }}
+                      size="small"
+                      fullWidth
+                    >
+                      <InputLabel>Amount</InputLabel>
+                      <Select
+                        value={item.amount}
+                        label={item.amount}
+                        onChange={(e) => changeHandle(item.id, e.target.value)}
+                      >
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <IconWrapper onClick={() => removeHandle(item.id)}>
+                    <BiX />
+                  </IconWrapper>
+                </ProductWrapper>
+              );
+            })}
+          <h2>Total:{getTotal(cartItems)}€</h2>
+        </div>
       )}
     </CartWrapper>
   );

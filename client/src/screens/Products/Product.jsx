@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../../context/CartContext";
 import ButtonProduct from "./ButtonProduct";
 
 const ProductWrapper = styled.div`

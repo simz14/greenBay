@@ -8,7 +8,7 @@ import { UserProvider } from "./context/UserContext";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { CartProvider } from "./context/CartContext";
 import { CategoriesProvider } from "./context/CategoriesContext";
-import Products from "./screens/Products";
+import Products from "./screens/Products/Products";
 
 import About from "./screens/About";
 

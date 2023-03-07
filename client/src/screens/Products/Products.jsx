@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container } from "../components/Container";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Product from "../components/Product";
-import FilterForm from "../components/FilterForm";
-import { CartContext } from "../context/CartContext";
-import { ProductsContext } from "../context/ProductsContext";
-import { CategoriesContext } from "../context/CategoriesContext";
+import { Container } from "../../components/Container";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Product from "./Product";
+import FilterForm from "./FilterForm";
+import { CartContext } from "../../context/CartContext";
+import { ProductsContext } from "../../context/ProductsContext";
+import { CategoriesContext } from "../../context/CategoriesContext";
 
 const PorductsWrapper = styled.div`
   width: 100%;
