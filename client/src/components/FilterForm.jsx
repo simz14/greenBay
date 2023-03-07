@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -6,7 +6,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Accordion from "@mui/material/Accordion";
 import { AccordionSummary, Slider, Typography } from "@mui/material";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { ProductsContext } from "../context/ProductsContext";
+import { getMinMax } from "../utils/minMax";
 
 const FormContainer = styled.div`
   position: relative;
@@ -27,10 +27,15 @@ const FormWrapper = styled.div`
 const Box = styled(FormControlLabel)`
   font-size: 0.5rem;
 `;
-const FilterForm = ({ setCategories, categories }) => {
-  const { minMax, setMinMax } = useContext(ProductsContext);
-  const handleChange = (e, newValue) => {
-    setMinMax(newValue);
+const FilterForm = ({
+  filteredProducts,
+  filteredCategories,
+  setCategories,
+}) => {
+  const [price, setPrice] = useState([20, 50]);
+
+  const handleChange = (e) => {
+    setPrice(e.target.value);
   };
 
   return (
@@ -45,20 +50,11 @@ const FilterForm = ({ setCategories, categories }) => {
             <Typography>Categories</Typography>
           </AccordionSummary>
           <FormGroup>
-            {categories.map((category) => {
+            {filteredCategories.map((category) => {
               return (
                 <Box
                   key={Math.random() * 7}
-                  onChange={(e) =>
-                    setCategories(
-                      categories.map((category) => {
-                        if (category.id == e.target.value) {
-                          category.checked = !category.checked;
-                        }
-                        return category;
-                      })
-                    )
-                  }
+                  onChange={(e) => setCategories(e)}
                   checked={category.checked}
                   control={<Checkbox sx={{ color: "#73c69c" }} />}
                   label={category.category}
@@ -78,10 +74,11 @@ const FilterForm = ({ setCategories, categories }) => {
             <Typography>Price</Typography>
           </AccordionSummary>
           <Slider
-            min={minMax[0]}
-            max={minMax[1]}
             step={5}
-            value={minMax}
+            min={getMinMax(filteredProducts).min}
+            max={getMinMax(filteredProducts).max}
+            marks
+            value={price}
             onChange={handleChange}
             valueLabelDisplay="auto"
             size="small"

@@ -5,7 +5,6 @@ import { CategoriesContext } from "./CategoriesContext";
 export const ProductsContext = createContext(null);
 
 export const ProductsProvider = (props) => {
-  const [minMax, setMinMax] = useState([]);
   const [products, setProducts] = useState([]);
   const { categories } = useContext(CategoriesContext);
 
@@ -33,40 +32,10 @@ export const ProductsProvider = (props) => {
 
   useEffect(() => {
     getProducts();
-
-    if (products.length > 0) {
-      let checked = [];
-
-      categories.map((category) => {
-        if (category.checked) {
-          checked.push(category.id);
-        }
-      });
-
-      if (checked.length > 0) {
-        let filtered = [];
-        products.map((product) => {
-          if (checked.includes(product.categoryId)) {
-            filtered.push(product);
-          }
-        });
-
-        console.log(filtered);
-        if (filtered.length > 0) {
-          setMinMax([
-            filtered.sort((a, b) => a.price - b.price)[0].price,
-            filtered.sort((a, b) => a.price - b.price)[filtered.length - 1]
-              .price,
-          ]);
-        }
-      }
-    }
   }, [categories]);
 
   return (
-    <ProductsContext.Provider
-      value={{ minMax, setMinMax, products, setProducts }}
-    >
+    <ProductsContext.Provider value={{ products, setProducts }}>
       {props.children}
     </ProductsContext.Provider>
   );

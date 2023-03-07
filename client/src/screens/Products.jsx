@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
 import Product from "../components/Product";
 import FilterForm from "../components/FilterForm";
 import { CartContext } from "../context/CartContext";
@@ -25,39 +24,75 @@ const Content = styled.div`
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 `;
 const Products = () => {
-  const { minMax, setMinMax, products } = useContext(ProductsContext);
-  const { categories, setCategories } = useContext(CategoriesContext);
+  const { products } = useContext(ProductsContext);
+  const { categories } = useContext(CategoriesContext);
   const { cartItems } = useContext(CartContext);
-  const [filters, setFilters] = useState([]);
+
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    let checked = [];
-    categories.map((category) => {
-      if (category.checked && !checked.includes(category.id)) {
-        checked.push(category.id);
+    products &&
+      setFilteredProducts(() =>
+        products.map((product) => {
+          return { ...product, isShown: true };
+        })
+      );
+    categories && setFilteredCategories(categories);
+  }, [products, categories]);
+
+  const filterHandler = (e) => {
+    setFilteredCategories(
+      filteredCategories.map((category) => {
+        if (category.id == e.target.value) {
+          category.checked = !category.checked;
+        }
+        return category;
+      })
+    );
+    setFilteredProducts((prevProducts) =>
+      prevProducts.map((product) => {
+        if (
+          filteredCategories.find(
+            (category) => category.id == product.categoryId && category.checked
+          )
+        ) {
+          return { ...product, isShown: true };
+        }
+        return { ...product, isShown: false };
+      })
+    );
+
+    // If all unchecked to show all products
+    let all = true;
+    filteredCategories.map((category) => {
+      if (category.checked) {
+        all = false;
       }
     });
-
-    setFilters(checked);
-  }, [categories]);
+    all &&
+      setFilteredProducts((prev) =>
+        prev.map((product) => {
+          return { ...product, isShown: true };
+        })
+      );
+  };
 
   return (
     <PorductsWrapper>
       <Header showAuth={false} cartItems={cartItems} />
       <Container>
         <ProductsWrapper>
-          <FilterForm categories={categories} setCategories={setCategories} />
+          <FilterForm
+            filteredProducts={filteredProducts}
+            filteredCategories={filteredCategories}
+            setCategories={filterHandler}
+          />
 
           <Content>
-            {products.map((item) => {
-              if (filters.length < 1) {
-                return <Product key={item.id} item={item} />;
-              } else {
-                if (filters.includes(item.categoryId)) {
-                  return <Product key={item.id} item={item} />;
-                }
-              }
-            })}
+            {filteredProducts.map(
+              (item) => item.isShown && <Product key={item.id} item={item} />
+            )}
           </Content>
         </ProductsWrapper>
       </Container>
