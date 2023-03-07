@@ -11,6 +11,7 @@ import { CategoriesProvider } from "./context/CategoriesContext";
 import Products from "./screens/Products/Products";
 
 import About from "./screens/About";
+import Home from "./screens/Home";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route key="Register" path="/register" element={<Register />} />
               <Route key="Login" path="/login" element={<Login />} />
               <Route key="About" path="/about" element={<About />} />
+              <Route key="Home" path="/home" element={<Home />} />
 
               <Route
                 key="Products"

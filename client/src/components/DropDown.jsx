@@ -44,7 +44,7 @@ const DropDown = () => {
     <DropWrapper>
       <Link to="/home">Home</Link>
       <Link to="/products">Products</Link>
-      <Link to="/categories">Categories</Link>
+      <Link to="/profile">Profile</Link>
       <Link to="/cart">Cart</Link>
       <Link to="/about">About</Link>
     </DropWrapper>

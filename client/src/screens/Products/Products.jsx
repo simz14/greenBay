@@ -8,23 +8,30 @@ import FilterForm from "./FilterForm";
 import { CartContext } from "../../context/CartContext";
 import { ProductsContext } from "../../context/ProductsContext";
 import { CategoriesContext } from "../../context/CategoriesContext";
+import { CircularProgress } from "@mui/material";
 
-const PorductsWrapper = styled.div`
+const ProductsContainer = styled.div`
   width: 100%;
 `;
 
 const ProductsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
-
+const ProductsBox = styled.div`
+  min-height: 100vh;
+  display: grid;
+  grid-column: 2/4;
+  justify-content: center;
+  align-items: center;
+`;
 const Content = styled.div`
   display: grid;
   grid-column: 2/5;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 `;
 const Products = () => {
-  const { products } = useContext(ProductsContext);
+  const { products, loading } = useContext(ProductsContext);
   const { categories } = useContext(CategoriesContext);
   const { cartItems } = useContext(CartContext);
 
@@ -33,16 +40,17 @@ const Products = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
+    categories && setFilteredCategories(categories);
     products &&
       setFilteredProducts(() =>
         products.map((product) => {
           return { ...product, isShown: true };
         })
       );
-    categories && setFilteredCategories(categories);
   }, [products, categories]);
 
   const filterHandler = (e) => {
+    console.log(filteredCategories);
     setFilteredCategories(
       filteredCategories.map((category) => {
         if (category.id == e.target.value) {
@@ -82,9 +90,8 @@ const Products = () => {
   const handleChange = (e) => {
     setPrice(e.target.value);
   };
-
   return (
-    <PorductsWrapper>
+    <ProductsContainer>
       <Header showAuth={false} cartItems={cartItems} />
       <Container>
         <ProductsWrapper>
@@ -95,19 +102,26 @@ const Products = () => {
             filteredCategories={filteredCategories}
             setCategories={filterHandler}
           />
-
-          <Content>
-            {filteredProducts.map(
-              (item) =>
-                item.isShown &&
-                item.price >= price[0] &&
-                item.price <= price[1] && <Product key={item.id} item={item} />
+          <ProductsBox>
+            {loading ? (
+              <CircularProgress sx={{ color: "#73c69c" }} />
+            ) : (
+              <Content>
+                {filteredProducts.map(
+                  (item) =>
+                    item.isShown &&
+                    item.price >= price[0] &&
+                    item.price <= price[1] && (
+                      <Product key={item.id} item={item} />
+                    )
+                )}
+              </Content>
             )}
-          </Content>
+          </ProductsBox>
         </ProductsWrapper>
       </Container>
       <Footer />
-    </PorductsWrapper>
+    </ProductsContainer>
   );
 };
 

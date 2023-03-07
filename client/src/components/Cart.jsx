@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 import emptyCart from "../assets/empty.gif";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { getTotal } from "../utils/getTotal";
 import { BiX } from "react-icons/bi";
+import Button from "../components/Button";
 
 const CartWrapper = styled.div`
   display: grid;
@@ -53,10 +55,21 @@ const EmptyCartWrapper = styled.div`
   display: grid;
   justify-items: center;
   align-content: center;
+  justify-content: space-evenly;
+`;
+const TotalWrapper = styled.div`
+  display: flex;
+  justify-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  & div {
+    align-self: center;
+  }
 `;
 
 const Cart = () => {
   const { cartItems, setCartItems } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const changeHandle = (itemId, amount) => {
     setCartItems(
@@ -123,7 +136,13 @@ const Cart = () => {
                 </ProductWrapper>
               );
             })}
-          <h2>Total:{getTotal(cartItems)}€</h2>
+          <TotalWrapper>
+            <h2>Total:{getTotal(cartItems)}€</h2>
+            <Button
+              buttonName={"Continue to cart"}
+              onClick={() => navigate("/cart")}
+            />
+          </TotalWrapper>
         </div>
       )}
     </CartWrapper>

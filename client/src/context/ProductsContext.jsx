@@ -6,6 +6,8 @@ export const ProductsContext = createContext(null);
 
 export const ProductsProvider = (props) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const { categories } = useContext(CategoriesContext);
 
   const returnId = (product) => {
@@ -19,15 +21,25 @@ export const ProductsProvider = (props) => {
     return categoryID;
   };
   const getProducts = async () => {
-    const response = await fetchProducts();
-    setProducts(
-      response.products.map((product) => {
-        return {
-          ...product,
-          categoryId: returnId(product),
-        };
-      })
-    );
+    try {
+      setLoading(true);
+      const allProducts = await fetch(
+        "https://dummyjson.com/products?limit=100"
+      );
+      const data = await allProducts.json();
+
+      setProducts(
+        data.products.map((product) => {
+          return {
+            ...product,
+            categoryId: returnId(product),
+          };
+        })
+      );
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+    }
   };
 
   useEffect(() => {
@@ -35,7 +47,7 @@ export const ProductsProvider = (props) => {
   }, [categories]);
 
   return (
-    <ProductsContext.Provider value={{ products, setProducts }}>
+    <ProductsContext.Provider value={{ products, setProducts, loading }}>
       {props.children}
     </ProductsContext.Provider>
   );
