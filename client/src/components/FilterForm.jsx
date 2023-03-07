@@ -28,16 +28,12 @@ const Box = styled(FormControlLabel)`
   font-size: 0.5rem;
 `;
 const FilterForm = ({
+  price,
+  setPrice,
   filteredProducts,
   filteredCategories,
   setCategories,
 }) => {
-  const [price, setPrice] = useState([20, 50]);
-
-  const handleChange = (e) => {
-    setPrice(e.target.value);
-  };
-
   return (
     <FormContainer>
       <FormWrapper>
@@ -77,9 +73,8 @@ const FilterForm = ({
             step={5}
             min={getMinMax(filteredProducts).min}
             max={getMinMax(filteredProducts).max}
-            marks
             value={price}
-            onChange={handleChange}
+            onChange={setPrice}
             valueLabelDisplay="auto"
             size="small"
             sx={{ color: "#73c69c" }}

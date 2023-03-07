@@ -28,6 +28,7 @@ const Products = () => {
   const { categories } = useContext(CategoriesContext);
   const { cartItems } = useContext(CartContext);
 
+  const [price, setPrice] = useState([0, 1000]);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -78,12 +79,18 @@ const Products = () => {
       );
   };
 
+  const handleChange = (e) => {
+    setPrice(e.target.value);
+  };
+
   return (
     <PorductsWrapper>
       <Header showAuth={false} cartItems={cartItems} />
       <Container>
         <ProductsWrapper>
           <FilterForm
+            price={price}
+            setPrice={handleChange}
             filteredProducts={filteredProducts}
             filteredCategories={filteredCategories}
             setCategories={filterHandler}
@@ -91,7 +98,10 @@ const Products = () => {
 
           <Content>
             {filteredProducts.map(
-              (item) => item.isShown && <Product key={item.id} item={item} />
+              (item) =>
+                item.isShown &&
+                item.price >= price[0] &&
+                item.price <= price[1] && <Product key={item.id} item={item} />
             )}
           </Content>
         </ProductsWrapper>
