@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Container } from "../../components/Container";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Product from "./Product";
-import FilterForm from "./FilterForm";
+import Product from "./components/Product";
+import FilterForm from "./components/FilterForm";
 import { CartContext } from "../../context/CartContext";
 import { ProductsContext } from "../../context/ProductsContext";
 import { CategoriesContext } from "../../context/CategoriesContext";
@@ -50,7 +50,6 @@ const Products = () => {
   }, [products, categories]);
 
   const filterHandler = (e) => {
-    console.log(filteredCategories);
     setFilteredCategories(
       filteredCategories.map((category) => {
         if (category.id == e.target.value) {
@@ -90,6 +89,7 @@ const Products = () => {
   const handleChange = (e) => {
     setPrice(e.target.value);
   };
+
   return (
     <ProductsContainer>
       <Header showAuth={false} cartItems={cartItems} />

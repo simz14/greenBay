@@ -6,7 +6,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Accordion from "@mui/material/Accordion";
 import { AccordionSummary, Slider, Typography } from "@mui/material";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { getMinMax } from "../../utils/minMax";
+import { getMinMax } from "../../../utils/minMax";
 
 const FormContainer = styled.div`
   position: relative;

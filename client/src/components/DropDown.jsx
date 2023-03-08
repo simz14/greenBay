@@ -46,7 +46,7 @@ const DropDown = () => {
       <Link to="/products">Products</Link>
       <Link to="/profile">Profile</Link>
       <Link to="/cart">Cart</Link>
-      <Link to="/about">About</Link>
+      <Link to="/sell">Sell</Link>
     </DropWrapper>
   );
 };

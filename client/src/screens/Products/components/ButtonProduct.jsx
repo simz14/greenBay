@@ -1,15 +1,20 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../../context/CartContext";
 
 const StyledButton = styled.button`
+  font-size: 16;
+  width: 10rem;
+  padding: 6px 12px;
+  border: 1px solid;
+  line-height: 1.5;
   background-color: #73c69c;
   border: none;
   border-radius: 10px;
   padding: 0.5rem;
   cursor: pointer;
   transition: 0.5s ease;
+  font-family: "Poppins", sans-serif;
   &:hover {
     background-color: #50856b;
     transition: 0.5s ease;

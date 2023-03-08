@@ -7,22 +7,32 @@ import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 import { CategoriesContext } from "../context/CategoriesContext";
 import { ProductsContext } from "../context/ProductsContext";
+import { UserContext } from "../context/UserContext";
 import { BiRightArrowAlt } from "react-icons/bi";
 
 const HomeContainer = styled.div``;
-const CategoryContent = styled.div`
-  margin: 1rem;
-  padding: 1rem;
-`;
+const CategoryContent = styled.div``;
 const ProductImageWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
+`;
+const Greeting = styled.h3`
+  color: #73c69c;
+  border: 1px solid #73c69c;
+  width: 10%;
+  padding: 1rem;
+  border-radius: 10px;
 `;
 const ProductImage = styled.img`
   width: 10rem;
   height: 10rem;
   object-fit: cover;
   border-radius: 50%;
+`;
+const SeeAll = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;
 const ArrowIcon = styled(BiRightArrowAlt)`
   display: flex;
@@ -32,19 +42,12 @@ const ArrowIcon = styled(BiRightArrowAlt)`
 `;
 const Home = () => {
   const { cartItems } = useContext(CartContext);
-  const { categories, setCategories } = useContext(CategoriesContext);
+  const { categories } = useContext(CategoriesContext);
   const { products } = useContext(ProductsContext);
+  const { username } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleClickCategory = (categoryId) => {
-    setCategories(
-      categories.map((category) => {
-        if (category.id == categoryId) {
-          category.checked = !category.checked;
-        }
-        return category;
-      })
-    );
+  const handleClickCategory = () => {
     navigate("/products");
   };
 
@@ -52,6 +55,7 @@ const Home = () => {
     <HomeContainer>
       <Header showAuth={false} cartItems={cartItems} />
       <Container>
+        <Greeting>Hello {username}!</Greeting>
         {categories.map((category) => {
           return (
             <CategoryContent key={category.id}>
@@ -65,7 +69,11 @@ const Home = () => {
                   }
                 })}
               </ProductImageWrapper>
-              <ArrowIcon onClick={() => handleClickCategory(category.id)} />
+              <SeeAll>
+                {" "}
+                <p>See all</p>
+                <ArrowIcon onClick={() => handleClickCategory()} />
+              </SeeAll>
             </CategoryContent>
           );
         })}

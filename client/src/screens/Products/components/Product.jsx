@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../../context/CartContext";
 import ButtonProduct from "./ButtonProduct";
 
 const ProductWrapper = styled.div`
@@ -12,6 +12,8 @@ const ProductWrapper = styled.div`
 
 const ProductImage = styled.img`
   height: 10rem;
+  width: 10rem;
+  object-fit: contain;
 `;
 
 const Product = ({ item }) => {

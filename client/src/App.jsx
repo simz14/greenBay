@@ -12,6 +12,7 @@ import Products from "./screens/Products/Products";
 
 import About from "./screens/About";
 import Home from "./screens/Home";
+import Sell from "./screens/Sell";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route key="Login" path="/login" element={<Login />} />
               <Route key="About" path="/about" element={<About />} />
               <Route key="Home" path="/home" element={<Home />} />
+              <Route key="Sell" path="/sell" element={<Sell />} />
 
               <Route
                 key="Products"
