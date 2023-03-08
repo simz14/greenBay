@@ -25,10 +25,12 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ buttonName, onClick }) => {
+const Button = ({ buttonName, onClick, disabled }) => {
   return (
     <div>
-      <StyledButton onClick={onClick}>{buttonName}</StyledButton>
+      <StyledButton onClick={onClick} disabled={disabled}>
+        {buttonName}
+      </StyledButton>
     </div>
   );
 };

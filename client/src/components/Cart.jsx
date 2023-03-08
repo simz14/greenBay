@@ -100,7 +100,7 @@ const Cart = () => {
               return (
                 <ProductWrapper key={item.id * Math.random()}>
                   <ImageWrapper>
-                    <img src={item.images[0]} />
+                    <img src={item.thumbnail} />
                   </ImageWrapper>
                   <div>
                     <p>{item.title}</p>

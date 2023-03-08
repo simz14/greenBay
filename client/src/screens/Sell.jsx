@@ -6,7 +6,9 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import { Container } from "../components/Container";
 import { CartContext } from "../context/CartContext";
+import { ProductsContext } from "../context/ProductsContext";
 import ProductInfo from "./Products/components/ProductInfo";
+import { vlidateSellData } from "../utils/validation";
 
 const SellContainer = styled.div``;
 const FormWrapper = styled(FormGroup)`
@@ -22,13 +24,14 @@ const FormWrapper = styled(FormGroup)`
 const Sell = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("https://url.com");
+  const [thumbnail, setThumbnail] = useState(["https://url.com"]);
   const [price, setPrice] = useState(10);
   const [showAddedProduct, setShowAddedProduct] = useState(false);
   const { cartItems } = useContext(CartContext);
+  const { products, setProducts } = useContext(ProductsContext);
 
   const handleChange = (value, setstate) => {
-    setstate((prev) => (prev = value));
+    setstate(value);
   };
 
   const isValidUrl = (url) => {
@@ -40,20 +43,33 @@ const Sell = () => {
     }
   };
 
-  const handleCLickSell = () => {
-    console.log(showAddedProduct);
-    setShowAddedProduct((prev) => !prev);
+  const isValidPrice = (price) => {
+    if (price > 0 && price % 1 === 0) {
+      return true;
+    } else {
+      return false;
+    }
   };
+
+  const handleCLickSell = () => {
+    const id = products.at(-1).id;
+    setProducts((prev) => [
+      ...prev,
+      { id: id + 1, title, description, thumbnail, price: Number(price) },
+    ]);
+  };
+
   return (
     <SellContainer>
       <Header showAuth={false} cartItems={cartItems} />
       <Container>
         {showAddedProduct && (
           <ProductInfo
-            item={{ image, title, description, price }}
-            setShow={handleCLickSell}
+            item={{ thumbnail, title, description, price }}
+            setShow={() => setShowAddedProduct((prev) => !prev)}
           />
         )}
+
         <FormWrapper>
           <TextField
             onChange={(e) => handleChange(e.target.value, setTitle)}
@@ -70,11 +86,12 @@ const Sell = () => {
             required
           />
           <TextField
-            onChange={(e) => handleChange(e.target.value, setImage)}
+            onChange={(e) => handleChange(e.target.value, setThumbnail)}
             id="outlined-basic"
             label="Photo"
             variant="outlined"
-            helperText={isValidUrl(image) ? "" : "URL is not correct"}
+            error={isValidUrl(thumbnail) ? false : true}
+            helperText={isValidUrl(thumbnail) ? "" : "URL is not correct"}
             required
           />
           <TextField
@@ -83,12 +100,19 @@ const Sell = () => {
             label="Price"
             variant="outlined"
             type="number"
-            helperText={
-              price > 0 && price % 1 === 0 ? "" : "Price is not correct"
-            }
+            error={isValidPrice(price) ? false : true}
+            helperText={isValidPrice(price) ? "" : "Price is not correct"}
             required
           />
-          <Button onClick={() => handleCLickSell()} buttonName={"Sell"} />
+
+          <Button
+            disabled={vlidateSellData(title, description, thumbnail, price)}
+            onClick={() => {
+              handleCLickSell();
+              setShowAddedProduct((prev) => !prev);
+            }}
+            buttonName={"Sell"}
+          />
         </FormWrapper>
       </Container>
       <Footer />

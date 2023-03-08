@@ -9,3 +9,20 @@ export const validatePassword = (password) => {
   }
   return true;
 };
+
+export const vlidateSellData = (title, description, image, price) => {
+  if (!title || !description || !image || !price) {
+    return true;
+  } else {
+    if (price > 0 && price % 1 === 0) {
+      return false;
+    } else {
+      try {
+        new URL(url);
+        return false;
+      } catch (err) {
+        return true;
+      }
+    }
+  }
+};

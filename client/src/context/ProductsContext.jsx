@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetchProducts } from "../services/products";
+
 import { CategoriesContext } from "./CategoriesContext";
 
 export const ProductsContext = createContext(null);
@@ -24,7 +24,7 @@ export const ProductsProvider = (props) => {
     try {
       setLoading(true);
       const allProducts = await fetch(
-        "https://dummyjson.com/products?limit=100"
+        "https://dummyjson.com/products?limit=50"
       );
       const data = await allProducts.json();
 

@@ -25,7 +25,7 @@ const Product = ({ item }) => {
 
   return (
     <ProductWrapper>
-      <ProductImage src={item.images[0]} />
+      <ProductImage src={item.thumbnail} />
       <p>{item.title}</p>
       <p>{item.price + "€"}</p>
       <ButtonProduct
