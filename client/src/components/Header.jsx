@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiMenu, BiLogOut, BiCartAlt } from "react-icons/bi";
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import Cart from "./Cart";
+import CartComponent from "./Cart";
 import { CartContext } from "../context/CartContext";
 
 const HeaderContainer = styled.div`
@@ -145,7 +145,7 @@ const Header = ({ showAuth }) => {
             )}
           </Icons>
           {showMenu && <DropDown />}
-          {showCart && <Cart />}
+          {showCart && <CartComponent />}
         </HeaderWrapper>
       </Container>
     </HeaderContainer>

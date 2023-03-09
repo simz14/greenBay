@@ -25,7 +25,7 @@ const Sell = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState(["https://url.com"]);
-  const [price, setPrice] = useState(10);
+  const [price, setPrice] = useState(0);
   const [showAddedProduct, setShowAddedProduct] = useState(false);
   const { cartItems } = useContext(CartContext);
   const { products, setProducts } = useContext(ProductsContext);

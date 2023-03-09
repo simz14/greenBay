@@ -13,6 +13,7 @@ import Products from "./screens/Products/Products";
 import About from "./screens/About";
 import Home from "./screens/Home";
 import Sell from "./screens/Sell";
+import CartScreen from "./screens/Cart/Cart";
 
 function App() {
   return (
@@ -26,7 +27,15 @@ function App() {
               <Route key="Login" path="/login" element={<Login />} />
               <Route key="About" path="/about" element={<About />} />
               <Route key="Home" path="/home" element={<Home />} />
-              <Route key="Sell" path="/sell" element={<Sell />} />
+              <Route
+                key="Sell"
+                path="/sell"
+                element={
+                  <PrivateRoute>
+                    <Sell />
+                  </PrivateRoute>
+                }
+              />
 
               <Route
                 key="Products"
@@ -34,6 +43,16 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Products />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                key="Cart"
+                path="/cart"
+                element={
+                  <PrivateRoute>
+                    <CartScreen />
                   </PrivateRoute>
                 }
               />
