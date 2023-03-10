@@ -14,6 +14,7 @@ import About from "./screens/About";
 import Home from "./screens/Home";
 import Sell from "./screens/Sell";
 import CartScreen from "./screens/Cart/Cart";
+import Profile from "./screens/Profile/Profile";
 
 function App() {
   return (
@@ -53,6 +54,15 @@ function App() {
                 element={
                   <PrivateRoute>
                     <CartScreen />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                key="Prorfile"
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
                   </PrivateRoute>
                 }
               />

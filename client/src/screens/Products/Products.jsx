@@ -47,6 +47,12 @@ const Products = () => {
           return { ...product, isShown: true };
         })
       );
+    if (filteredProducts.length > 0) {
+      const max = filteredProducts
+        .sort((a, b) => a.price - b.price)
+        .at(-1).price;
+      setPrice([0, max]);
+    }
   }, [products, categories]);
 
   const filterHandler = (e) => {

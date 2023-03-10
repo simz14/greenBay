@@ -7,18 +7,20 @@ export const UserProvider = (props) => {
   const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
-  const setContext = async () => {
-    let userData = await userAuth();
+  const setUser = async () => {
+    const userData = await userAuth();
     if (userData) {
       setUserId(userData.userId);
       setUsername(userData.username);
+      setUserEmail(userData.email);
       setIsAdmin(userData.isAdmin);
     }
   };
 
   useEffect(() => {
-    setContext();
+    setUser();
   }, []);
 
   return (
@@ -30,6 +32,8 @@ export const UserProvider = (props) => {
         setUsername,
         isAdmin,
         setIsAdmin,
+        userEmail,
+        setUserEmail,
       }}
     >
       {props.children}

@@ -40,8 +40,7 @@ const InfoWrapper = styled.div`
 
 const CartScreen = () => {
   const { cartItems } = useContext(CartContext);
-  console.log(getTotal(cartItems));
-  console.log(cartItems);
+
   return (
     <CartContainer>
       <Header showAuth={false} cartItems={cartItems} />

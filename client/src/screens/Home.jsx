@@ -50,7 +50,7 @@ const Home = () => {
   const handleClickCategory = () => {
     navigate("/products");
   };
-
+  console.log(username);
   return (
     <HomeContainer>
       <Header showAuth={false} cartItems={cartItems} />

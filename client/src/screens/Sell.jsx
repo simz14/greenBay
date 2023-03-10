@@ -24,9 +24,11 @@ const FormWrapper = styled(FormGroup)`
 const Sell = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState(["https://url.com"]);
-  const [price, setPrice] = useState(0);
+  const [thumbnail, setThumbnail] = useState();
+  const [price, setPrice] = useState(null);
   const [showAddedProduct, setShowAddedProduct] = useState(false);
+  const [urlErrorMsg, setUrlErrorMsg] = useState("");
+  const [priceErrorMsg, setPriceErrorMsg] = useState("");
   const { cartItems } = useContext(CartContext);
   const { products, setProducts } = useContext(ProductsContext);
 
@@ -51,7 +53,7 @@ const Sell = () => {
     }
   };
 
-  const handleCLickSell = () => {
+  const handleCLickSell = async () => {
     const id = products.at(-1).id;
     setProducts((prev) => [
       ...prev,
@@ -90,8 +92,12 @@ const Sell = () => {
             id="outlined-basic"
             label="Photo"
             variant="outlined"
-            error={isValidUrl(thumbnail) ? false : true}
-            helperText={isValidUrl(thumbnail) ? "" : "URL is not correct"}
+            onBlur={() =>
+              isValidUrl(thumbnail)
+                ? setUrlErrorMsg("")
+                : setUrlErrorMsg("Url is not correct")
+            }
+            helperText={urlErrorMsg}
             required
           />
           <TextField
@@ -100,8 +106,12 @@ const Sell = () => {
             label="Price"
             variant="outlined"
             type="number"
-            error={isValidPrice(price) ? false : true}
-            helperText={isValidPrice(price) ? "" : "Price is not correct"}
+            onBlur={() =>
+              isValidPrice(price)
+                ? setPriceErrorMsg("")
+                : setPriceErrorMsg("Price is not correct")
+            }
+            helperText={priceErrorMsg}
             required
           />
 

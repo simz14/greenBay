@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,8 @@ import { validateEmail, validatePassword } from "../utils/validation";
 import { fetchLogin } from "../services/login";
 import greenShape from "../assets/greenShape.jpg";
 import { BiEnvelope, BiLockAlt } from "react-icons/bi";
+import { UserContext } from "../context/UserContext";
+import { userAuth } from "../utils/auth";
 
 const LoginContainer = styled.div`
   width: 100%;
@@ -108,15 +110,24 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const { username, setUserId, setUsername, setUserEmail, setIsAdmin } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLoginClick = async () => {
     const response = await fetchLogin({ email, password });
     const data = await response.json();
     if (!data.jwt) {
-      setErrorMsg((prev) => (prev = data.message));
+      setErrorMsg(data.message);
     } else {
       window.localStorage.setItem("token", data.jwt);
+      const userData = await userAuth();
+      if (userData) {
+        setUserId(userData.userId);
+        setUsername(userData.username);
+        setUserEmail(userData.email);
+        setIsAdmin(userData.isAdmin);
+      }
       navigate("/home");
     }
   };
@@ -136,7 +147,6 @@ const Login = () => {
       setErrorMsg("");
     }
   };
-
   return (
     <LoginContainer>
       <Header showAuth={true} />

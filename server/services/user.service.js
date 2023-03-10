@@ -40,11 +40,51 @@ const checkUserService = async (data) => {
     if (!(await valid)) {
       throw new Error("Incorrect password!");
     }
-    const usersJwt = createJwt(user.id, user.username, user.isAdmin);
+    const usersJwt = createJwt(
+      user.id,
+      user.username,
+      user.isAdmin,
+      user.email
+    );
     return usersJwt;
   } else {
     throw new Error("Incorrect email adress!");
   }
 };
 
-module.exports = { addUserService, checkUserService };
+const updateUserService = async (data) => {
+  if (data.currentPassword) {
+    const user = await User.findOne({
+      where: { id: data.id },
+    });
+
+    if (user) {
+      const valid = bcrypt.compare(data.currentPassword, user.password);
+      if (!valid) {
+        throw new Error("Incorrect password!");
+      } else {
+        const entries = Object.entries(data);
+        const toChange = entries.filter(
+          (array) =>
+            array[1].length > 0 &&
+            array[0] !== "currentPassword" &&
+            array[0] !== "id"
+        );
+
+        const obj = {};
+        for (let i = 0; i < toChange.length; i++) {
+          obj[toChange[i][0]] = toChange[i][1];
+        }
+        try {
+          await User.update(obj, {
+            where: { id: data.id },
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    }
+  }
+};
+
+module.exports = { addUserService, checkUserService, updateUserService };
