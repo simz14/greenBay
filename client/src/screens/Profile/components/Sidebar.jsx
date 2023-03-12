@@ -7,11 +7,12 @@ const SideContainer = styled.div`
   gap: 1rem;
 `;
 
-const ProfileSideBar = ({ showAccount, showSelling }) => {
+const ProfileSideBar = ({ showAccount, showSelling, showPurchases }) => {
   return (
     <SideContainer>
       <Button onClick={showAccount} buttonName={"Account"} />
       <Button onClick={showSelling} buttonName={"Selling"} />
+      <Button onClick={showPurchases} buttonName={"Purchases"} />
     </SideContainer>
   );
 };

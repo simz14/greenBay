@@ -91,7 +91,8 @@ const InputsWrapper = styled.div`
     width: 50%;
   }
 `;
-const EroorMessage = styled.p`
+
+const InfoMessage = styled.p`
   font-size: small;
   width: 90%;
   font-weight: 600;
@@ -100,16 +101,22 @@ const EroorMessage = styled.p`
   border-radius: 5px;
   box-shadow: 0px 7px 23px rgb(0 0 0 / 10%);
   backdrop-filter: blur(10px);
-  color: red;
   @media (max-width: 700px) {
     font-size: x-small;
+  }
+  &.error {
+    color: red;
+  }
+  &.success {
+    color: green;
   }
 `;
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [succesMsg, setSuccesMsg] = useState([false, ""]);
+  const [failMsg, setFailMsg] = useState([false, ""]);
   const { username, setUserId, setUsername, setUserEmail, setIsAdmin } =
     useContext(UserContext);
   const navigate = useNavigate();
@@ -118,7 +125,8 @@ const Login = () => {
     const response = await fetchLogin({ email, password });
     const data = await response.json();
     if (!data.jwt) {
-      setErrorMsg(data.message);
+      setFailMsg([true, data.message]);
+      setSuccesMsg([false, ""]);
     } else {
       window.localStorage.setItem("token", data.jwt);
       const userData = await userAuth();
@@ -134,17 +142,19 @@ const Login = () => {
 
   const handleEmailBlur = () => {
     if (!validateEmail(email)) {
-      setErrorMsg("Invalid Email adress!");
+      setSuccesMsg([false, " data.message"]);
+      setFailMsg([true, "Invalid Email adress!"]);
     } else {
-      setErrorMsg("");
+      setFailMsg("");
     }
   };
 
   const handlePasswordBlur = () => {
     if (!validatePassword(password)) {
-      setErrorMsg("Password needs 8 characters!");
+      setSuccesMsg([false, " data.message"]);
+      setFailMsg([true, "Password needs 8 characters!"]);
     } else {
-      setErrorMsg("");
+      setFailMsg("");
     }
   };
   return (
@@ -176,7 +186,12 @@ const Login = () => {
               icon={<BiLockAlt />}
             />
             <Button onClick={() => handleLoginClick()} buttonName="Sign in" />
-            {errorMsg.length > 0 && <EroorMessage>{errorMsg}</EroorMessage>}
+            {succesMsg[0] && (
+              <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
+            )}
+            {failMsg[0] && (
+              <InfoMessage className="error">{failMsg[1]}</InfoMessage>
+            )}
           </InputsWrapper>
         </LoginWrapper>
       </Container>

@@ -88,7 +88,7 @@ const InputsWrapper = styled.div`
     width: 50%;
   }
 `;
-const ErrorMessage = styled.p`
+const InfoMessage = styled.p`
   font-size: small;
   width: 90%;
   font-weight: 600;
@@ -97,9 +97,14 @@ const ErrorMessage = styled.p`
   border-radius: 5px;
   box-shadow: 0px 7px 23px rgb(0 0 0 / 10%);
   backdrop-filter: blur(10px);
-  color: red;
   @media (max-width: 700px) {
     font-size: x-small;
+  }
+  &.error {
+    color: red;
+  }
+  &.success {
+    color: green;
   }
 `;
 
@@ -107,27 +112,30 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [succesMsg, setSuccesMsg] = useState([false, ""]);
+  const [failMsg, setFailMsg] = useState([false, ""]);
 
   const handleRegisterClick = async () => {
     const response = await fetchRegister({ username, email, password });
     const message = await response.json();
-    setErrorMsg((prev) => (prev = message.message));
+    setSuccesMsg([true, message.message]);
   };
 
   const handleEmailBlur = () => {
     if (!validateEmail(email)) {
-      setErrorMsg("Invalid Email adress!");
+      setFailMsg([true, "Invalid Email adress!"]);
+      setSuccesMsg([false, ""]);
     } else {
-      setErrorMsg("");
+      setFailMsg([false, ""]);
     }
   };
 
   const handlePasswordBlur = () => {
     if (!validatePassword(password)) {
-      setErrorMsg("Password needs 8 characters!");
+      setFailMsg([true, "Password needs 8 characters!"]);
+      setSuccesMsg([false, ""]);
     } else {
-      setErrorMsg("");
+      setFailMsg([false, ""]);
     }
   };
 
@@ -171,7 +179,12 @@ const Register = () => {
               onClick={() => handleRegisterClick()}
               buttonName="Sign up"
             />
-            {errorMsg.length > 0 && <ErrorMessage>{errorMsg}</ErrorMessage>}
+            {succesMsg[0] && (
+              <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
+            )}
+            {failMsg[0] && (
+              <InfoMessage className="error">{failMsg[1]}</InfoMessage>
+            )}
           </InputsWrapper>
         </RegisterWrapper>
       </Container>

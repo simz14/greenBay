@@ -6,7 +6,7 @@ const SellingContainer = styled.div``;
 const Selling = () => {
   return (
     <SellingContainer>
-      <h1>fdg</h1>
+      <h1>Selling</h1>
     </SellingContainer>
   );
 };

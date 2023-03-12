@@ -45,7 +45,7 @@ const CartItem = ({ item }) => {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
   };
   return (
-    <ProductWrapper key={item.id * Math.random()}>
+    <ProductWrapper key={item.id}>
       <ImageWrapper>
         <img src={item.thumbnail} />
       </ImageWrapper>

@@ -8,6 +8,7 @@ import { CartContext } from "../../context/CartContext";
 import CartItem from "./components/CartItem";
 import { getTotal } from "../../utils/getTotal";
 import Button from "../../components/Button";
+import { PurchasesContext } from "../../context/PurchasesContext";
 
 const ContentWrapper = styled.div`
   display: grid;
@@ -39,7 +40,13 @@ const InfoWrapper = styled.div`
 `;
 
 const CartScreen = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
+  const { setPurchases } = useContext(PurchasesContext);
+
+  const handleClickOrder = () => {
+    setPurchases((prev) => [...prev, ...cartItems]);
+    setCartItems([]);
+  };
 
   return (
     <CartContainer>
@@ -62,7 +69,10 @@ const CartScreen = () => {
 
               <TotalWrapper>
                 <h2>Total: {getTotal(cartItems)}€</h2>
-                <Button buttonName={"Order"} />
+                <Button
+                  onClick={() => handleClickOrder()}
+                  buttonName={"Order"}
+                />
               </TotalWrapper>
             </ContentWrapper>
           )}
