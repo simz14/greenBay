@@ -25,7 +25,7 @@ const User = db.define(
             throw new Error("Email is missing!");
           }
         },
-        isEmail: { msg: "Email is not valid!" },
+        isEmail: { msg: "Invalid Email adress!" },
       },
     },
     password: {
@@ -54,6 +54,14 @@ User.beforeCreate(async (user, options) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(user.password, salt);
   user.password = hashedPassword;
+});
+
+User.beforeBulkUpdate(async (user, options) => {
+  if (user.attributes.password) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(user.attributes.password, salt);
+    user.attributes.password = hashedPassword;
+  }
 });
 
 module.exports = { User };

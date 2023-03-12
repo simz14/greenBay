@@ -88,7 +88,7 @@ const InputsWrapper = styled.div`
     width: 50%;
   }
 `;
-const EroorMessage = styled.p`
+const ErrorMessage = styled.p`
   font-size: small;
   width: 90%;
   font-weight: 600;
@@ -171,7 +171,7 @@ const Register = () => {
               onClick={() => handleRegisterClick()}
               buttonName="Sign up"
             />
-            {errorMsg.length > 0 && <EroorMessage>{errorMsg}</EroorMessage>}
+            {errorMsg.length > 0 && <ErrorMessage>{errorMsg}</ErrorMessage>}
           </InputsWrapper>
         </RegisterWrapper>
       </Container>

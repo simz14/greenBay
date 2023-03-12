@@ -4,6 +4,6 @@ const userController = require("../controllers/user.controller");
 
 router.post("/register", userController.addUser);
 router.post("/login", userController.checkUser);
-router.patch("/editProfile", userController.updateUser);
+router.patch("/editprofile", userController.updateUser);
 
 module.exports = router;

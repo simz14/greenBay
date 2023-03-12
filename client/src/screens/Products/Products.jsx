@@ -23,7 +23,6 @@ const ProductsBox = styled.div`
   display: grid;
   grid-column: 2/4;
   justify-content: center;
-  align-items: center;
 `;
 const Content = styled.div`
   display: grid;

@@ -7,7 +7,9 @@ const ProductWrapper = styled.div`
   padding: 1rem;
   margin: 1rem;
   justify-content: center;
+  align-content: space-between;
   display: grid;
+  max-height: 25rem;
 `;
 
 const ProductImage = styled.img`

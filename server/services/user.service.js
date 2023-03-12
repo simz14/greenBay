@@ -60,7 +60,7 @@ const updateUserService = async (data) => {
 
     if (user) {
       const valid = bcrypt.compare(data.currentPassword, user.password);
-      if (!valid) {
+      if (!(await valid)) {
         throw new Error("Incorrect password!");
       } else {
         const entries = Object.entries(data);
@@ -75,12 +75,25 @@ const updateUserService = async (data) => {
         for (let i = 0; i < toChange.length; i++) {
           obj[toChange[i][0]] = toChange[i][1];
         }
+
         try {
           await User.update(obj, {
             where: { id: data.id },
           });
+
+          const user = await User.findOne({
+            where: { id: data.id },
+          });
+          const usersJwt = createJwt(
+            user.id,
+            user.username,
+            user.isAdmin,
+            user.email
+          );
+
+          return usersJwt;
         } catch (e) {
-          console.log(e);
+          throw new Error(e.message.split(":")[1]);
         }
       }
     }

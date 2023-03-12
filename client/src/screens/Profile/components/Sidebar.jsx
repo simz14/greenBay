@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../../../components/Button";
 
-const SideContainer = styled.div``;
+const SideContainer = styled.div`
+  display: grid;
+  gap: 1rem;
+`;
 
 const ProfileSideBar = ({ showAccount, showSelling }) => {
   return (
