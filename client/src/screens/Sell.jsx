@@ -63,7 +63,7 @@ const Sell = () => {
 
   return (
     <SellContainer>
-      <Header showAuth={false} cartItems={cartItems} />
+      <Header cartItems={cartItems} />
       <Container>
         {showAddedProduct && (
           <ProductInfo

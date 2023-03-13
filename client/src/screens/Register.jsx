@@ -141,7 +141,7 @@ const Register = () => {
 
   return (
     <RegisterContainer>
-      <Header showAuth={true} />
+      <Header />
       <Container>
         <RegisterWrapper>
           <InfoWrapper>

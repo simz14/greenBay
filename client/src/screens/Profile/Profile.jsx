@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Container } from "@mui/material";
+import { Container } from "../../components/Container";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { CartContext } from "../../context/CartContext";
@@ -45,7 +45,7 @@ const Profile = () => {
   };
   return (
     <ProfileContainer>
-      <Header showAuth={false} cartItems={cartItems} />
+      <Header cartItems={cartItems} />
       <Container>
         <ProfileWrapper>
           <div>

@@ -1,17 +1,17 @@
 import React, { useState, createContext } from "react";
 
 export const PurchasesContext = createContext({
-  pruchases: [],
-  setPruchases: () => {},
+  purchases: [],
+  setPurchases: () => {},
 });
 
 export const PurchasesProvider = (props) => {
-  const [pruchases, setPurchases] = useState([]);
+  const [purchases, setPurchases] = useState([]);
 
   return (
     <PurchasesContext.Provider
       value={{
-        pruchases,
+        purchases,
         setPurchases,
       }}
     >

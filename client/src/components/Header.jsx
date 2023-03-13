@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import DropDown from "./DropDown";
@@ -9,6 +9,7 @@ import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import CartComponent from "./Cart";
 import { CartContext } from "../context/CartContext";
+import { userAuth } from "../utils/auth";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -102,18 +103,28 @@ const CartCount = styled.span`
   margin-left: -10px;
 `;
 
-const Header = ({ showAuth }) => {
+const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const { setUserId, setUsername, setIsAdmin } = useContext(UserContext);
+  const [showAuth, setShowAuth] = useState(false);
+  const { username, setUserId, setUsername, setIsAdmin } =
+    useContext(UserContext);
   const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userAuth) {
+      setShowAuth(false);
+    } else {
+      setShowAuth(true);
+    }
+  }, [username]);
 
   return (
     <HeaderContainer>
       <Container>
         <HeaderWrapper>
-          <HeaderLink className="logo" to="/home">
+          <HeaderLink className="logo" to="/">
             <BrandImage src={logo} />
           </HeaderLink>
           {showAuth && (

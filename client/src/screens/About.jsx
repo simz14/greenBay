@@ -9,7 +9,7 @@ const ContentWrapper = styled.div``;
 const About = () => {
   return (
     <div>
-      <Header showAuth={false} />
+      <Header />
       <Container>
         <ContentWrapper>
           <h1>GreenBay</h1>

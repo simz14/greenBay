@@ -136,7 +136,7 @@ const Login = () => {
         setUserEmail(userData.email);
         setIsAdmin(userData.isAdmin);
       }
-      navigate("/home");
+      navigate("/");
     }
   };
 
@@ -159,7 +159,7 @@ const Login = () => {
   };
   return (
     <LoginContainer>
-      <Header showAuth={true} />
+      <Header />
       <Container>
         <LoginWrapper>
           <InfoWrapper>

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../components/Container";
 import Header from "../../components/Header";
@@ -38,6 +39,9 @@ const Products = () => {
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  const params = useParams();
+  const categoryId = params.categoryId;
+
   useEffect(() => {
     categories && setFilteredCategories(categories);
     products &&
@@ -46,6 +50,7 @@ const Products = () => {
           return { ...product, isShown: true };
         })
       );
+
     if (filteredProducts.length > 0) {
       const max = filteredProducts
         .sort((a, b) => a.price - b.price)
@@ -54,15 +59,16 @@ const Products = () => {
     }
   }, [products, categories]);
 
-  const filterHandler = (e) => {
+  const filterHandler = (value) => {
     setFilteredCategories(
       filteredCategories.map((category) => {
-        if (category.id == e.target.value) {
+        if (category.id == value) {
           category.checked = !category.checked;
         }
         return category;
       })
     );
+
     setFilteredProducts((prevProducts) =>
       prevProducts.map((product) => {
         if (
@@ -97,7 +103,7 @@ const Products = () => {
 
   return (
     <ProductsContainer>
-      <Header showAuth={false} cartItems={cartItems} />
+      <Header cartItems={cartItems} />
       <Container>
         <ProductsWrapper>
           <FilterForm

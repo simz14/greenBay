@@ -42,7 +42,7 @@ const Link = styled(NavLink)`
 const DropDown = () => {
   return (
     <DropWrapper>
-      <Link to="/home">Home</Link>
+      <Link to="/">Home</Link>
       <Link to="/products">Products</Link>
       <Link to="/profile">Profile</Link>
       <Link to="/cart">Cart</Link>

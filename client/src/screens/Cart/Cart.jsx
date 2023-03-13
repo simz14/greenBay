@@ -41,7 +41,7 @@ const InfoWrapper = styled.div`
 
 const CartScreen = () => {
   const { cartItems, setCartItems } = useContext(CartContext);
-  const { setPurchases } = useContext(PurchasesContext);
+  const { purchases, setPurchases } = useContext(PurchasesContext);
 
   const handleClickOrder = () => {
     setPurchases((prev) => [...prev, ...cartItems]);
@@ -50,7 +50,7 @@ const CartScreen = () => {
 
   return (
     <CartContainer>
-      <Header showAuth={false} cartItems={cartItems} />
+      <Header cartItems={cartItems} />
       <Container>
         <div>
           {cartItems.length < 1 ? (

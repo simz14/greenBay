@@ -34,6 +34,7 @@ const FilterForm = ({
   filteredCategories,
   setCategories,
 }) => {
+  console.log(filteredCategories);
   return (
     <FormContainer>
       <FormWrapper>
@@ -50,7 +51,7 @@ const FilterForm = ({
               return (
                 <Box
                   key={Math.random() * 7}
-                  onChange={(e) => setCategories(e)}
+                  onChange={(e) => setCategories(e.target.value)}
                   checked={category.checked}
                   control={<Checkbox sx={{ color: "#73c69c" }} />}
                   label={category.category}

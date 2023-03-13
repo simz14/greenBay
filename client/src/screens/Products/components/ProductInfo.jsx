@@ -37,7 +37,7 @@ const ItemInfo = styled.div``;
 
 const ProductInfo = ({ item, setShow }) => {
   const { image, title, description, price } = item;
-  console.log(image);
+
   return (
     <ProductWrapper>
       <Remove onClick={setShow}>
