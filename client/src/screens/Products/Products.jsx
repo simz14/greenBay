@@ -35,7 +35,7 @@ const Products = () => {
   const { categories } = useContext(CategoriesContext);
   const { cartItems } = useContext(CartContext);
 
-  const [price, setPrice] = useState([0, 1000]);
+  const [price, setPrice] = useState([0, 2000]);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -43,11 +43,13 @@ const Products = () => {
   const categoryId = params.categoryId;
 
   useEffect(() => {
-    categories && setFilteredCategories(categories);
-    products &&
-      setFilteredProducts(() =>
-        products.map((product) => {
-          return { ...product, isShown: true };
+    categories &&
+      setFilteredCategories(() =>
+        categories.map((category) => {
+          if (category.id == categoryId) {
+            return { ...category, checked: true };
+          }
+          return category;
         })
       );
 
@@ -57,6 +59,20 @@ const Products = () => {
         .at(-1).price;
       setPrice([0, max]);
     }
+    console.log(price);
+
+    products &&
+      setFilteredProducts(() =>
+        products.map((product) => {
+          if (categoryId) {
+            if (product.categoryId == categoryId) {
+              return { ...product, isShown: true };
+            }
+            return { ...product, isShown: false };
+          }
+          return { ...product, isShown: true };
+        })
+      );
   }, [products, categories]);
 
   const filterHandler = (value) => {
