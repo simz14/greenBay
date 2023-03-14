@@ -19,7 +19,7 @@ const StyledInput = styled.input`
   width: 100%;
   @media (max-width: 700px) {
     padding: 5px 0 5px 20px;
-    font-size: x-small;
+    font-size: 10px;
     border-radius: 5px;
     width: 100%;
   }

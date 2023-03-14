@@ -28,7 +28,7 @@ const HeaderWrapper = styled.div`
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 0.5rem;
-  font-size: small;
+  font-size: 13px;
 `;
 const BrandImage = styled.img`
   height: 1.5rem;
@@ -60,7 +60,7 @@ const HeaderLink = styled(Link)`
     background-color: #ffffff;
   }
   @media (max-width: 510px) {
-    font-size: x-small;
+    font-size: 10px;
   }
 `;
 const MenuIcon = styled(BiMenu)`

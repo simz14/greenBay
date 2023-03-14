@@ -55,7 +55,7 @@ const CartItem = ({ item }) => {
         <FormControl
           id="demo-simple-select-label"
           sx={{ maxWidth: 100 }}
-          size="small"
+          size="13px"
           fullWidth
         >
           <InputLabel>Amount</InputLabel>

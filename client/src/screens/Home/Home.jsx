@@ -5,9 +5,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import styled from "styled-components";
 import { CartContext } from "../../context/CartContext";
-import { CategoriesContext } from "../../context/CategoriesContext";
-import { ProductsContext } from "../../context/ProductsContext";
-import { UserContext } from "../../context/UserContext";
+
 import shoppingImage from "../../assets/shoppingImage.png";
 import CategoriesComp from "./components/Categories";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -15,7 +13,34 @@ import { FaRegHandshake } from "react-icons/fa";
 import { AiOutlineFieldTime } from "react-icons/ai";
 import TopProducts from "./components/TopProducts";
 
-const HomeContainer = styled.div``;
+const HomeContainer = styled.div`
+  @media (max-width: 1000px) {
+    padding-right: 0;
+    font-size: 20px;
+    & span {
+      font-size: 13px;
+    }
+  }
+  @media (max-width: 750px) {
+    padding-right: 0;
+    font-size: 15px;
+    & span {
+      font-size: smaller;
+    }
+  }
+  @media (max-width: 550px) {
+    padding-right: 0;
+    font-size: 13px;
+    display: grid;
+    justify-items: center;
+    & span {
+      font-size: 10px;
+    }
+    & p {
+      margin-top: 0;
+    }
+  }
+`;
 
 const Description = styled.div`
   padding-right: 4rem;
@@ -32,21 +57,26 @@ const Description = styled.div`
     padding-right: 0;
     font-size: x-large;
     & span {
-      font-size: small;
+      font-size: 13px;
     }
   }
   @media (max-width: 750px) {
     padding-right: 0;
     font-size: large;
     & span {
-      font-size: smaller;
+      font-size: 10px;
     }
   }
   @media (max-width: 550px) {
     padding-right: 0;
-    font-size: small;
+    font-size: 13px;
+    display: grid;
+    justify-items: center;
     & span {
-      font-size: xx-small;
+      font-size: 10px;
+    }
+    & p {
+      margin-top: 0;
     }
   }
 `;
@@ -62,7 +92,6 @@ const WelcomeWrapper = styled.div`
 const ImageWrapper = styled.div`
   display: flex;
   justify-self: self-end;
-  height: 30rem;
 
   @media (max-width: 1000px) {
     & img {
@@ -75,6 +104,7 @@ const ImageWrapper = styled.div`
     }
   }
   @media (max-width: 550px) {
+    height: 0;
     & img {
       display: none;
     }
@@ -94,7 +124,13 @@ const WhyUsWrapper = styled.div`
     color: #73c69c;
     justify-self: center;
   }
+  @media (max-width: 1000px) {
+    & h2 {
+      font-size: 10px;
+    }
+  }
 `;
+
 const ReasonWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -104,23 +140,31 @@ const ReasonWrapper = styled.div`
     width: 3rem;
     height: 3rem;
   }
+  @media (max-width: 750px) {
+    & svg {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  @media (max-width: 450px) {
+    & svg {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
 `;
 
 const ReasonsWrapper = styled.div`
   display: flex;
   gap: 3rem;
+  @media (max-width: 750px) {
+    display: grid;
+    gap: 1rem;
+  }
 `;
 
 const Home = () => {
   const { cartItems } = useContext(CartContext);
-  const { categories } = useContext(CategoriesContext);
-  const { products } = useContext(ProductsContext);
-  const { username } = useContext(UserContext);
-  const navigate = useNavigate();
-
-  const handleClickCategory = () => {
-    navigate("/products");
-  };
 
   return (
     <HomeContainer>
@@ -142,6 +186,7 @@ const Home = () => {
         </WelcomeWrapper>
         <h2>Shop our top categories</h2>
         <CategoriesComp />
+
         <WhyUsWrapper>
           <h2>Why choose us?</h2>
           <ReasonsWrapper>
@@ -160,6 +205,7 @@ const Home = () => {
           </ReasonsWrapper>
         </WhyUsWrapper>
         <h2>Our top products</h2>
+
         <TopProducts />
       </Container>
       <Footer />

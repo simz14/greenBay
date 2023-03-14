@@ -80,16 +80,16 @@ const InputsWrapper = styled.div`
   padding: 2rem 4rem;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
   @media (max-width: 700px) {
-    padding: 2rem 2rem;
-    width: 40%;
+    padding: 1rem;
+    width: 60%;
   }
   @media (max-width: 400px) {
-    padding: 1rem 1rem;
-    width: 50%;
+    padding: 1rem;
+    width: 100%;
   }
 `;
 const InfoMessage = styled.p`
-  font-size: small;
+  font-size: 13px;
   width: 90%;
   font-weight: 600;
   justify-self: center;
@@ -98,7 +98,7 @@ const InfoMessage = styled.p`
   box-shadow: 0px 7px 23px rgb(0 0 0 / 10%);
   backdrop-filter: blur(10px);
   @media (max-width: 700px) {
-    font-size: x-small;
+    font-size: 10px;
   }
   &.error {
     color: red;

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../../context/CartContext";
-import { PurchasesContext } from "../../../context/PurchasesContext";
 import ButtonProduct from "./ButtonProduct";
 
 const ProductZoomWrapper = styled.div`
@@ -28,19 +27,36 @@ const ProductBox = styled.div`
 `;
 
 const ProductWrapper = styled.div`
-  padding: 1rem;
-  margin: 1rem;
-  justify-content: center;
-  align-content: space-between;
-  display: grid;
+  justify-content: flex-start;
+
   max-height: 25rem;
   cursor: pointer;
+  gap: 0.5rem;
+  @media (max-width: 1000px) {
+    & p {
+      font-size: 10px;
+    }
+  }
+  &.productContent {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const ProductImage = styled.img`
-  height: 10rem;
-  width: 10rem;
-  object-fit: contain;
+  border-radius: 5px;
+  height: 8rem;
+  width: 100%;
+  object-fit: cover;
+  margin: 0;
+  overflow: hidden;
+  cursor: pointer;
+  @media (max-width: 550px) {
+    height: 5rem;
+  }
+  @media (max-width: 400px) {
+    height: 4rem;
+  }
 `;
 
 const Product = ({ item }) => {
@@ -56,11 +72,12 @@ const Product = ({ item }) => {
   };
 
   return (
-    <ProductWrapper onClick={hadnleClickProduct}>
+    <ProductWrapper>
       {showProduct && (
         <ProductZoomWrapper>
           <ProductBox>
             <ProductImage src={item.thumbnail} />
+
             <p>{item.title}</p>
             <p>{item.description}</p>
             <p>{item.price + "€"}</p>
@@ -72,14 +89,16 @@ const Product = ({ item }) => {
           </ProductBox>
         </ProductZoomWrapper>
       )}
-      <ProductImage src={item.thumbnail} />
-      <p>{item.title}</p>
-      <p>{item.price + "€"}</p>
-      <ButtonProduct
-        itemId={item.id}
-        buttonName={"Add to cart"}
-        onClick={handleClickAdd}
-      />
+      <ProductImage onClick={hadnleClickProduct} src={item.thumbnail} />
+      <div className="productContent">
+        <p>{item.title}</p>
+        <p>{item.price + "€"}</p>
+        <ButtonProduct
+          itemId={item.id}
+          buttonName={"Add"}
+          onClick={handleClickAdd}
+        />
+      </div>
     </ProductWrapper>
   );
 };

@@ -4,10 +4,10 @@ import logo from "../assets/logo.svg";
 import styled from "styled-components";
 
 const FooterContainer = styled.div`
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
   width: 100%;
-  height: 1rem;
 `;
 
 const FooterWrapper = styled.div`
@@ -25,12 +25,12 @@ const LogoImage = styled.img`
 const Links = styled.div`
   display: flex;
   gap: 1rem;
-  font-size: small;
+  font-size: 13px;
   & a {
     color: #529070;
   }
   @media (max-width: 510px) {
-    font-size: xx-small;
+    font-size: 10px;
   }
 `;
 

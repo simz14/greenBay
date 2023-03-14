@@ -21,6 +21,11 @@ const ProductImageWrapper = styled.div`
   & img:hover {
     transform: scale(0.9);
   }
+  @media (max-width: 550px) {
+    & img {
+      height: 4rem;
+    }
+  }
 `;
 
 const CategoriesComp = () => {

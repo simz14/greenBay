@@ -24,9 +24,21 @@ const FormWrapper = styled.div`
   backdrop-filter: blur(10px);
   border-radius: 15px;
 `;
-const Box = styled(FormControlLabel)`
-  font-size: 0.5rem;
+const StyledAccordion = styled(Accordion)`
+  @media (max-width: 900px) {
+    & .MuiFormGroup-root {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
 `;
+const StyledFormGroup = styled(FormGroup)`
+  padding: 0 16px;
+  & span {
+    font-size: 15px;
+  }
+`;
+
 const FilterForm = ({
   price,
   setPrice,
@@ -37,36 +49,27 @@ const FilterForm = ({
   return (
     <FormContainer>
       <FormWrapper>
-        <Accordion sx={{ padding: 1 }}>
-          <AccordionSummary
-            expandIcon={<MdKeyboardArrowDown />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
+        <StyledAccordion defaultExpanded={true}>
+          <AccordionSummary expandIcon={<MdKeyboardArrowDown />}>
             <Typography>Categories</Typography>
           </AccordionSummary>
-          <FormGroup>
+          <StyledFormGroup>
             {filteredCategories.map((category) => {
               return (
-                <Box
-                  key={Math.random() * 7}
+                <FormControlLabel
+                  key={category.id}
                   onChange={(e) => setCategories(e.target.value)}
                   checked={category.checked}
                   control={<Checkbox sx={{ color: "#73c69c" }} />}
                   label={category.category}
                   value={category.id}
-                  sx={{ fontSize: 0.5 }}
                 />
               );
             })}
-          </FormGroup>
-        </Accordion>
-        <Accordion sx={{ padding: 1 }}>
-          <AccordionSummary
-            expandIcon={<MdKeyboardArrowDown />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
+          </StyledFormGroup>
+        </StyledAccordion>
+        <Accordion defaultExpanded={true}>
+          <AccordionSummary expandIcon={<MdKeyboardArrowDown />}>
             <Typography>Price</Typography>
           </AccordionSummary>
           <Slider
@@ -76,7 +79,7 @@ const FilterForm = ({
             value={price}
             onChange={setPrice}
             valueLabelDisplay="auto"
-            size="small"
+            size="13px"
             sx={{ color: "#73c69c" }}
           />
         </Accordion>

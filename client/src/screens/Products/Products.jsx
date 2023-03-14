@@ -9,26 +9,73 @@ import FilterForm from "./components/FilterForm";
 import { CartContext } from "../../context/CartContext";
 import { ProductsContext } from "../../context/ProductsContext";
 import { CategoriesContext } from "../../context/CategoriesContext";
-import { CircularProgress } from "@mui/material";
+import {
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { BsFilterLeft } from "react-icons/bs";
+import FilterComp from "./components/FilterComponent";
 
 const ProductsContainer = styled.div`
   width: 100%;
 `;
 
+const StyledFormControl = styled(FormControl)`
+  display: grid;
+  width: 30%;
+  justify-self: flex-end;
+  grid-column: 1/4;
+  & .MuiSelect-select {
+    padding: 1rem;
+  }
+  @media (max-width: 900px) {
+    grid-column: 2/3;
+  }
+`;
+
 const ProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  @media (max-width: 900px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 const ProductsBox = styled.div`
   min-height: 100vh;
   display: grid;
   grid-column: 2/4;
   justify-content: center;
+  @media (max-width: 900px) {
+    display: grid;
+    grid-column: 1/3;
+  }
 `;
 const Content = styled.div`
   display: grid;
   grid-column: 2/5;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 650px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  @media (max-width: 450px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+`;
+
+const StyledFilterIcon = styled(BsFilterLeft)`
+  display: grid;
+  grid-column: 1/2;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
 `;
 const Products = () => {
   const { products, loading } = useContext(ProductsContext);
@@ -38,9 +85,14 @@ const Products = () => {
   const [price, setPrice] = useState([0, 2000]);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [orderOfProducts, setOrderOfProducts] = useState("");
+  const [windowSize, setWindowSize] = useState(0);
+  const [showFilterComp, setShowFilterComp] = useState(false);
 
   const params = useParams();
   const categoryId = params.categoryId;
+
+  window.addEventListener("resize", () => setWindowSize(window.innerWidth));
 
   useEffect(() => {
     categories &&
@@ -59,7 +111,6 @@ const Products = () => {
         .at(-1).price;
       setPrice([0, max]);
     }
-    console.log(price);
 
     products &&
       setFilteredProducts(() =>
@@ -113,8 +164,17 @@ const Products = () => {
       );
   };
 
-  const handleChange = (e) => {
+  const handleChangePirce = (e) => {
     setPrice(e.target.value);
+  };
+
+  const sortProducts = (e) => {
+    setOrderOfProducts(e);
+    if (e === "high") {
+      setFilteredProducts((prev) => prev.sort((a, b) => b.price - a.price));
+    } else {
+      setFilteredProducts((prev) => prev.sort((a, b) => a.price - b.price));
+    }
   };
 
   return (
@@ -122,13 +182,34 @@ const Products = () => {
       <Header cartItems={cartItems} />
       <Container>
         <ProductsWrapper>
-          <FilterForm
-            price={price}
-            setPrice={handleChange}
-            filteredProducts={filteredProducts}
-            filteredCategories={filteredCategories}
-            setCategories={filterHandler}
-          />
+          <StyledFormControl>
+            <InputLabel>Order by</InputLabel>
+            <Select
+              label="OrderOfProducts"
+              value={orderOfProducts}
+              onChange={(e) => {
+                sortProducts(e.target.value);
+              }}
+            >
+              <MenuItem value={"high"}>Price from high</MenuItem>
+              <MenuItem value={"low"}>Price from low</MenuItem>
+            </Select>
+          </StyledFormControl>
+
+          {windowSize > 900 ? (
+            <FilterForm
+              price={price}
+              setPrice={handleChangePirce}
+              filteredProducts={filteredProducts}
+              filteredCategories={filteredCategories}
+              setCategories={filterHandler}
+            />
+          ) : (
+            <StyledFilterIcon
+              onClick={() => setShowFilterComp((prev) => !prev)}
+            />
+          )}
+
           <ProductsBox>
             {loading ? (
               <CircularProgress sx={{ color: "#73c69c" }} />
@@ -145,6 +226,15 @@ const Products = () => {
               </Content>
             )}
           </ProductsBox>
+          {showFilterComp && (
+            <FilterComp
+              price={price}
+              handleChangePirce={handleChangePirce}
+              filteredProducts={filteredProducts}
+              filteredCategories={filteredCategories}
+              filterHandler={filterHandler}
+            />
+          )}
         </ProductsWrapper>
       </Container>
       <Footer />

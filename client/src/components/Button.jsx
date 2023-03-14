@@ -14,14 +14,13 @@ const StyledButton = styled.button`
   padding: 0.5rem;
   cursor: pointer;
   transition: 0.5s ease;
-  font-family: "Poppins", sans-serif;
 
   &:hover {
     background-color: #50856b;
     transition: 0.5s ease;
   }
   @media (max-width: 510px) {
-    font-size: x-small;
+    font-size: 10px;
   }
 `;
 

@@ -19,7 +19,7 @@ const DropWrapper = styled.div`
 `;
 const Link = styled(NavLink)`
   text-decoration: none;
-  font-size: small;
+  font-size: 13px;
   font-weight: 600;
   color: #252525;
   padding: 0.5rem;
@@ -34,7 +34,7 @@ const Link = styled(NavLink)`
     &:hover {
       border-radius: 10px;
     }
-    font-size: x-small;
+    font-size: 10px;
     padding: 0.5rem;
     border-radius: 10px;
   }

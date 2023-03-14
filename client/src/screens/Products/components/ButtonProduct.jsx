@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { CartContext } from "../../../context/CartContext";
 
 const StyledButton = styled.button`
-  font-size: 16;
-  width: 10rem;
+  font-size: 10px;
+  width: 100%;
   padding: 6px 12px;
   border: 1px solid;
   line-height: 1.5;
@@ -19,8 +19,8 @@ const StyledButton = styled.button`
     background-color: #50856b;
     transition: 0.5s ease;
   }
-  @media (max-width: 510px) {
-    font-size: x-small;
+  @media (max-width: 550px) {
+    padding: 4px 10px;
   }
 `;
 

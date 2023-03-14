@@ -4,7 +4,17 @@ import { ProductsContext } from "../../../context/ProductsContext";
 import Product from "../../Products/components/Product";
 
 const TopProductsWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
+    minmax(0, 1fr);
+  gap: 1rem;
+  @media (max-width: 550px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+  @media (max-width: 400px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
 `;
 
 const TopProducts = () => {
@@ -13,10 +23,9 @@ const TopProducts = () => {
 
   useEffect(() => {
     const sorted = products.sort((a, b) => b.rating - a.rating);
-    setTopProducts(sorted.slice(0, 5));
+    setTopProducts(sorted.slice(0, 6));
   }, [products]);
 
-  console.log(topProducts);
   return (
     <TopProductsWrapper>
       {topProducts.map((product) => {
