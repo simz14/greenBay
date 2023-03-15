@@ -46,6 +46,7 @@ const FilterForm = ({
   filteredCategories,
   setCategories,
 }) => {
+  console.log(filteredCategories);
   return (
     <FormContainer>
       <FormWrapper>

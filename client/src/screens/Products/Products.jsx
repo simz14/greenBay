@@ -40,9 +40,21 @@ const ProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
+  & .filtersScreenLess900 {
+    display: none;
+  }
+
   @media (max-width: 900px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+    .filtersScreenLess900 {
+      display: grid;
+      grid-column: 1/2;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+    }
   }
 `;
 const ProductsBox = styled.div`
@@ -70,6 +82,12 @@ const Content = styled.div`
   }
 `;
 
+const StyledFilterForm = styled.div`
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
 const StyledFilterIcon = styled(BsFilterLeft)`
   display: grid;
   grid-column: 1/2;
@@ -86,13 +104,11 @@ const Products = () => {
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [orderOfProducts, setOrderOfProducts] = useState("");
-  const [windowSize, setWindowSize] = useState(0);
+
   const [showFilterComp, setShowFilterComp] = useState(false);
 
   const params = useParams();
   const categoryId = params.categoryId;
-
-  window.addEventListener("resize", () => setWindowSize(window.innerWidth));
 
   useEffect(() => {
     categories &&
@@ -181,7 +197,7 @@ const Products = () => {
     <ProductsContainer>
       <Header cartItems={cartItems} />
       <Container>
-        <ProductsWrapper>
+        <ProductsWrapper className="productsWrapper">
           <StyledFormControl>
             <InputLabel>Order by</InputLabel>
             <Select
@@ -195,8 +211,7 @@ const Products = () => {
               <MenuItem value={"low"}>Price from low</MenuItem>
             </Select>
           </StyledFormControl>
-
-          {windowSize > 900 ? (
+          <StyledFilterForm>
             <FilterForm
               price={price}
               setPrice={handleChangePirce}
@@ -204,11 +219,11 @@ const Products = () => {
               filteredCategories={filteredCategories}
               setCategories={filterHandler}
             />
-          ) : (
-            <StyledFilterIcon
-              onClick={() => setShowFilterComp((prev) => !prev)}
-            />
-          )}
+          </StyledFilterForm>
+          <StyledFilterIcon
+            className={"filtersScreenLess900"}
+            onClick={() => setShowFilterComp((prev) => !prev)}
+          />
 
           <ProductsBox>
             {loading ? (
