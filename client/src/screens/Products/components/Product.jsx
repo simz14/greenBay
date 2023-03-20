@@ -27,9 +27,10 @@ const ProductBox = styled.div`
 `;
 
 const ProductWrapper = styled.div`
-  justify-content: flex-start;
-
-  max-height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 16rem;
   cursor: pointer;
   gap: 0.5rem;
   @media (max-width: 1000px) {

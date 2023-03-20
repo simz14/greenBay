@@ -28,8 +28,9 @@ const StyledFormControl = styled(FormControl)`
   width: 30%;
   justify-self: flex-end;
   grid-column: 1/4;
+  grid-row: 1/2;
   & .MuiSelect-select {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 `;
 
@@ -37,6 +38,7 @@ const ProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
+  margin-bottom: auto;
   & .filtersScreenLess900 {
     display: none;
   }
@@ -78,13 +80,6 @@ const Content = styled.div`
   }
 `;
 
-const FiltersBoxesWrapper = styled.div`
-  display: flex;
-
-  grid-column: 1/3;
-  justify-content: space-between;
-  align-items: center;
-`;
 const StyledFilterForm = styled.div`
   @media (max-width: 900px) {
     display: none;
@@ -97,6 +92,8 @@ const StyledFilterIcon = styled(BsFilterLeft)`
   width: 2rem;
   height: 2rem;
   cursor: pointer;
+  grid-row: 1/2;
+  align-self: center;
 `;
 const Products = () => {
   const { products, loading } = useContext(ProductsContext);
@@ -119,8 +116,9 @@ const Products = () => {
         categories.map((category) => {
           if (category.id == categoryId) {
             return { ...category, checked: true };
+          } else {
+            return { ...category, checked: false };
           }
-          return category;
         })
       );
 
@@ -146,8 +144,8 @@ const Products = () => {
   }, [products, categories]);
 
   const filterHandler = (value) => {
-    setFilteredCategories(
-      filteredCategories.map((category) => {
+    setFilteredCategories((prev) =>
+      prev.map((category) => {
         if (category.id == value) {
           category.checked = !category.checked;
         }
@@ -201,34 +199,34 @@ const Products = () => {
       <Header cartItems={cartItems} />
       <Container>
         <ProductsWrapper className="productsWrapper">
-          <FiltersBoxesWrapper>
-            <StyledFormControl>
-              <InputLabel>Order by</InputLabel>
-              <Select
-                label="OrderOfProducts"
-                value={orderOfProducts}
-                onChange={(e) => {
-                  sortProducts(e.target.value);
-                }}
-              >
-                <MenuItem value={"high"}>Price from high</MenuItem>
-                <MenuItem value={"low"}>Price from low</MenuItem>
-              </Select>
-            </StyledFormControl>
-            <StyledFilterForm>
-              <FilterForm
-                price={price}
-                setPrice={handleChangePirce}
-                filteredProducts={filteredProducts}
-                filteredCategories={filteredCategories}
-                filterHandler={filterHandler}
-              />
-            </StyledFilterForm>
-            <StyledFilterIcon
-              className={"filtersScreenLess900"}
-              onClick={() => setShowFilterComp((prev) => !prev)}
+          <StyledFormControl>
+            <InputLabel>Order by</InputLabel>
+            <Select
+              label="OrderOfProducts"
+              value={orderOfProducts}
+              onChange={(e) => {
+                sortProducts(e.target.value);
+              }}
+            >
+              <MenuItem value={"high"}>Price from high</MenuItem>
+              <MenuItem value={"low"}>Price from low</MenuItem>
+            </Select>
+          </StyledFormControl>
+
+          <StyledFilterForm>
+            <FilterForm
+              price={price}
+              setPrice={handleChangePirce}
+              filteredProducts={filteredProducts}
+              filteredCategories={filteredCategories}
+              filterHandler={filterHandler}
             />
-          </FiltersBoxesWrapper>
+          </StyledFilterForm>
+
+          <StyledFilterIcon
+            className={"filtersScreenLess900"}
+            onClick={() => setShowFilterComp((prev) => !prev)}
+          />
 
           <ProductsBox>
             {loading ? (

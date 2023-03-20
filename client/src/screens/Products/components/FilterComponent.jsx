@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import { Container } from "../../../components/Container";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import FilterForm from "./FilterForm";
+import { CiCircleRemove } from "react-icons/ci";
 
 const FilterCompWrapper = styled.div`
   display: grid;
@@ -11,7 +13,6 @@ const FilterCompWrapper = styled.div`
   height: 100vh;
   position: fixed;
   bottom: -100%;
-  opacity: 0.5;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 10px;
@@ -21,13 +22,12 @@ const FilterCompWrapper = styled.div`
     to {
       top: 0px;
       bottom: 100%;
-      opacity: 1;
     }
   }
 
   @media (max-width: 700px) {
     .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
-      font-size: 10px;
+      font-size: 13px;
     }
   }
 `;
@@ -41,6 +41,24 @@ const FormBox = styled.div`
   height: 35rem;
   overflow-x: hidden;
   overflow-y: auto;
+  position: relative;
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10rem;
+    border: 1px solid #fff;
+  }
+`;
+
+const StyledIcon = styled(CiCircleRemove)`
+  display: flex;
+  width: 1rem;
+  height: 1rem;
+  justify-self: end;
+  position: absolute;
+  right: 0rem;
+  padding: 0.5rem;
+  z-index: 9;
+  cursor: pointer;
 `;
 
 const FilterComp = ({
@@ -59,18 +77,21 @@ const FilterComp = ({
     }
   };
   return (
-    <FilterCompWrapper onClick={(e) => checkClickOutside(e)}>
-      <BcgClick ref={ref}></BcgClick>
-      <FormBox>
-        <FilterForm
-          price={price}
-          setPrice={handleChangePirce}
-          filteredProducts={filteredProducts}
-          filteredCategories={filteredCategories}
-          filterHandler={filterHandler}
-        />
-      </FormBox>
-    </FilterCompWrapper>
+    <Container>
+      <FilterCompWrapper onClick={(e) => checkClickOutside(e)}>
+        <BcgClick ref={ref}></BcgClick>
+        <FormBox>
+          <StyledIcon onClick={() => setShowFilterComp(false)} />
+          <FilterForm
+            price={price}
+            setPrice={handleChangePirce}
+            filteredProducts={filteredProducts}
+            filteredCategories={filteredCategories}
+            filterHandler={filterHandler}
+          />
+        </FormBox>
+      </FilterCompWrapper>
+    </Container>
   );
 };
 

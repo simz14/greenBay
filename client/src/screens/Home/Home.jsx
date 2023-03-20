@@ -24,18 +24,13 @@ const HomeContainer = styled.div`
   @media (max-width: 750px) {
     padding-right: 0;
     font-size: 15px;
-    & span {
-      font-size: smaller;
-    }
   }
   @media (max-width: 550px) {
     padding-right: 0;
     font-size: 13px;
     display: grid;
     justify-items: center;
-    & span {
-      font-size: 10px;
-    }
+
     & p {
       margin-top: 0;
     }
@@ -64,7 +59,7 @@ const Description = styled.div`
     padding-right: 0;
     font-size: large;
     & span {
-      font-size: 10px;
+      font-size: 13px;
     }
   }
   @media (max-width: 550px) {
@@ -126,7 +121,7 @@ const WhyUsWrapper = styled.div`
   }
   @media (max-width: 1000px) {
     & h2 {
-      font-size: 10px;
+      font-size: 15px;
     }
   }
 `;
@@ -160,6 +155,7 @@ const ReasonsWrapper = styled.div`
   @media (max-width: 750px) {
     display: grid;
     gap: 1rem;
+    font-size: 10px;
   }
 `;
 

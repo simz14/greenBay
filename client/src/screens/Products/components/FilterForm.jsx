@@ -23,14 +23,20 @@ const FormWrapper = styled.div`
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
+  width: 100%;
 `;
 const StyledAccordion = styled(Accordion)`
+  width: 100%;
   @media (max-width: 900px) {
-    width: 19rem;
     padding: 0.5rem;
     .MuiFormGroup-root {
       display: grid;
       grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    .MuiFormGroup-root {
+      grid-template-columns: 1fr;
     }
   }
 `;
@@ -60,10 +66,15 @@ const FilterForm = ({
               return (
                 <FormControlLabel
                   key={category.id}
-                  value={category.id}
-                  control={<Checkbox sx={{ color: "#73c69c" }} />}
+                  control={
+                    <Checkbox
+                      checked={category.checked}
+                      value={category.id}
+                      sx={{ color: "#73c69c" }}
+                      onChange={(e) => filterHandler(e.target.value)}
+                    />
+                  }
                   label={category.category}
-                  onChange={(e) => filterHandler(e.target.value)}
                 />
               );
             })}
