@@ -9,10 +9,10 @@ const TopProductsWrapper = styled.div`
     minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
     minmax(0, 1fr);
   gap: 1rem;
-  @media (max-width: 550px) {
+  @media (max-width: 700px) {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   }
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 `;

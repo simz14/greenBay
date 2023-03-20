@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import Accordion from "@mui/material/Accordion";
-import { AccordionSummary, Slider, Typography } from "@mui/material";
+import { AccordionSummary, Box, Slider, Typography } from "@mui/material";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { getMinMax } from "../../../utils/minMax";
 
@@ -26,9 +26,11 @@ const FormWrapper = styled.div`
 `;
 const StyledAccordion = styled(Accordion)`
   @media (max-width: 900px) {
-    & .MuiFormGroup-root {
+    width: 19rem;
+    padding: 0.5rem;
+    .MuiFormGroup-root {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
   }
 `;
@@ -44,9 +46,8 @@ const FilterForm = ({
   setPrice,
   filteredProducts,
   filteredCategories,
-  setCategories,
+  filterHandler,
 }) => {
-  console.log(filteredCategories);
   return (
     <FormContainer>
       <FormWrapper>
@@ -59,11 +60,10 @@ const FilterForm = ({
               return (
                 <FormControlLabel
                   key={category.id}
-                  onChange={(e) => setCategories(e.target.value)}
-                  checked={category.checked}
+                  value={category.id}
                   control={<Checkbox sx={{ color: "#73c69c" }} />}
                   label={category.category}
-                  value={category.id}
+                  onChange={(e) => filterHandler(e.target.value)}
                 />
               );
             })}

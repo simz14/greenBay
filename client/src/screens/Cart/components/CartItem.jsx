@@ -9,14 +9,37 @@ const ProductWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 1rem;
+  justify-content: flex-start;
+
+  @media (max-width: 1000px) {
+    & p {
+      font-size: 14px;
+    }
+  }
+  &.productContent {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 const ImageWrapper = styled.div`
   display: grid;
   grid-column: 1/3;
   & img {
-    object-fit: contain;
+    object-fit: cover;
+    height: 8rem;
+    width: 100%;
+  }
+  @media (max-width: 550px) {
+    & img {
+      height: 7rem;
+    }
+  }
+  @media (max-width: 400px) {
+    & img {
+      height: 8rem;
+    }
   }
 `;
 

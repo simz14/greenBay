@@ -21,18 +21,20 @@ const ItemsWrapper = styled.div`
   display: grid;
   grid-column: 1/3;
   padding: 1rem;
-  & img {
-    width: 20rem;
-  }
 `;
 
 const TotalWrapper = styled.div`
-  border: 1.5px solid #ffffff;
-  box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
+  display: grid;
+  justify-content: center;
+  align-content: space-between;
+  border: 1.5px solid rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 23px;
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 1rem;
-  height: 20%;
+  height: 100%;
+  width: 50%;
+  justify-self: center;
 `;
 
 const InfoWrapper = styled.div`

@@ -1,31 +1,46 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import FilterForm from "./FilterForm";
 
 const FilterCompWrapper = styled.div`
+  display: grid;
+  justify-content: center;
+  align-items: center;
   z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  bottom: -100%;
+  opacity: 0.5;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  animation: smooth-appear 2.5s ease forwards;
 
-  width: 45rem;
-  height: 35rem;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: center;
-  padding: 20px;
   @keyframes smooth-appear {
     to {
-      bottom: 20px;
+      top: 0px;
+      bottom: 100%;
       opacity: 1;
     }
   }
 
-  padding: 20px;
+  @media (max-width: 700px) {
+    .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+      font-size: 10px;
+    }
+  }
+`;
+
+const BcgClick = styled.div`
+  width: 100vw;
+  height: 100vh;
   position: fixed;
-  bottom: -100%;
-  opacity: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 10px;
-  animation: smooth-appear 1s ease forwards;
+`;
+const FormBox = styled.div`
+  height: 35rem;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 const FilterComp = ({
@@ -34,16 +49,27 @@ const FilterComp = ({
   filteredProducts,
   filteredCategories,
   filterHandler,
+  setShowFilterComp,
 }) => {
+  const ref = useRef(null);
+
+  const checkClickOutside = (e) => {
+    if (ref.current.contains(e.target)) {
+      setShowFilterComp(false);
+    }
+  };
   return (
-    <FilterCompWrapper>
-      <FilterForm
-        price={price}
-        setPrice={handleChangePirce}
-        filteredProducts={filteredProducts}
-        filteredCategories={filteredCategories}
-        setCategories={filterHandler}
-      />
+    <FilterCompWrapper onClick={(e) => checkClickOutside(e)}>
+      <BcgClick ref={ref}></BcgClick>
+      <FormBox>
+        <FilterForm
+          price={price}
+          setPrice={handleChangePirce}
+          filteredProducts={filteredProducts}
+          filteredCategories={filteredCategories}
+          filterHandler={filterHandler}
+        />
+      </FormBox>
     </FilterCompWrapper>
   );
 };

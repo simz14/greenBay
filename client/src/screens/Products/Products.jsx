@@ -31,9 +31,6 @@ const StyledFormControl = styled(FormControl)`
   & .MuiSelect-select {
     padding: 1rem;
   }
-  @media (max-width: 900px) {
-    grid-column: 2/3;
-  }
 `;
 
 const ProductsWrapper = styled.div`
@@ -50,7 +47,6 @@ const ProductsWrapper = styled.div`
 
     .filtersScreenLess900 {
       display: grid;
-      grid-column: 1/2;
       width: 2rem;
       height: 2rem;
       cursor: pointer;
@@ -82,6 +78,13 @@ const Content = styled.div`
   }
 `;
 
+const FiltersBoxesWrapper = styled.div`
+  display: flex;
+
+  grid-column: 1/3;
+  justify-content: space-between;
+  align-items: center;
+`;
 const StyledFilterForm = styled.div`
   @media (max-width: 900px) {
     display: none;
@@ -198,32 +201,34 @@ const Products = () => {
       <Header cartItems={cartItems} />
       <Container>
         <ProductsWrapper className="productsWrapper">
-          <StyledFormControl>
-            <InputLabel>Order by</InputLabel>
-            <Select
-              label="OrderOfProducts"
-              value={orderOfProducts}
-              onChange={(e) => {
-                sortProducts(e.target.value);
-              }}
-            >
-              <MenuItem value={"high"}>Price from high</MenuItem>
-              <MenuItem value={"low"}>Price from low</MenuItem>
-            </Select>
-          </StyledFormControl>
-          <StyledFilterForm>
-            <FilterForm
-              price={price}
-              setPrice={handleChangePirce}
-              filteredProducts={filteredProducts}
-              filteredCategories={filteredCategories}
-              setCategories={filterHandler}
+          <FiltersBoxesWrapper>
+            <StyledFormControl>
+              <InputLabel>Order by</InputLabel>
+              <Select
+                label="OrderOfProducts"
+                value={orderOfProducts}
+                onChange={(e) => {
+                  sortProducts(e.target.value);
+                }}
+              >
+                <MenuItem value={"high"}>Price from high</MenuItem>
+                <MenuItem value={"low"}>Price from low</MenuItem>
+              </Select>
+            </StyledFormControl>
+            <StyledFilterForm>
+              <FilterForm
+                price={price}
+                setPrice={handleChangePirce}
+                filteredProducts={filteredProducts}
+                filteredCategories={filteredCategories}
+                filterHandler={filterHandler}
+              />
+            </StyledFilterForm>
+            <StyledFilterIcon
+              className={"filtersScreenLess900"}
+              onClick={() => setShowFilterComp((prev) => !prev)}
             />
-          </StyledFilterForm>
-          <StyledFilterIcon
-            className={"filtersScreenLess900"}
-            onClick={() => setShowFilterComp((prev) => !prev)}
-          />
+          </FiltersBoxesWrapper>
 
           <ProductsBox>
             {loading ? (
@@ -248,6 +253,7 @@ const Products = () => {
               filteredProducts={filteredProducts}
               filteredCategories={filteredCategories}
               filterHandler={filterHandler}
+              setShowFilterComp={setShowFilterComp}
             />
           )}
         </ProductsWrapper>

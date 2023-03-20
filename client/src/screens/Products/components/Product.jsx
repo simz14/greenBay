@@ -34,7 +34,7 @@ const ProductWrapper = styled.div`
   gap: 0.5rem;
   @media (max-width: 1000px) {
     & p {
-      font-size: 10px;
+      font-size: 14px;
     }
   }
   &.productContent {
@@ -52,10 +52,10 @@ const ProductImage = styled.img`
   overflow: hidden;
   cursor: pointer;
   @media (max-width: 550px) {
-    height: 5rem;
+    height: 7rem;
   }
   @media (max-width: 400px) {
-    height: 4rem;
+    height: 8rem;
   }
 `;
 
