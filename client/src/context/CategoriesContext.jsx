@@ -16,6 +16,7 @@ export const CategoriesProvider = (props) => {
   useEffect(() => {
     getCategories();
   }, []);
+  console.log(categories);
   return (
     <CategoriesContext.Provider value={{ categories, setCategories }}>
       {props.children}

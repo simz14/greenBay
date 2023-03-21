@@ -2,7 +2,7 @@ import { Container } from "../../../components/Container";
 import React, { useRef } from "react";
 import styled from "styled-components";
 import FilterForm from "./FilterForm";
-import { CiCircleRemove } from "react-icons/ci";
+import { BiX } from "react-icons/bi";
 
 const FilterCompWrapper = styled.div`
   display: grid;
@@ -49,7 +49,7 @@ const FormBox = styled.div`
   }
 `;
 
-const StyledIcon = styled(CiCircleRemove)`
+const StyledIcon = styled(BiX)`
   display: flex;
   width: 1rem;
   height: 1rem;

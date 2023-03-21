@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Container } from "../../components/Container";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import { CartContext } from "../../context/CartContext";
 import styled from "styled-components";
 import ProfileSideBar from "./components/Sidebar";

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../components/Container";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer";
 import Product from "./components/Product";
 import FilterForm from "./components/FilterForm";
@@ -86,6 +86,12 @@ const StyledFilterForm = styled.div`
   }
 `;
 
+const FilterCompWrapper = styled.div`
+  @media (min-width: 900px) {
+    display: none;
+  }
+`;
+
 const StyledFilterIcon = styled(BsFilterLeft)`
   display: grid;
   grid-column: 1/2;
@@ -99,12 +105,10 @@ const Products = () => {
   const { products, loading } = useContext(ProductsContext);
   const { categories } = useContext(CategoriesContext);
   const { cartItems } = useContext(CartContext);
-
   const [price, setPrice] = useState([0, 2000]);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [orderOfProducts, setOrderOfProducts] = useState("");
-
   const [showFilterComp, setShowFilterComp] = useState(false);
 
   const params = useParams();
@@ -244,16 +248,18 @@ const Products = () => {
               </Content>
             )}
           </ProductsBox>
-          {showFilterComp && (
-            <FilterComp
-              price={price}
-              handleChangePirce={handleChangePirce}
-              filteredProducts={filteredProducts}
-              filteredCategories={filteredCategories}
-              filterHandler={filterHandler}
-              setShowFilterComp={setShowFilterComp}
-            />
-          )}
+          <FilterCompWrapper>
+            {showFilterComp && (
+              <FilterComp
+                price={price}
+                handleChangePirce={handleChangePirce}
+                filteredProducts={filteredProducts}
+                filteredCategories={filteredCategories}
+                filterHandler={filterHandler}
+                setShowFilterComp={setShowFilterComp}
+              />
+            )}
+          </FilterCompWrapper>
         </ProductsWrapper>
       </Container>
       <Footer />

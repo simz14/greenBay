@@ -1,21 +1,40 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Container } from "../../components/Container";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer";
 import { CartContext } from "../../context/CartContext";
-
 import CartItem from "./components/CartItem";
 import { getTotal } from "../../utils/getTotal";
 import Button from "../../components/Button";
 import { PurchasesContext } from "../../context/PurchasesContext";
+import EmptyBasket from "../../assets/emptyBasket.webp";
 
 const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
 `;
 const CartContainer = styled.div`
   width: 100%;
+`;
+
+const EmptyCartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & img {
+    height: 60%;
+    width: 60%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  @media (max-width: 500px) {
+    & h2 {
+      font-size: 15px;
+    }
+  }
 `;
 const ItemsWrapper = styled.div`
   display: grid;
@@ -24,26 +43,22 @@ const ItemsWrapper = styled.div`
 `;
 
 const TotalWrapper = styled.div`
-  display: grid;
-  justify-content: center;
-  align-content: space-between;
-  border: 1.5px solid rgb(255, 255, 255);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 23px;
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 1rem;
-  height: 100%;
-  width: 50%;
-  justify-self: center;
+  display: flex;
+  flex-direction: column;
+`;
+const Total = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const InfoWrapper = styled.div`
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgb(115 198 156);
 `;
 
 const CartScreen = () => {
   const { cartItems, setCartItems } = useContext(CartContext);
-  const { purchases, setPurchases } = useContext(PurchasesContext);
+  const { setPurchases } = useContext(PurchasesContext);
 
   const handleClickOrder = () => {
     setPurchases((prev) => [...prev, ...cartItems]);
@@ -56,7 +71,10 @@ const CartScreen = () => {
       <Container>
         <div>
           {cartItems.length < 1 ? (
-            <h2>Your cart is empty</h2>
+            <EmptyCartWrapper>
+              <h2>Your cart is empty</h2>
+              <img src={EmptyBasket} />
+            </EmptyCartWrapper>
           ) : (
             <ContentWrapper>
               <ItemsWrapper>
@@ -70,7 +88,11 @@ const CartScreen = () => {
               </ItemsWrapper>
 
               <TotalWrapper>
-                <h2>Total: {getTotal(cartItems)}€</h2>
+                <Total>
+                  <h2>Total: </h2>
+                  <p>{getTotal(cartItems)}€</p>
+                </Total>
+
                 <Button
                   onClick={() => handleClickOrder()}
                   buttonName={"Order"}

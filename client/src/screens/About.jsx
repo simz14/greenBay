@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "../components/Container";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 
 const ContentWrapper = styled.div``;
 

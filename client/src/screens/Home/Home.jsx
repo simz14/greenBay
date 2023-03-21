@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import { Container } from "@mui/material";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import styled from "styled-components";
 import { CartContext } from "../../context/CartContext";
 
@@ -39,7 +39,7 @@ const HomeContainer = styled.div`
 
 const Description = styled.div`
   padding-right: 4rem;
-  font-size: xx-large;
+  font-size: 23px;
   font-weight: 700;
   align-self: self-start;
   & span {
@@ -50,7 +50,7 @@ const Description = styled.div`
   }
   @media (max-width: 1000px) {
     padding-right: 0;
-    font-size: x-large;
+    font-size: 20px;
     & span {
       font-size: 13px;
     }
@@ -113,7 +113,7 @@ const GreenP = styled.h2`
 const WhyUsWrapper = styled.div`
   display: grid;
   justify-content: center;
-  margin: 5rem 0;
+  margin: 3rem 0;
 
   & h2 {
     color: #73c69c;
@@ -121,7 +121,7 @@ const WhyUsWrapper = styled.div`
   }
   @media (max-width: 1000px) {
     & h2 {
-      font-size: 15px;
+      font-size: 20px;
     }
   }
 `;
@@ -152,10 +152,11 @@ const ReasonWrapper = styled.div`
 const ReasonsWrapper = styled.div`
   display: flex;
   gap: 3rem;
+  font-size: 15px;
   @media (max-width: 750px) {
     display: grid;
     gap: 1rem;
-    font-size: 10px;
+    font-size: 13px;
   }
 `;
 

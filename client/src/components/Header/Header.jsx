@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import logo from "../assets/logo.svg";
-import DropDown from "./DropDown";
-import { Container } from "./Container";
+import logo from "../../assets/logo.svg";
+import DropDown from "../DropDown";
+import { Container } from "../Container";
 import { Link, useNavigate } from "react-router-dom";
 import { BiMenu, BiLogOut, BiCartAlt } from "react-icons/bi";
 import { useState, useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import CartComponent from "./Cart";
-import { CartContext } from "../context/CartContext";
-import { userAuth } from "../utils/auth";
+import { CartContext } from "../../context/CartContext";
+import { userAuth } from "../../utils/auth";
 
 const HeaderContainer = styled.div`
   width: 100%;

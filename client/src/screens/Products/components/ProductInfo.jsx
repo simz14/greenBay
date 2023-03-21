@@ -15,16 +15,25 @@ const ProductWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Remove = styled.div`
-  display: flex;
-  width: 50%;
-  justify-content: flex-end;
-  cursor: pointer;
-`;
+const Remove = styled.div``;
 const ProductInfoWrapper = styled.div`
   background-color: white;
   padding: 1rem;
   border-radius: 5px;
+  position: relative;
+`;
+
+const StyledIcon = styled(BiX)`
+  display: flex;
+  width: 1rem;
+  height: 1rem;
+  top: 0;
+  justify-self: end;
+  position: absolute;
+  right: 0rem;
+  padding: 0.2rem;
+  z-index: 9;
+  cursor: pointer;
 `;
 const ItemsImageWrapper = styled.div`
   & img {
@@ -40,10 +49,10 @@ const ProductInfo = ({ item, setShow }) => {
 
   return (
     <ProductWrapper>
-      <Remove onClick={setShow}>
-        <BiX size="2em" />
-      </Remove>
       <ProductInfoWrapper>
+        <Remove onClick={setShow}>
+          <StyledIcon size="2em" />
+        </Remove>
         <ItemsImageWrapper>
           <img src={image} />
         </ItemsImageWrapper>

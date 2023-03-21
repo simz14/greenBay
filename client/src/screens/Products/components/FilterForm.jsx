@@ -4,7 +4,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import Accordion from "@mui/material/Accordion";
-import { AccordionSummary, Box, Slider, Typography } from "@mui/material";
+import { AccordionSummary, Slider, Typography } from "@mui/material";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { getMinMax } from "../../../utils/minMax";
 

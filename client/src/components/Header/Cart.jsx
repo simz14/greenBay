@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { CartContext } from "../context/CartContext";
-import emptyCart from "../assets/empty.gif";
-import { getTotal } from "../utils/getTotal";
-import Button from "../components/Button";
-import CartItem from "../screens/Cart/components/CartItem";
+import { CartContext } from "../../context/CartContext";
+import emptyCart from "../../assets/empty.gif";
+import { getTotal } from "../../utils/getTotal";
+import Button from "../Button";
+import CartItem from "../../screens/Cart/components/CartItem";
 
 const CartWrapper = styled.div`
   display: grid;
@@ -17,7 +17,7 @@ const CartWrapper = styled.div`
   justify-self: end;
   top: 5rem;
   padding: 1rem;
-  width: 25rem;
+  width: 50%;
   justify-content: center;
   height: 36rem;
   overflow-x: hidden;
@@ -27,9 +27,12 @@ const CartWrapper = styled.div`
     max-width: 100%;
     height: auto;
   }
-
+  @media (max-width: 750px) {
+    width: 75%;
+  }
   @media (max-width: 510px) {
     padding: 0.5rem;
+    width: 95%;
   }
 `;
 
@@ -38,6 +41,16 @@ const EmptyCartWrapper = styled.div`
   justify-items: center;
   align-content: center;
   justify-content: space-evenly;
+  @media (max-width: 550px) {
+    & img {
+      height: 15rem;
+    }
+  }
+  @media (max-width: 400px) {
+    & img {
+      height: 13rem;
+    }
+  }
 `;
 const TotalWrapper = styled.div`
   display: flex;

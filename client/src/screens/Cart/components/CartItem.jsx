@@ -7,15 +7,22 @@ import { CartContext } from "../../../context/CartContext";
 
 const ProductWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  justify-content: center;
+  grid-template-columns: repeat(8, 1fr);
   gap: 0.5rem;
   padding: 1rem;
   justify-content: flex-start;
+  border-bottom: 1px solid rgb(115 198 156);
+  align-items: center;
+  justify-items: center;
 
   @media (max-width: 1000px) {
     & p {
       font-size: 14px;
+    }
+  }
+  @media (max-width: 550px) {
+    & p {
+      font-size: 10px;
     }
   }
   &.productContent {
@@ -23,23 +30,33 @@ const ProductWrapper = styled.div`
     flex-direction: column;
   }
 `;
+
+const Title = styled.p`
+  display: grid;
+  grid-column: 3/5;
+`;
+
 const ImageWrapper = styled.div`
   display: grid;
   grid-column: 1/3;
   & img {
+    border-radius: 5px;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 5rem;
+    max-height: 100%;
     object-fit: cover;
-    height: 8rem;
-    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    cursor: pointer;
   }
-  @media (max-width: 550px) {
-    & img {
-      height: 7rem;
-    }
-  }
-  @media (max-width: 400px) {
-    & img {
-      height: 8rem;
-    }
+`;
+
+const StyledFormControl = styled(FormControl)`
+  display: grid;
+  grid-column: 5/7;
+  & .MuiOutlinedInput-input {
+    padding: 8px;
   }
 `;
 
@@ -71,35 +88,28 @@ const CartItem = ({ item }) => {
     <ProductWrapper key={item.id}>
       <ImageWrapper>
         <img src={item.thumbnail} />
-      </ImageWrapper>
-      <div>
-        <p>{item.title}</p>
-        <p>{item.price + "€"}</p>
-        <FormControl
-          id="demo-simple-select-label"
-          sx={{ maxWidth: 100 }}
-          size="13px"
-          fullWidth
+      </ImageWrapper>{" "}
+      <Title>{item.title}</Title>
+      <StyledFormControl id="demo-simple-select-label" fullWidth>
+        <InputLabel>Amount</InputLabel>
+        <Select
+          value={item.amount}
+          label={item.amount}
+          onChange={(e) => changeHandle(item.id, e.target.value)}
         >
-          <InputLabel>Amount</InputLabel>
-          <Select
-            value={item.amount}
-            label={item.amount}
-            onChange={(e) => changeHandle(item.id, e.target.value)}
-          >
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={4}>4</MenuItem>
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={6}>6</MenuItem>
-            <MenuItem value={7}>7</MenuItem>
-            <MenuItem value={8}>8</MenuItem>
-            <MenuItem value={9}>9</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+          <MenuItem value={9}>9</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+        </Select>
+      </StyledFormControl>
+      <p>{item.price + "€"}</p>
       <IconWrapper onClick={() => removeHandle(item.id)}>
         <BiX />
       </IconWrapper>
