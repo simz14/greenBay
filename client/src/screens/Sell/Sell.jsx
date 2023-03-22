@@ -31,8 +31,9 @@ const SellWrapper = styled.div`
     display: grid;
     grid-column: 1/3;
     justify-content: center;
+    font-size: 30px;
     @media (max-width: 500px) {
-      font-size: 18px;
+      font-size: 25px;
     }
   }
 
@@ -201,8 +202,8 @@ const Sell = () => {
 
           <div className="gotYourBack">
             <div>
-              <h2>You've got this.</h2>
-              <h2>We've got your back.</h2>
+              <h1>You've got this.</h1>
+              <h1>We've got your back.</h1>
             </div>
             <img src={SellImg} />
           </div>
