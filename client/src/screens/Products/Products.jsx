@@ -70,6 +70,7 @@ const Content = styled.div`
   grid-column: 2/5;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   gap: 1rem;
+  margin-bottom: auto;
 
   @media (max-width: 650px) {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

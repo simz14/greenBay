@@ -33,6 +33,10 @@ const ProductWrapper = styled.div`
   max-height: 16rem;
   cursor: pointer;
   gap: 0.5rem;
+
+  & p {
+    overflow-wrap: anywhere;
+  }
   @media (max-width: 1000px) {
     & p {
       font-size: 14px;

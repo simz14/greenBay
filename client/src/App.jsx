@@ -8,10 +8,9 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { CartProvider } from "./context/CartContext";
 import { CategoriesProvider } from "./context/CategoriesContext";
 import Products from "./screens/Products/Products";
-
 import About from "./screens/About";
 import Home from "./screens/Home/Home";
-import Sell from "./screens/Sell";
+import Sell from "./screens/Sell/Sell";
 import CartScreen from "./screens/Cart/Cart";
 import Profile from "./screens/Profile/Profile";
 import { PurchasesProvider } from "./context/PurchasesContext";
@@ -26,8 +25,23 @@ function App() {
               <Routes>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/" element={<Home />} />
+
+                <Route
+                  path="/about"
+                  element={
+                    <PrivateRoute>
+                      <About />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/"
+                  element={
+                    <PrivateRoute>
+                      <Home />
+                    </PrivateRoute>
+                  }
+                />
                 <Route
                   path="/sell"
                   element={

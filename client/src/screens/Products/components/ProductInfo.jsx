@@ -16,6 +16,7 @@ const ProductWrapper = styled.div`
   align-items: center;
 `;
 const Remove = styled.div``;
+
 const ProductInfoWrapper = styled.div`
   background-color: white;
   padding: 1rem;
@@ -37,15 +38,16 @@ const StyledIcon = styled(BiX)`
 `;
 const ItemsImageWrapper = styled.div`
   & img {
-    width: 20rem;
-    object-fit: contain;
-    height: 20rem;
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: 15px;
   }
 `;
 const ItemInfo = styled.div``;
 
 const ProductInfo = ({ item, setShow }) => {
-  const { image, title, description, price } = item;
+  const { thumbnail, title, description, price } = item;
 
   return (
     <ProductWrapper>
@@ -54,7 +56,7 @@ const ProductInfo = ({ item, setShow }) => {
           <StyledIcon size="2em" />
         </Remove>
         <ItemsImageWrapper>
-          <img src={image} />
+          <img src={thumbnail} />
         </ItemsImageWrapper>
         <ItemInfo>
           <h3>{title}</h3>

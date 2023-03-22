@@ -10,18 +10,33 @@ export const validatePassword = (password) => {
   return true;
 };
 
-export const vlidateSellData = (title, description, image, price) => {
-  if (!title || !description || !image || !price) {
-    return true;
+export const validateSellData = (
+  title,
+
+  description,
+  image,
+  price,
+  categoryId
+) => {
+  if (!title || !description || !image || !price || !categoryId) {
+    throw new Error("All fields are required!");
   } else {
-    if (price > 0 && price % 1 === 0) {
-      return false;
+    if (title.length > 20) {
+      throw new Error("Title is too long!");
     } else {
-      try {
-        new URL(url);
-        return false;
-      } catch (err) {
-        return true;
+      if (description.length > 100) {
+        throw new Error("Description is too long!");
+      } else {
+        if (!(price > 0) || price % 1 !== 0) {
+          throw new Error("Price is not correct!");
+        } else {
+          try {
+            new URL(image);
+            return true;
+          } catch (err) {
+            throw new Error("Url is not correct!");
+          }
+        }
       }
     }
   }

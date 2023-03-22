@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const StyledButton = styled.button`
   font-size: 16px;
   max-width: 20rem;
@@ -27,11 +32,11 @@ const StyledButton = styled.button`
 
 const Button = ({ buttonName, onClick, disabled }) => {
   return (
-    <div>
+    <ButtonWrapper>
       <StyledButton onClick={onClick} disabled={disabled}>
         {buttonName}
       </StyledButton>
-    </div>
+    </ButtonWrapper>
   );
 };
 export default Button;

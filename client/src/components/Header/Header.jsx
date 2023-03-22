@@ -113,7 +113,9 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userAuth) {
+    const isLogged = userAuth();
+
+    if (isLogged) {
       setShowAuth(false);
     } else {
       setShowAuth(true);
