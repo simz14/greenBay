@@ -14,10 +14,24 @@ const ProfileWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   padding: 1rem;
+
+  @media (max-width: 800px) {
+    & .links {
+      display: grid;
+      grid-column: 1/5;
+      margin-bottom: 1rem;
+    }
+  }
 `;
 const ContentWrapper = styled.div`
   display: grid;
   grid-column: 2/5;
+  @media (max-width: 800px) {
+    grid-column: 1 / 5;
+  }
+  @media (max-width: 500px) {
+    grid-column: 1 / 5;
+  }
 `;
 const Profile = () => {
   const [showAccount, setShowAccount] = useState(true);
@@ -48,7 +62,7 @@ const Profile = () => {
       <Header cartItems={cartItems} />
       <Container>
         <ProfileWrapper>
-          <div>
+          <div className="links">
             <ProfileSideBar
               showAccount={handleClickAccount}
               showSelling={handleClickSelling}

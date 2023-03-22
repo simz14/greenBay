@@ -50,18 +50,14 @@ const ProductWrapper = styled.div`
 
 const ProductImage = styled.img`
   border-radius: 5px;
-  height: 8rem;
-  width: 100%;
+  min-height: 5rem;
+  min-width: 5rem;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: cover;
   margin: 0;
   overflow: hidden;
   cursor: pointer;
-  @media (max-width: 550px) {
-    height: 7rem;
-  }
-  @media (max-width: 400px) {
-    height: 8rem;
-  }
 `;
 
 const Product = ({ item }) => {

@@ -30,7 +30,7 @@ const StyledFormControl = styled(FormControl)`
   grid-column: 1/4;
   grid-row: 1/2;
   & .MuiSelect-select {
-    padding: 0.5rem;
+    padding: 1rem;
   }
 `;
 

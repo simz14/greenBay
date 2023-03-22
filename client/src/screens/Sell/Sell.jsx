@@ -19,6 +19,7 @@ import { CategoriesContext } from "../../context/CategoriesContext";
 import SuggestionList from "./SuggestionList";
 import SellImg from "../../assets/sellingImg.webp";
 import PopUp from "../../components/PopUp";
+import { SellingItemsContext } from "../../context/SellingItems";
 
 const SellContainer = styled.div``;
 
@@ -149,6 +150,7 @@ const Sell = () => {
   const { products, setProducts } = useContext(ProductsContext);
   const { categories } = useContext(CategoriesContext);
   const [successAdding, setSuccessAdding] = useState(false);
+  const { setSellingItems } = useContext(SellingItemsContext);
 
   const handleChange = (value, setstate) => {
     setstate(value);
@@ -177,6 +179,18 @@ const Sell = () => {
             price: Number(price),
           },
         ]);
+
+        setSellingItems((prev) => [
+          ...prev,
+          {
+            id: id + 1,
+            categoryId: categoryId,
+            title: title,
+            description: description,
+            thumbnail: thumbnail,
+            price: Number(price),
+          },
+        ]);
         setTitle("");
         setDescription("");
         setThumbnail("");
@@ -188,7 +202,7 @@ const Sell = () => {
       setErrorMsg(e.message);
     }
   };
-
+  console.log(successAdding);
   return (
     <SellContainer>
       <Header cartItems={cartItems} />

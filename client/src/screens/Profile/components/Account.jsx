@@ -18,6 +18,9 @@ const FormWrapper = styled(FormGroup)`
   backdrop-filter: blur(10px);
   border-radius: 15px;
   gap: 1rem;
+  @media (max-width: 800px) {
+    width: 65%;
+  }
 `;
 
 const InfoMessage = styled.p`

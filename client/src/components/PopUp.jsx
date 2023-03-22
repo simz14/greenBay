@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const SuccessBox = styled.div`
-  position: fixed;
+  position: absolute;
   z-index: 9999;
   background-color: black;
   color: white;
   display: flex;
   justify-self: center;
-  align-self: center;
+  align-self: flex-end;
   border-radius: 15px;
   padding: 1rem;
   @keyframes myAnimation {
@@ -37,6 +37,8 @@ const PopUp = ({ show, showHandler, title }) => {
       showHandler(false);
     }, 5000);
   }, [show]);
+
+  console.log(show);
 
   return (
     <>
