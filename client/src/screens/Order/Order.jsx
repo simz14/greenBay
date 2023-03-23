@@ -25,28 +25,32 @@ const Order = () => {
   const [showYourData, setShowYourData] = useState(true);
   const [showShipping, setShowShipping] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [orderData, setOrderData] = useState({});
 
   const { cartItems } = useContext(CartContext);
 
   const handleClickStep = (page) => {
-    if (page === "data") {
-      setShowYourData(true);
-      setShowShipping(false);
-      setShowSummary(false);
-    }
-    if (page === "shipping") {
-      setShowYourData(false);
-      setShowShipping(true);
-      setShowSummary(false);
-    }
-    if (page === "summary") {
-      setShowYourData(false);
-      setShowShipping(false);
-      setShowSummary(true);
+    if (orderData.name) {
+      if (page === "data") {
+        setShowYourData(true);
+        setShowShipping(false);
+        setShowSummary(false);
+      }
+      if (page === "shipping") {
+        setShowYourData(false);
+        setShowShipping(true);
+        setShowSummary(false);
+      }
+      if (orderData.shipping && orderData.payment) {
+        if (page === "summary") {
+          setShowYourData(false);
+          setShowShipping(false);
+          setShowSummary(true);
+        }
+      }
     }
   };
-
+  console.log(orderData);
   return (
     <div>
       <Header cartItems={cartItems} />
@@ -82,18 +86,20 @@ const Order = () => {
           <YourDataPage
             setShowYourData={setShowYourData}
             setShowShipping={setShowShipping}
-            setUserData={setUserData}
-            userData={userData}
+            setOrderData={setOrderData}
+            orderData={orderData}
           />
         )}
 
-        {showShipping && (
+        {showShipping && orderData.name && (
           <ShippingPage
             setShowSummary={setShowSummary}
             setShowShipping={setShowShipping}
+            setOrderData={setOrderData}
+            orderData={orderData}
           />
         )}
-        {showSummary && <SummaryPage />}
+        {showSummary && <SummaryPage orderData={orderData} />}
       </Container>
       <Footer />
     </div>

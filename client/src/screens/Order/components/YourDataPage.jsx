@@ -45,14 +45,14 @@ const ErrorMsg = styled.p`
 const YourDataPage = ({
   setShowYourData,
   setShowShipping,
-  setUserData,
-  userData,
+  setOrderData,
+  orderData,
 }) => {
-  const [name, setName] = useState(userData.name);
-  const [lastName, setLastName] = useState(userData.lastName);
-  const [adress, setAdress] = useState(userData.adress);
-  const [city, setCity] = useState(userData.city);
-  const [country, setCountry] = useState(userData.country);
+  const [name, setName] = useState(orderData.name);
+  const [lastName, setLastName] = useState(orderData.lastName);
+  const [adress, setAdress] = useState(orderData.adress);
+  const [city, setCity] = useState(orderData.city);
+  const [country, setCountry] = useState(orderData.country);
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleClickContinue = () => {
@@ -60,7 +60,7 @@ const YourDataPage = ({
       validateOrderData(name, lastName, adress, city, country);
       setShowYourData(false);
       setShowShipping(true);
-      setUserData({ name, lastName, adress, city, country });
+      setOrderData({ name, lastName, adress, city, country });
     } catch (e) {
       setErrorMsg(e.message);
     }

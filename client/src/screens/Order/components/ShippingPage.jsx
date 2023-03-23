@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import shippingImg from "../../../assets/shipping.svg";
 import Button from "../../../components/Button";
@@ -52,7 +52,6 @@ const ShippingOptionWrapper = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 23px;
   backdrop-filter: blur(10px);
   border-radius: 15px;
-
   width: 80%;
   margin: 0.5rem;
   font-size: 13px;
@@ -61,76 +60,127 @@ const ShippingOptionWrapper = styled.div`
   align-content: flex-start;
   cursor: pointer;
   transition: 0.5s ease;
-  & .clicked {
+  &.active {
     box-shadow: #50856b 0px 7px 23px;
   }
+
   &:hover {
     transition: 0.5s ease;
     box-shadow: #50856b 0px 7px 23px;
   }
 `;
 
+const Option = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 23px;
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  transition: 0.5s ease;
+  cursor: pointer;
+  padding: 1rem;
+  & img {
+    max-width: 20%;
+    max-height: 100%;
+    min-height: 3rem;
+    min-width: 3rem;
+    border-radius: 5px;
+  }
+
+  & .cards {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  & p {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+  }
+  &:hover {
+    transition: 0.5s ease;
+    box-shadow: #50856b 0px 7px 23px;
+  }
+`;
 const PaymentWrapper = styled.div`
   gap: 1rem;
   display: flex;
   flex-direction: column;
-  & .optionWrapper {
-    display: flex;
-    flex-direction: column;
-    border: 1.5px solid rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 23px;
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    transition: 0.5s ease;
-    cursor: pointer;
-    padding: 1rem;
-    & img {
-      max-width: 20%;
-      max-height: 100%;
-      min-height: 3rem;
-      min-width: 3rem;
-      border-radius: 5px;
-    }
-    & .cards {
-      display: flex;
-      justify-content: space-evenly;
-    }
-    & p {
-      display: flex;
-      justify-content: center;
-      font-weight: 600;
-    }
-    &:hover {
-      transition: 0.5s ease;
-      box-shadow: #50856b 0px 7px 23px;
-    }
+  & .active {
+    box-shadow: #50856b 0px 7px 23px;
   }
 `;
 
-const ShippingPage = ({ setShowShipping, setShowSummary }) => {
+const ShippingPage = ({
+  setShowShipping,
+  setShowSummary,
+  setOrderData,
+  orderData,
+}) => {
+  const [shippingMethod, setShippingMethod] = useState(orderData.shipping);
+  const [paymentMethod, setPaymentMethod] = useState(orderData.payment);
+
   const handleClickContinue = () => {
-    setShowShipping(false);
-    setShowSummary(true);
+    if (shippingMethod && paymentMethod) {
+      setOrderData((prev) => ({
+        ...prev,
+        shipping: { ...shippingMethod },
+        payment: { ...paymentMethod },
+      }));
+      setShowShipping(false);
+      setShowSummary(true);
+    }
   };
 
+  console.log(shippingMethod, paymentMethod);
   return (
     <YourDataWrapper>
       <ShippingWrapper>
-        <ShippingOptionWrapper>
+        <ShippingOptionWrapper
+          className={shippingMethod && shippingMethod.id === 1 && "active"}
+          onClick={() =>
+            setShippingMethod({
+              id: 1,
+              type: "Standard: 5-7 Business Days",
+              cost: "$4.99 or FREE on orders above $99",
+              carriers: "FedEx, FedEx SmartPost, LaserShip, DHL",
+            })
+          }
+        >
           <h3>Standard: 5-7 Business Days</h3>
           <ul>
             <li>Cost: $4.99 or FREE on orders above $99</li>
             <li>Carriers: FedEx, FedEx SmartPost, LaserShip, DHL</li>
           </ul>
         </ShippingOptionWrapper>
-        <ShippingOptionWrapper>
+        <ShippingOptionWrapper
+          className={shippingMethod && shippingMethod.id === 2 && "active"}
+          onClick={() =>
+            setShippingMethod({
+              id: 2,
+              type: "Express: 3-Business Days",
+              cost: "Cost: $9.99",
+              carriers: "Carrier: FedEx",
+            })
+          }
+        >
           <h3>Express: 3-Business Days</h3>
           <ul>
             <li>Cost: $9.99</li>
             <li>Carrier: FedEx</li>
           </ul>
         </ShippingOptionWrapper>
-        <ShippingOptionWrapper className="third">
+        <ShippingOptionWrapper
+          className={shippingMethod && shippingMethod.id === 3 && "active"}
+          onClick={() =>
+            setShippingMethod({
+              id: 3,
+              type: "Express: 1-2-Business Days",
+              cost: "Cost: $19.99",
+              carriers: "Carrier: FedEx",
+            })
+          }
+        >
           <h3>Express: 1-2-Business Days</h3>
           <ul>
             <li>Cost: $19.99</li>
@@ -140,17 +190,25 @@ const ShippingPage = ({ setShowShipping, setShowSummary }) => {
       </ShippingWrapper>
       <PaymentWrapper>
         <h2>Payment options</h2>
-        <div className="optionWrapper">
+        <Option
+          className={paymentMethod && paymentMethod.id === 1 && "active"}
+          onClick={() => setPaymentMethod({ id: 1, method: "Payment by card" })}
+        >
           <div className="cards">
             <img src={visa} />
             <img src={paypal} />
             <img src={mastercard} />
           </div>
           <p>Pay by credit card</p>
-        </div>
-        <div className="optionWrapper">
+        </Option>
+        <Option
+          className={paymentMethod && paymentMethod.id === 2 && "active"}
+          onClick={() =>
+            setPaymentMethod({ id: 2, method: "Payment on delievery" })
+          }
+        >
           <p>Payment on delivery</p>
-        </div>
+        </Option>
         <div className="buttonContinue">
           <Button
             onClick={() => handleClickContinue()}
