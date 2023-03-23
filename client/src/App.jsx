@@ -15,6 +15,7 @@ import CartScreen from "./screens/Cart/Cart";
 import Profile from "./screens/Profile/Profile";
 import { PurchasesProvider } from "./context/PurchasesContext";
 import { SellingItemsProvider } from "./context/SellingItems";
+import Order from "./screens/Order/Order";
 
 function App() {
   return (
@@ -84,6 +85,14 @@ function App() {
                     element={
                       <PrivateRoute>
                         <Profile />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/order"
+                    element={
+                      <PrivateRoute>
+                        <Order />
                       </PrivateRoute>
                     }
                   />

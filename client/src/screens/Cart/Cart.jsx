@@ -9,6 +9,7 @@ import { getTotal } from "../../utils/getTotal";
 import Button from "../../components/Button";
 import { PurchasesContext } from "../../context/PurchasesContext";
 import EmptyBasket from "../../assets/emptyBasket.webp";
+import { useNavigate } from "react-router";
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -57,13 +58,8 @@ const InfoWrapper = styled.div`
 `;
 
 const CartScreen = () => {
-  const { cartItems, setCartItems } = useContext(CartContext);
-  const { setPurchases } = useContext(PurchasesContext);
-
-  const handleClickOrder = () => {
-    setPurchases((prev) => [...prev, ...cartItems]);
-    setCartItems([]);
-  };
+  const { cartItems } = useContext(CartContext);
+  const navigate = useNavigate();
 
   return (
     <CartContainer>
@@ -94,7 +90,7 @@ const CartScreen = () => {
                 </Total>
 
                 <Button
-                  onClick={() => handleClickOrder()}
+                  onClick={() => navigate("/order")}
                   buttonName={"Order"}
                 />
               </TotalWrapper>

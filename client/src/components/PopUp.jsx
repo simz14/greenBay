@@ -23,7 +23,6 @@ const SuccessBox = styled.div`
     100% {
       display: none;
       opacity: 0;
-      transform: rotateX(90deg);
     }
   }
   animation-name: myAnimation;
@@ -37,8 +36,6 @@ const PopUp = ({ show, showHandler, title }) => {
       showHandler(false);
     }, 5000);
   }, [show]);
-
-  console.log(show);
 
   return (
     <>

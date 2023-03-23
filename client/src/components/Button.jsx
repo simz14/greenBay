@@ -63,7 +63,6 @@ const Button = ({ buttonName, onClick, disabled, pulsing }) => {
     }
   }, []);
 
-  console.log(ref);
   return (
     <ButtonWrapper>
       <StyledButton ref={ref} onClick={onClick} disabled={disabled}>

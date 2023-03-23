@@ -8,7 +8,6 @@ export const SellingItemsContext = createContext({
 export const SellingItemsProvider = (props) => {
   const [sellingItems, setSellingItems] = useState([]);
 
-  console.log(sellingItems);
   return (
     <SellingItemsContext.Provider
       value={{

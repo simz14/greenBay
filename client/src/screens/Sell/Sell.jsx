@@ -202,7 +202,7 @@ const Sell = () => {
       setErrorMsg(e.message);
     }
   };
-  console.log(successAdding);
+
   return (
     <SellContainer>
       <Header cartItems={cartItems} />

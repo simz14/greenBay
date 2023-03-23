@@ -21,7 +21,7 @@ export const validateSellData = (
   if (!title || !description || !image || !price || !categoryId) {
     throw new Error("All fields are required!");
   } else {
-    if (title.length > 20) {
+    if (title.length > 30) {
       throw new Error("Title is too long!");
     } else {
       if (description.length > 100) {
@@ -39,5 +39,13 @@ export const validateSellData = (
         }
       }
     }
+  }
+};
+
+export const validateOrderData = (name, lastName, adress, city, country) => {
+  if (!name || !lastName || !adress || !city || !country) {
+    throw new Error("All fields are required!");
+  } else {
+    return true;
   }
 };
