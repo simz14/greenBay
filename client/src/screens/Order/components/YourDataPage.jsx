@@ -36,6 +36,13 @@ const InputsWrapper = styled.div`
   justify-self: center;
   margin-top: 3rem;
   gap: 1rem;
+  & .nameData {
+    display: flex;
+    gap: 1rem;
+    & .MuiFormControl-root {
+      width: 100%;
+    }
+  }
 `;
 
 const ErrorMsg = styled.p`
@@ -69,7 +76,7 @@ const YourDataPage = ({
   return (
     <YourDataWrapper>
       <InputsWrapper>
-        <div>
+        <div className="nameData">
           <TextField
             onChange={(e) => {
               setName(e.target.value);

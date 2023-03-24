@@ -132,7 +132,6 @@ const ShippingPage = ({
     }
   };
 
-  console.log(shippingMethod, paymentMethod);
   return (
     <YourDataWrapper>
       <ShippingWrapper>
@@ -142,14 +141,14 @@ const ShippingPage = ({
             setShippingMethod({
               id: 1,
               type: "Standard: 5-7 Business Days",
-              cost: "$4.99 or FREE on orders above $99",
+              cost: 4.99,
               carriers: "FedEx, FedEx SmartPost, LaserShip, DHL",
             })
           }
         >
           <h3>Standard: 5-7 Business Days</h3>
           <ul>
-            <li>Cost: $4.99 or FREE on orders above $99</li>
+            <li>Cost: 4.99€</li>
             <li>Carriers: FedEx, FedEx SmartPost, LaserShip, DHL</li>
           </ul>
         </ShippingOptionWrapper>
@@ -159,14 +158,14 @@ const ShippingPage = ({
             setShippingMethod({
               id: 2,
               type: "Express: 3-Business Days",
-              cost: "Cost: $9.99",
+              cost: 9.99,
               carriers: "Carrier: FedEx",
             })
           }
         >
           <h3>Express: 3-Business Days</h3>
           <ul>
-            <li>Cost: $9.99</li>
+            <li>Cost: 9.99€</li>
             <li>Carrier: FedEx</li>
           </ul>
         </ShippingOptionWrapper>
@@ -176,14 +175,14 @@ const ShippingPage = ({
             setShippingMethod({
               id: 3,
               type: "Express: 1-2-Business Days",
-              cost: "Cost: $19.99",
+              cost: 19.99,
               carriers: "Carrier: FedEx",
             })
           }
         >
           <h3>Express: 1-2-Business Days</h3>
           <ul>
-            <li>Cost: $19.99</li>
+            <li>Cost: 19.99€</li>
             <li>Carrier: FedEx</li>
           </ul>
         </ShippingOptionWrapper>

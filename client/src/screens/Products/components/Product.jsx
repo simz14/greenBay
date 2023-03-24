@@ -49,15 +49,16 @@ const ProductWrapper = styled.div`
 `;
 
 const ProductImage = styled.img`
-  border-radius: 5px;
+  display: grid;
+  grid-column: 1/3;
   min-height: 5rem;
-  min-width: 5rem;
-  max-width: 100%;
-  max-height: 100%;
+  min-width: 10rem;
+  max-width: 12rem;
+  max-height: 12rem;
+  width: 100%;
+  height: 8rem;
+  border-radius: 15px;
   object-fit: cover;
-  margin: 0;
-  overflow: hidden;
-  cursor: pointer;
 `;
 
 const Product = ({ item }) => {

@@ -14,10 +14,21 @@ const StepsWrapper = styled.div`
   display: flex;
   gap: 1rem;
   border-bottom: 1px solid #c6b7b7;
+
   & .step {
     display: flex;
     align-items: center;
     cursor: pointer;
+    transition: 0.5s ease;
+  }
+  & .active {
+    transition: 0.5s ease;
+    color: rgb(115 198 156);
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 0;
   }
 `;
 
@@ -50,7 +61,7 @@ const Order = () => {
       }
     }
   };
-  console.log(orderData);
+
   return (
     <div>
       <Header cartItems={cartItems} />
@@ -60,7 +71,7 @@ const Order = () => {
             onClick={() => {
               handleClickStep("data");
             }}
-            className="step"
+            className={`step ${showYourData && "active"}`}
           >
             <p>Your data</p>
             <IoIosArrowForward />
@@ -69,7 +80,7 @@ const Order = () => {
             onClick={() => {
               handleClickStep("shipping");
             }}
-            className="step"
+            className={`step ${showShipping && "active"}`}
           >
             <p>Shipping and payment</p> <IoIosArrowForward />
           </div>
@@ -77,7 +88,7 @@ const Order = () => {
             onClick={() => {
               handleClickStep("summary");
             }}
-            className="step"
+            className={`step ${showSummary && "active"}`}
           >
             <p>Summary</p> <IoIosArrowForward />
           </div>

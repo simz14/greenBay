@@ -4,7 +4,6 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import { ProductsProvider } from "./context/ProductsContext";
 import { UserProvider } from "./context/UserContext";
-import { PrivateRoute } from "./components/PrivateRoute";
 import { CartProvider } from "./context/CartContext";
 import { CategoriesProvider } from "./context/CategoriesContext";
 import Products from "./screens/Products/Products";
@@ -16,6 +15,8 @@ import Profile from "./screens/Profile/Profile";
 import { PurchasesProvider } from "./context/PurchasesContext";
 import { SellingItemsProvider } from "./context/SellingItems";
 import Order from "./screens/Order/Order";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { HasItemsInCartRoute } from "./components/HasItemsInCartRoute";
 
 function App() {
   return (
@@ -91,9 +92,9 @@ function App() {
                   <Route
                     path="/order"
                     element={
-                      <PrivateRoute>
+                      <HasItemsInCartRoute>
                         <Order />
-                      </PrivateRoute>
+                      </HasItemsInCartRoute>
                     }
                   />
                 </Routes>
