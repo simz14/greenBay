@@ -44,32 +44,19 @@ const Description = styled.div`
   align-self: self-start;
   & span {
     display: flex;
-    font-size: large;
     font-weight: 100;
     margin-bottom: 1rem;
   }
   @media (max-width: 1000px) {
     padding-right: 0;
-    font-size: 20px;
-    & span {
-      font-size: 13px;
-    }
   }
   @media (max-width: 750px) {
     padding-right: 0;
-    font-size: large;
-    & span {
-      font-size: 13px;
-    }
   }
   @media (max-width: 550px) {
     padding-right: 0;
-    font-size: 13px;
     display: grid;
     justify-items: center;
-    & span {
-      font-size: 10px;
-    }
     & p {
       margin-top: 0;
     }

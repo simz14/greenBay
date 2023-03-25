@@ -52,7 +52,7 @@ const ProductImage = styled.img`
   display: grid;
   grid-column: 1/3;
   min-height: 5rem;
-  min-width: 10rem;
+  min-width: 5rem;
   max-width: 12rem;
   max-height: 12rem;
   width: 100%;
