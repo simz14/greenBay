@@ -46,6 +46,36 @@ const NoPurchasesWrapper = styled.div`
   }
 `;
 
+const PurchaseWrapper = styled.div`
+  display: grid;
+  gap: 1rem;
+  & .time {
+    border-bottom: 1px solid #cfcaca;
+  }
+  @media (max-width: 500px) {
+    & .time {
+      font-size: 12px;
+    }
+  }
+`;
+
+const PurchaseInfo = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #73c69c3d;
+  border-radius: 15px;
+  padding: 1rem;
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+  }
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
+`;
+
 const Purchases = () => {
   const { purchases } = useContext(PurchasesContext);
   const navigate = useNavigate();
@@ -56,7 +86,41 @@ const Purchases = () => {
         <div className="itemsWrapper">
           <InfoText>Here you can find all your purchases</InfoText>
           {purchases.map((item) => {
-            return <PorductInfo item={item} key={item.id} />;
+            return (
+              <PurchaseWrapper key={item.time}>
+                <p className="time">{item.time}</p>
+                <PurchaseInfo>
+                  <div>
+                    <h2>Shipping adress</h2>
+                    <ul>
+                      <li>
+                        {item.name} {item.lastName}
+                      </li>
+                      <li>{item.adress}</li>
+                      <li>{item.city}</li>
+                      <li>{item.country}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h2>Shiping method</h2>
+                    <ul>
+                      <li>{item.shipping.type}</li>
+                      <li>{item.shipping.carriers}</li>
+                      <li>{item.shipping.cost}€</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h2>Payment method</h2>
+                    <ul>
+                      <li>{item.payment.method}</li>
+                    </ul>
+                  </div>
+                </PurchaseInfo>
+                {item.products.map((product) => {
+                  return <PorductInfo item={product} key={product.id} />;
+                })}
+              </PurchaseWrapper>
+            );
           })}
         </div>
       ) : (

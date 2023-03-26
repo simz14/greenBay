@@ -6,6 +6,7 @@ import { CartContext } from "../../../context/CartContext";
 import { PurchasesContext } from "../../../context/PurchasesContext";
 import { getTotal } from "../../../utils/getTotal";
 import succesImg from "../../../assets/successOrder.svg";
+import moment from "moment";
 
 const SummaryWrapper = styled.div`
   display: grid;
@@ -83,6 +84,8 @@ const SuccesInfo = styled.div`
 `;
 
 const SummaryPage = ({ orderData }) => {
+  const { name, lastName, adress, city, country, shipping, payment } =
+    orderData;
   const { cartItems, setCartItems } = useContext(CartContext);
   const { setPurchases } = useContext(PurchasesContext);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -92,7 +95,22 @@ const SummaryPage = ({ orderData }) => {
     setShowSuccess(true);
     setTimeout(() => {
       setShowSuccess(false);
-      setPurchases((prev) => [...prev, ...cartItems]);
+      setPurchases((prev) => [
+        ...prev,
+        {
+          products: [...cartItems],
+          time: moment
+            .unix(String(Date.now() / 1000))
+            .format("DD.MM.YYYY, h:mm:ss"),
+          name: name,
+          lastName: lastName,
+          adress: adress,
+          city: city,
+          country: country,
+          shipping: shipping,
+          payment: payment,
+        },
+      ]);
       setCartItems([]);
     }, 10000);
     setInterval(() => {
@@ -123,25 +141,25 @@ const SummaryPage = ({ orderData }) => {
           <h2>Shipping adress</h2>
           <ul>
             <li>
-              {orderData.name} {orderData.lastName}
+              {name} {lastName}
             </li>
-            <li>{orderData.adress}</li>
-            <li>{orderData.city}</li>
-            <li>{orderData.country}</li>
+            <li>{adress}</li>
+            <li>{city}</li>
+            <li>{country}</li>
           </ul>
         </div>
         <div>
           <h2>Shiping method</h2>
           <ul>
-            <li>{orderData.shipping.type}</li>
-            <li>{orderData.shipping.carriers}</li>
-            <li>{orderData.shipping.cost}€</li>
+            <li>{shipping.type}</li>
+            <li>{shipping.carriers}</li>
+            <li>{shipping.cost}€</li>
           </ul>
         </div>
         <div>
           <h2>Payment method</h2>
           <ul>
-            <li>{orderData.payment.method}</li>
+            <li>{payment.method}</li>
           </ul>
         </div>
       </OrderData>

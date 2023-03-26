@@ -7,7 +7,6 @@ export const PurchasesContext = createContext({
 
 export const PurchasesProvider = (props) => {
   const [purchases, setPurchases] = useState([]);
-
   return (
     <PurchasesContext.Provider
       value={{
