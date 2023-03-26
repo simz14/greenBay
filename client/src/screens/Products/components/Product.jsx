@@ -30,7 +30,7 @@ const ProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 16rem;
+
   cursor: pointer;
   gap: 0.5rem;
 
@@ -53,7 +53,7 @@ const ProductImage = styled.img`
   grid-column: 1/3;
   min-height: 5rem;
   min-width: 5rem;
-  max-width: 12rem;
+  max-width: 100%;
   max-height: 12rem;
   width: 100%;
   height: 8rem;

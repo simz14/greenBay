@@ -9,7 +9,7 @@ const TopProductsWrapper = styled.div`
     minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
     minmax(0, 1fr);
   gap: 1rem;
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   }
   @media (max-width: 500px) {
