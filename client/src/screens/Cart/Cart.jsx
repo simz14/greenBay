@@ -54,7 +54,7 @@ const Total = styled.div`
 `;
 
 const InfoWrapper = styled.div`
-  border-bottom: 1px solid rgb(115 198 156);
+  border-bottom: 1px solid #cfcaca;
 `;
 
 const CartScreen = () => {
@@ -75,7 +75,7 @@ const CartScreen = () => {
             <ContentWrapper>
               <ItemsWrapper>
                 <InfoWrapper>
-                  <h2>Your cart</h2>
+                  <h2 className="underline">Your cart:</h2>
                 </InfoWrapper>
                 {cartItems &&
                   cartItems.map((item) => {

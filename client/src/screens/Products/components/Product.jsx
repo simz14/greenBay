@@ -63,35 +63,14 @@ const ProductImage = styled.img`
 
 const Product = ({ item }) => {
   const { setCartItems } = useContext(CartContext);
-  const [showProduct, setShowProduct] = useState(false);
 
   const handleClickAdd = () => {
     setCartItems((prev) => [...prev, { ...item, amount: 1 }]);
   };
 
-  const hadnleClickProduct = () => {
-    setShowProduct((prev) => !prev);
-  };
-
   return (
     <ProductWrapper>
-      {showProduct && (
-        <ProductZoomWrapper>
-          <ProductBox>
-            <ProductImage src={item.thumbnail} />
-
-            <p>{item.title}</p>
-            <p>{item.description}</p>
-            <p>{item.price + "€"}</p>
-            <ButtonProduct
-              itemId={item.id}
-              buttonName={"Add to cart"}
-              onClick={handleClickAdd}
-            />
-          </ProductBox>
-        </ProductZoomWrapper>
-      )}
-      <ProductImage onClick={hadnleClickProduct} src={item.thumbnail} />
+      <ProductImage src={item.thumbnail} />
       <div className="productContent">
         <p>{item.title}</p>
         <p>{item.price + "€"}</p>

@@ -8,6 +8,7 @@ export const UserProvider = (props) => {
   const [username, setUsername] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
   const setUser = async () => {
     const userData = await userAuth();
@@ -16,6 +17,7 @@ export const UserProvider = (props) => {
       setUsername(userData.username);
       setUserEmail(userData.email);
       setIsAdmin(userData.isAdmin);
+      setUserPassword(userData.password);
     }
   };
 
@@ -34,6 +36,8 @@ export const UserProvider = (props) => {
         setIsAdmin,
         userEmail,
         setUserEmail,
+        userPassword,
+        setUserPassword,
       }}
     >
       {props.children}

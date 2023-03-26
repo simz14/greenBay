@@ -1,15 +1,25 @@
-export const updateUserData = async (data) => {
+export const updateUserData = async (data, contextPassword) => {
   const [
     userId,
     changedUsername,
     changedEmail,
     currentPassword,
-    changedPasword,
+    changedPassword,
   ] = data;
 
   if (currentPassword) {
-    if (changedUsername || changedEmail || changedPasword) {
-      try {
+    if (changedUsername || changedEmail || changedPassword) {
+      if (currentPassword === contextPassword) {
+        return {
+          userId: 1,
+          username: changedUsername,
+          email: changedEmail,
+          password: changedPassword,
+        };
+      } else {
+        throw new Error("Current password is incorrect!");
+      }
+      /*try {
         const postData = await fetch("http://localhost:8080/editprofile", {
           method: "PATCH",
           headers: {
@@ -27,7 +37,7 @@ export const updateUserData = async (data) => {
         return postData;
       } catch (e) {
         return e.message;
-      }
+      }*/
     } else {
       throw new Error("At least one field is required!");
     }

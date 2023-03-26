@@ -63,6 +63,7 @@ const StyledImg = styled.img`
     justify-self: center;
     flex-wrap: wrap;
     right: initial;
+    margin-top: 5rem;
   }
   @media (max-width: 700px) {
     width: 20rem;
@@ -145,11 +146,11 @@ const Register = () => {
       <Container>
         <RegisterWrapper>
           <InfoWrapper>
+            <h1>Registering is not possible😬</h1>
             <h1> Welcome to GreenBay!</h1>
             <p>Sign up to continue</p>
           </InfoWrapper>
           <InputsWrapper>
-            {" "}
             <StyledImg src={greenShape} />
             <h1>Register</h1>
             <Input
@@ -176,6 +177,7 @@ const Register = () => {
               icon={<BiLockAlt />}
             />
             <Button
+              disabled={true}
               onClick={() => handleRegisterClick()}
               buttonName="Sign up"
             />

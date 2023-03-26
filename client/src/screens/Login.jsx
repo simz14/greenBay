@@ -113,21 +113,18 @@ const InfoMessage = styled.p`
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("user@gmail.com");
+  const [password, setPassword] = useState("user1234");
   const [succesMsg, setSuccesMsg] = useState([false, ""]);
   const [failMsg, setFailMsg] = useState([false, ""]);
-  const { username, setUserId, setUsername, setUserEmail, setIsAdmin } =
+  const { setUserPassword, setUserId, setUsername, setUserEmail, setIsAdmin } =
     useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLoginClick = async () => {
-    const response = await fetchLogin({ email, password });
-    const data = await response.json();
-    if (!data.jwt) {
-      setFailMsg([true, data.message]);
-      setSuccesMsg([false, ""]);
-    } else {
+    try {
+      const data = await fetchLogin({ email, password });
+      //const data = await response.json();
       window.localStorage.setItem("token", data.jwt);
       const userData = await userAuth();
       if (userData) {
@@ -135,8 +132,12 @@ const Login = () => {
         setUsername(userData.username);
         setUserEmail(userData.email);
         setIsAdmin(userData.isAdmin);
+        setUserPassword(userData.password);
       }
       navigate("/");
+    } catch (e) {
+      setFailMsg([true, e.message]);
+      setSuccesMsg([false, ""]);
     }
   };
 
@@ -189,9 +190,9 @@ const Login = () => {
             {succesMsg[0] && (
               <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
             )}
-            {failMsg[0] && (
+            {failMsg[0] ? (
               <InfoMessage className="error">{failMsg[1]}</InfoMessage>
-            )}
+            ) : null}
           </InputsWrapper>
         </LoginWrapper>
       </Container>

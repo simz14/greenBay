@@ -44,11 +44,18 @@ const InfoMessage = styled.p`
 `;
 
 const Account = () => {
-  const { userId, username, setUsername, userEmail, setUserEmail } =
-    useContext(UserContext);
+  const {
+    userId,
+    username,
+    setUsername,
+    userEmail,
+    setUserEmail,
+    userPassword,
+    setUserPassword,
+  } = useContext(UserContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
-  const [changedPasword, setChangedPassword] = useState("");
+  const [changedPassword, setChangedPassword] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [succesMsg, setSuccesMsg] = useState([false, ""]);
   const [failMsg, setFailMsg] = useState([false, ""]);
@@ -56,24 +63,33 @@ const Account = () => {
   useEffect(() => {
     setChangedUsername(username);
     setChangedEmail(userEmail);
-  }, []);
+    setChangedPassword(userPassword);
+  }, [userPassword, username, userEmail]);
 
   const handleClickEdit = async () => {
     try {
-      const response = await updateUserData([
-        userId,
-        changedUsername,
-        changedEmail,
-        currentPassword,
-        changedPasword,
-      ]);
-      const data = await response.json();
+      const response = await updateUserData(
+        [
+          userId,
+          changedUsername.length > 0 ? changedUsername : username,
+          changedEmail.length > 0 ? changedEmail : userEmail,
+          currentPassword,
+          changedPassword.length > 0 ? changedPassword : userPassword,
+        ],
+        userPassword
+      );
+      /*const data = await response.json();
       window.localStorage.setItem("token", data.jwt);
-      const userData = await userAuth();
-      if (userData) {
-        setUsername(userData.username);
-        setUserEmail(userData.email);
-      }
+      const userData = await userAuth();*/
+
+      setUsername(response.username);
+      setUserEmail(response.email);
+      setUserPassword(response.password);
+
+      setChangedUsername(username);
+      setChangedEmail(userEmail);
+      setChangedPassword(userPassword);
+
       setSuccesMsg([true, "Successfully edited!"]);
       setFailMsg([false, ""]);
     } catch (e) {
@@ -89,6 +105,7 @@ const Account = () => {
       setFailMsg([false, ""]);
     }
   };
+
   return (
     <AccountContainer>
       <FormWrapper>

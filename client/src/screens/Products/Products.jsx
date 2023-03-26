@@ -170,6 +170,12 @@ const Products = () => {
         return { ...product, isShown: false };
       })
     );
+    if (filteredProducts.length > 0) {
+      const max = filteredProducts
+        .sort((a, b) => a.price - b.price)
+        .at(-1).price;
+      setPrice([0, max]);
+    }
 
     // If all unchecked to show all products
     let all = true;

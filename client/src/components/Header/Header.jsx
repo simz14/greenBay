@@ -23,7 +23,6 @@ const HeaderWrapper = styled.div`
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
-  border: 1.5px solid #ffffff;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
@@ -114,7 +113,7 @@ const CompWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
-  top: 0;
+  top: -1rem;
   right: 0;
 `;
 
@@ -127,23 +126,11 @@ const BcgClick = styled.div`
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [showAuth, setShowAuth] = useState(false);
-  const { username, setUserId, setUsername, setIsAdmin } =
-    useContext(UserContext);
+  const { setUserId, setUsername, setIsAdmin } = useContext(UserContext);
   const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
   const refMenu = useRef(null);
   const refCart = useRef(null);
-
-  useEffect(() => {
-    const isLogged = userAuth();
-
-    if (isLogged) {
-      setShowAuth(false);
-    } else {
-      setShowAuth(true);
-    }
-  }, [username]);
 
   const checkClickOutsideMenu = (e) => {
     if (refMenu.current.contains(e.target)) {
@@ -174,7 +161,7 @@ const Header = () => {
           <HeaderLink className="logo" to="/">
             <BrandImage src={logo} />
           </HeaderLink>
-          {showAuth && (
+          {!userAuth() && (
             <UserAuthWrapper>
               <HeaderLink to="/login">Login</HeaderLink>
               <HeaderLink className="register" to="/register">
@@ -182,15 +169,14 @@ const Header = () => {
               </HeaderLink>
             </UserAuthWrapper>
           )}
-          <Icons>
-            <MenuIcon onClick={() => handleClickMenu()} />
-            {!showAuth && (
+
+          {userAuth() && (
+            <Icons>
+              <MenuIcon onClick={() => handleClickMenu()} />
               <div>
                 <CartIcon onClick={() => handleClickCart()} />
                 <CartCount> {cartItems && cartItems.length}</CartCount>
               </div>
-            )}
-            {!showAuth && (
               <LogOutIcon
                 onClick={() => {
                   localStorage.removeItem("token");
@@ -200,8 +186,9 @@ const Header = () => {
                     navigate("/login");
                 }}
               />
-            )}
-          </Icons>
+            </Icons>
+          )}
+
           {showMenu && (
             <CompWrapper onClick={(e) => checkClickOutsideMenu(e)}>
               <BcgClick ref={refMenu}></BcgClick>

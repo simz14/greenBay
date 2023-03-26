@@ -46,7 +46,7 @@ const Footer = () => {
           <LogoImage src={logo} />
           <Links>
             <a href="">About us</a>
-            <a href="">Account</a>
+            <a href="/profile">Account</a>
           </Links>
         </FooterWrapper>
       </Container>
