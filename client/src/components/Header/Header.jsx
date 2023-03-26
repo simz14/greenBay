@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import logo from "../../assets/logo.svg";
-import DropDown from "../DropDown";
+import DropDown from "./DropDown";
 import { Container } from "../Container";
 import { Link, useNavigate } from "react-router-dom";
 import { BiMenu, BiLogOut, BiCartAlt } from "react-icons/bi";
@@ -89,6 +89,9 @@ const UserAuthWrapper = styled.div`
 const Icons = styled.div`
   display: flex;
   gap: 1rem;
+  position: fixed;
+  justify-self: end;
+  z-index: 99999;
 `;
 
 const CartCount = styled.span`
@@ -103,6 +106,24 @@ const CartCount = styled.span`
   margin-left: -10px;
 `;
 
+const CompWrapper = styled.div`
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+`;
+
+const BcgClick = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+`;
+
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -111,6 +132,8 @@ const Header = () => {
     useContext(UserContext);
   const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
+  const refMenu = useRef(null);
+  const refCart = useRef(null);
 
   useEffect(() => {
     const isLogged = userAuth();
@@ -121,6 +144,28 @@ const Header = () => {
       setShowAuth(true);
     }
   }, [username]);
+
+  const checkClickOutsideMenu = (e) => {
+    if (refMenu.current.contains(e.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  const checkClickOutsideCart = (e) => {
+    if (refCart.current.contains(e.target)) {
+      setShowCart(false);
+    }
+  };
+
+  const handleClickMenu = () => {
+    setShowMenu((prev) => !prev);
+    setShowCart(false);
+  };
+
+  const handleClickCart = () => {
+    setShowCart((prev) => !prev);
+    setShowMenu(false);
+  };
 
   return (
     <HeaderContainer>
@@ -138,10 +183,10 @@ const Header = () => {
             </UserAuthWrapper>
           )}
           <Icons>
-            <MenuIcon onClick={() => setShowMenu((prev) => !prev)} />{" "}
+            <MenuIcon onClick={() => handleClickMenu()} />
             {!showAuth && (
               <div>
-                <CartIcon onClick={() => setShowCart((prev) => !prev)} />
+                <CartIcon onClick={() => handleClickCart()} />
                 <CartCount> {cartItems && cartItems.length}</CartCount>
               </div>
             )}
@@ -157,8 +202,18 @@ const Header = () => {
               />
             )}
           </Icons>
-          {showMenu && <DropDown />}
-          {showCart && <CartComponent />}
+          {showMenu && (
+            <CompWrapper onClick={(e) => checkClickOutsideMenu(e)}>
+              <BcgClick ref={refMenu}></BcgClick>
+              <DropDown />
+            </CompWrapper>
+          )}
+          {showCart && (
+            <CompWrapper onClick={(e) => checkClickOutsideCart(e)}>
+              <BcgClick ref={refCart}></BcgClick>
+              <CartComponent />
+            </CompWrapper>
+          )}
         </HeaderWrapper>
       </Container>
     </HeaderContainer>
