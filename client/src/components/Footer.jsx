@@ -36,19 +36,17 @@ const Links = styled.div`
 const Footer = () => {
   return (
     <FooterContainer>
-      <Container>
-        <FooterWrapper>
-          <Links>
-            <a href="">Policy</a>
-            <a href="">Security</a>
-          </Links>
-          <LogoImage src={logo} />
-          <Links>
-            <a href="">About us</a>
-            <a href="/profile">Account</a>
-          </Links>
-        </FooterWrapper>
-      </Container>
+      <FooterWrapper>
+        <Links>
+          <a href="">Policy</a>
+          <a href="">Security</a>
+        </Links>
+        <LogoImage src={logo} />
+        <Links>
+          <a href="">About us</a>
+          <a href="/profile">Account</a>
+        </Links>
+      </FooterWrapper>
     </FooterContainer>
   );
 };

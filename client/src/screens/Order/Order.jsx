@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { Container } from "../../components/Container";
 import { CartContext } from "../../context/CartContext";
 import { IoIosArrowForward } from "react-icons/io";
-
 import YourDataPage from "./components/YourDataPage";
 import ShippingPage from "./components/ShippingPage";
 import SummaryPage from "./components/SummaryPage";
@@ -63,7 +62,7 @@ const Order = () => {
   };
 
   return (
-    <div>
+    <Container>
       <Header cartItems={cartItems} />
       <Container>
         <StepsWrapper>
@@ -113,7 +112,7 @@ const Order = () => {
         {showSummary && <SummaryPage orderData={orderData} />}
       </Container>
       <Footer />
-    </div>
+    </Container>
   );
 };
 export default Order;

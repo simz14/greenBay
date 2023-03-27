@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/logo.svg";
 import DropDown from "./DropDown";
-import { Container } from "../Container";
 import { Link, useNavigate } from "react-router-dom";
 import { BiMenu, BiLogOut, BiCartAlt } from "react-icons/bi";
 import { useState, useContext } from "react";
@@ -125,43 +124,41 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Container>
-        <HeaderWrapper>
-          <HeaderLink className="logo" to="/">
-            <BrandImage src={logo} />
-          </HeaderLink>
-          {!userAuth() && (
-            <UserAuthWrapper>
-              <HeaderLink to="/login">Login</HeaderLink>
-              <HeaderLink className="register" to="/register">
-                Register
-              </HeaderLink>
-            </UserAuthWrapper>
-          )}
+      <HeaderWrapper>
+        <HeaderLink className="logo" to="/">
+          <BrandImage src={logo} />
+        </HeaderLink>
+        {!userAuth() && (
+          <UserAuthWrapper>
+            <HeaderLink to="/login">Login</HeaderLink>
+            <HeaderLink className="register" to="/register">
+              Register
+            </HeaderLink>
+          </UserAuthWrapper>
+        )}
 
-          {userAuth() && (
-            <Icons>
-              <MenuIcon onClick={() => handleClickMenu()} />
-              <div>
-                <CartIcon onClick={() => handleClickCart()} />
-                <CartCount> {cartItems && cartItems.length}</CartCount>
-              </div>
-              <LogOutIcon
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  setUserId(null),
-                    setUsername(null),
-                    setIsAdmin(null),
-                    navigate("/login");
-                }}
-              />
-            </Icons>
-          )}
+        {userAuth() && (
+          <Icons>
+            <MenuIcon onClick={() => handleClickMenu()} />
+            <div>
+              <CartIcon onClick={() => handleClickCart()} />
+              <CartCount> {cartItems && cartItems.length}</CartCount>
+            </div>
+            <LogOutIcon
+              onClick={() => {
+                localStorage.removeItem("token");
+                setUserId(null),
+                  setUsername(null),
+                  setIsAdmin(null),
+                  navigate("/login");
+              }}
+            />
+          </Icons>
+        )}
 
-          {showMenu && <DropDown />}
-          {showCart && <CartComponent />}
-        </HeaderWrapper>
-      </Container>
+        {showMenu && <DropDown />}
+        {showCart && <CartComponent />}
+      </HeaderWrapper>
     </HeaderContainer>
   );
 };

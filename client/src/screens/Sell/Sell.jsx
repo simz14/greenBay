@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FormControl,
   FormGroup,
@@ -19,8 +19,7 @@ import SuggestionList from "./SuggestionList";
 import SellImg from "../../assets/sellingImg.webp";
 import PopUp from "../../components/PopUp";
 import { SellingItemsContext } from "../../context/SellingItems";
-
-const SellContainer = styled.div`s`;
+import { Container } from "../../components/Container";
 
 const SellWrapper = styled.div`
   display: grid;
@@ -215,7 +214,7 @@ const Sell = () => {
   };
 
   return (
-    <SellContainer>
+    <Container>
       <Header cartItems={cartItems} />
       <SellWrapper>
         <PopUp
@@ -317,7 +316,7 @@ const Sell = () => {
         </div>
       </SellWrapper>
       <Footer />
-    </SellContainer>
+    </Container>
   );
 };
 export default Sell;

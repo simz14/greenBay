@@ -19,10 +19,6 @@ import {
 import { BsFilterLeft } from "react-icons/bs";
 import FilterComp from "./components/FilterComponent";
 
-const ProductsContainer = styled.div`
-  width: 100%;
-`;
-
 const StyledFormControl = styled(FormControl)`
   display: grid;
   width: 30%;
@@ -39,6 +35,7 @@ const ProductsWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   margin-bottom: auto;
+  margin-top: 5rem;
   & .filtersScreenLess900 {
     display: none;
   }
@@ -206,71 +203,70 @@ const Products = () => {
   };
 
   return (
-    <ProductsContainer>
+    <Container>
       <Header cartItems={cartItems} />
-      <Container>
-        <ProductsWrapper className="productsWrapper">
-          <StyledFormControl>
-            <InputLabel>Order by</InputLabel>
-            <Select
-              label="OrderOfProducts"
-              value={orderOfProducts}
-              onChange={(e) => {
-                sortProducts(e.target.value);
-              }}
-            >
-              <MenuItem value={"high"}>Price from high</MenuItem>
-              <MenuItem value={"low"}>Price from low</MenuItem>
-            </Select>
-          </StyledFormControl>
+      <ProductsWrapper className="productsWrapper">
+        <StyledFormControl>
+          <InputLabel>Order by</InputLabel>
+          <Select
+            label="OrderOfProducts"
+            value={orderOfProducts}
+            onChange={(e) => {
+              sortProducts(e.target.value);
+            }}
+          >
+            <MenuItem value={"high"}>Price from high</MenuItem>
+            <MenuItem value={"low"}>Price from low</MenuItem>
+          </Select>
+        </StyledFormControl>
 
-          <StyledFilterForm>
-            <FilterForm
+        <StyledFilterForm>
+          <FilterForm
+            price={price}
+            setPrice={handleChangePirce}
+            filteredProducts={filteredProducts}
+            filteredCategories={filteredCategories}
+            filterHandler={filterHandler}
+          />
+        </StyledFilterForm>
+
+        <StyledFilterIcon
+          className={"filtersScreenLess900"}
+          onClick={() => setShowFilterComp((prev) => !prev)}
+        />
+
+        <ProductsBox>
+          {loading ? (
+            <CircularProgress sx={{ color: "#73c69c" }} />
+          ) : (
+            <Content>
+              {filteredProducts.map(
+                (item) =>
+                  item.isShown &&
+                  item.price >= price[0] &&
+                  item.price <= price[1] && (
+                    <Product key={item.id} item={item} />
+                  )
+              )}
+            </Content>
+          )}
+        </ProductsBox>
+        <FilterCompWrapper>
+          {showFilterComp && (
+            <FilterComp
               price={price}
-              setPrice={handleChangePirce}
+              handleChangePirce={handleChangePirce}
               filteredProducts={filteredProducts}
               filteredCategories={filteredCategories}
               filterHandler={filterHandler}
+              setShowFilterComp={setShowFilterComp}
             />
-          </StyledFilterForm>
+          )}
+        </FilterCompWrapper>
+      </ProductsWrapper>
 
-          <StyledFilterIcon
-            className={"filtersScreenLess900"}
-            onClick={() => setShowFilterComp((prev) => !prev)}
-          />
-
-          <ProductsBox>
-            {loading ? (
-              <CircularProgress sx={{ color: "#73c69c" }} />
-            ) : (
-              <Content>
-                {filteredProducts.map(
-                  (item) =>
-                    item.isShown &&
-                    item.price >= price[0] &&
-                    item.price <= price[1] && (
-                      <Product key={item.id} item={item} />
-                    )
-                )}
-              </Content>
-            )}
-          </ProductsBox>
-          <FilterCompWrapper>
-            {showFilterComp && (
-              <FilterComp
-                price={price}
-                handleChangePirce={handleChangePirce}
-                filteredProducts={filteredProducts}
-                filteredCategories={filteredCategories}
-                filterHandler={filterHandler}
-                setShowFilterComp={setShowFilterComp}
-              />
-            )}
-          </FilterCompWrapper>
-        </ProductsWrapper>
-      </Container>
       <Footer />
-    </ProductsContainer>
+    </Container>
   );
 };
 

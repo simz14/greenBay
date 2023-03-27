@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router";
 import { Container } from "@mui/material";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header/Header";
 import styled from "styled-components";
 import { CartContext } from "../../context/CartContext";
-
 import shoppingImage from "../../assets/shoppingImage.png";
 import CategoriesComp from "./components/Categories";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -151,49 +149,49 @@ const Home = () => {
   const { cartItems } = useContext(CartContext);
 
   return (
-    <HomeContainer>
+    <Container>
       <Header cartItems={cartItems} />
-      <Container>
-        <WelcomeWrapper>
-          <Description>
-            <GreenP>Welcome to GreenBay</GreenP>
-            <p>Best Place to Buy Everything</p>
-            <span>
-              At GreenBay you can buy clothes, houshold products and more
-              anytime at one place.
-            </span>
-          </Description>
 
-          <ImageWrapper>
-            <img src={shoppingImage} />
-          </ImageWrapper>
-        </WelcomeWrapper>
-        <h2>Shop our top categories</h2>
-        <CategoriesComp />
+      <WelcomeWrapper>
+        <Description>
+          <GreenP>Welcome to GreenBay</GreenP>
+          <p>Best Place to Buy Everything</p>
+          <span>
+            At GreenBay you can buy clothes, houshold products and more anytime
+            at one place.
+          </span>
+        </Description>
 
-        <WhyUsWrapper>
-          <h2>Why choose us?</h2>
-          <ReasonsWrapper>
-            <ReasonWrapper>
-              <TbTruckDelivery />
-              <p>Free delivery</p>
-            </ReasonWrapper>{" "}
-            <ReasonWrapper>
-              <FaRegHandshake />
-              <p>Trusted platform</p>
-            </ReasonWrapper>
-            <ReasonWrapper>
-              <AiOutlineFieldTime />
-              <p>Here for you 24/7</p>
-            </ReasonWrapper>
-          </ReasonsWrapper>
-        </WhyUsWrapper>
-        <h2>Our top products</h2>
+        <ImageWrapper>
+          <img src={shoppingImage} />
+        </ImageWrapper>
+      </WelcomeWrapper>
+      <h2>Shop our top categories</h2>
+      <CategoriesComp />
 
-        <TopProducts />
-      </Container>
+      <WhyUsWrapper>
+        <h2>Why choose us?</h2>
+        <ReasonsWrapper>
+          <ReasonWrapper>
+            <TbTruckDelivery />
+            <p>Free delivery</p>
+          </ReasonWrapper>{" "}
+          <ReasonWrapper>
+            <FaRegHandshake />
+            <p>Trusted platform</p>
+          </ReasonWrapper>
+          <ReasonWrapper>
+            <AiOutlineFieldTime />
+            <p>Here for you 24/7</p>
+          </ReasonWrapper>
+        </ReasonsWrapper>
+      </WhyUsWrapper>
+      <h2>Our top products</h2>
+
+      <TopProducts />
+
       <Footer />
-    </HomeContainer>
+    </Container>
   );
 };
 export default Home;

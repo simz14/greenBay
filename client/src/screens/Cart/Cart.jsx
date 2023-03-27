@@ -7,16 +7,12 @@ import { CartContext } from "../../context/CartContext";
 import CartItem from "./components/CartItem";
 import { getTotal } from "../../utils/getTotal";
 import Button from "../../components/Button";
-import { PurchasesContext } from "../../context/PurchasesContext";
 import EmptyBasket from "../../assets/emptyBasket.webp";
 import { useNavigate } from "react-router";
 
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const CartContainer = styled.div`
-  width: 100%;
 `;
 
 const EmptyCartWrapper = styled.div`
@@ -62,44 +58,40 @@ const CartScreen = () => {
   const navigate = useNavigate();
 
   return (
-    <CartContainer>
+    <Container>
       <Header cartItems={cartItems} />
-      <Container>
-        <div>
-          {cartItems.length < 1 ? (
-            <EmptyCartWrapper>
-              <h2>Your cart is empty</h2>
-              <img src={EmptyBasket} />
-            </EmptyCartWrapper>
-          ) : (
-            <ContentWrapper>
-              <ItemsWrapper>
-                <InfoWrapper>
-                  <h2 className="underline">Your cart:</h2>
-                </InfoWrapper>
-                {cartItems &&
-                  cartItems.map((item) => {
-                    return <CartItem key={item.id} item={item} />;
-                  })}
-              </ItemsWrapper>
+      <div>
+        {cartItems.length < 1 ? (
+          <EmptyCartWrapper>
+            <h2>Your cart is empty</h2>
+            <img src={EmptyBasket} />
+          </EmptyCartWrapper>
+        ) : (
+          <ContentWrapper>
+            <ItemsWrapper>
+              <InfoWrapper>
+                <h2 className="underline">Your cart:</h2>
+              </InfoWrapper>
+              {cartItems &&
+                cartItems.map((item) => {
+                  return <CartItem key={item.id} item={item} />;
+                })}
+            </ItemsWrapper>
 
-              <TotalWrapper>
-                <Total>
-                  <h2>Total: </h2>
-                  <p>{getTotal(cartItems)}€</p>
-                </Total>
+            <TotalWrapper>
+              <Total>
+                <h2>Total: </h2>
+                <p>{getTotal(cartItems)}€</p>
+              </Total>
 
-                <Button
-                  onClick={() => navigate("/order")}
-                  buttonName={"Order"}
-                />
-              </TotalWrapper>
-            </ContentWrapper>
-          )}
-        </div>
-      </Container>
+              <Button onClick={() => navigate("/order")} buttonName={"Order"} />
+            </TotalWrapper>
+          </ContentWrapper>
+        )}
+      </div>
+
       <Footer />
-    </CartContainer>
+    </Container>
   );
 };
 

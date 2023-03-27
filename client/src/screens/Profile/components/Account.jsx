@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Button from "../../../components/Button";
 import { UserContext } from "../../../context/UserContext";
 import { updateUserData } from "../../../services/updateProfile";
-import { userAuth } from "../../../utils/auth";
 import { validateEmail } from "../../../utils/validation";
 
 const AccountContainer = styled.div``;
@@ -12,12 +11,12 @@ const AccountContainer = styled.div``;
 const FormWrapper = styled(FormGroup)`
   width: 50%;
   margin: auto;
-  padding: 1rem;
   border: 1.5px solid #ffffff;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   gap: 1rem;
+  padding: 1rem;
   @media (max-width: 800px) {
     width: 65%;
   }

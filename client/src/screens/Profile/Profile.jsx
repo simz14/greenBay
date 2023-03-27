@@ -9,12 +9,12 @@ import Account from "./components/Account";
 import Selling from "./components/Selling";
 import Purchases from "./components/Purchases";
 
-const ProfileContainer = styled.div``;
 const ProfileWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 1rem;
+
   margin-bottom: auto;
+  margin-top: 5rem;
 
   @media (max-width: 800px) {
     & .links {

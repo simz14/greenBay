@@ -8,6 +8,7 @@ import { validateOrderData } from "../../../utils/validation";
 const YourDataWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   & img {
     max-width: 100%;
     max-height: 100%;
