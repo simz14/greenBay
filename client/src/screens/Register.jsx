@@ -10,11 +10,6 @@ import { fetchRegister } from "../services/register";
 import { validateEmail, validatePassword } from "../utils/validation";
 import { BiUser, BiEnvelope, BiLockAlt } from "react-icons/bi";
 
-const RegisterContainer = styled.div`
-  width: 100%;
-  padding-bottom: 0.5rem;
-`;
-
 const RegisterWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -106,56 +101,56 @@ const Register = () => {
   };
 
   return (
-    <RegisterContainer>
+    <Container>
       <Header />
-      <Container>
-        <RegisterWrapper>
-          <InfoWrapper>
-            <h1>Registering is not possible😬</h1>
-            <h1> Welcome to GreenBay!</h1>
-            <p>Sign up to continue</p>
-          </InfoWrapper>
-          <InputsWrapper>
-            <h1>Register</h1>
-            <Input
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-              type="text"
-              placeholder="username"
-              icon={<BiUser />}
-            />
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              onBlur={() => handleEmailBlur()}
-              value={email}
-              type="text"
-              placeholder="email"
-              icon={<BiEnvelope />}
-            />
-            <Input
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={() => handlePasswordBlur()}
-              value={password}
-              type="password"
-              placeholder="password"
-              icon={<BiLockAlt />}
-            />
-            <Button
-              disabled={true}
-              onClick={() => handleRegisterClick()}
-              buttonName="Sign up"
-            />
-            {succesMsg[0] && (
-              <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
-            )}
-            {failMsg[0] && (
-              <InfoMessage className="error">{failMsg[1]}</InfoMessage>
-            )}
-          </InputsWrapper>
-        </RegisterWrapper>
-      </Container>
+
+      <RegisterWrapper>
+        <InfoWrapper>
+          <h1>Registering is not possible😬</h1>
+          <h1> Welcome to GreenBay!</h1>
+          <p>Sign up to continue</p>
+        </InfoWrapper>
+        <InputsWrapper>
+          <h1>Register</h1>
+          <Input
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            type="text"
+            placeholder="username"
+            icon={<BiUser />}
+          />
+          <Input
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => handleEmailBlur()}
+            value={email}
+            type="text"
+            placeholder="email"
+            icon={<BiEnvelope />}
+          />
+          <Input
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={() => handlePasswordBlur()}
+            value={password}
+            type="password"
+            placeholder="password"
+            icon={<BiLockAlt />}
+          />
+          <Button
+            disabled={true}
+            onClick={() => handleRegisterClick()}
+            buttonName="Sign up"
+          />
+          {succesMsg[0] && (
+            <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
+          )}
+          {failMsg[0] && (
+            <InfoMessage className="error">{failMsg[1]}</InfoMessage>
+          )}
+        </InputsWrapper>
+      </RegisterWrapper>
+
       <Footer />
-    </RegisterContainer>
+    </Container>
   );
 };
 

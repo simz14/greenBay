@@ -10,6 +10,10 @@ import Button from "../../components/Button";
 import EmptyBasket from "../../assets/emptyBasket.webp";
 import { useNavigate } from "react-router";
 
+const CartWrapper = styled.div`
+  top: 0;
+`;
+
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -60,7 +64,7 @@ const CartScreen = () => {
   return (
     <Container>
       <Header cartItems={cartItems} />
-      <div>
+      <CartWrapper>
         {cartItems.length < 1 ? (
           <EmptyCartWrapper>
             <h2>Your cart is empty</h2>
@@ -88,7 +92,7 @@ const CartScreen = () => {
             </TotalWrapper>
           </ContentWrapper>
         )}
-      </div>
+      </CartWrapper>
 
       <Footer />
     </Container>
