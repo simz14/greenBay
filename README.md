@@ -16,7 +16,7 @@
 
 - filter products based on category and price
 
-- add or more items to cart and manage them
+- add one or more items to cart and manage them
 
 - complete purchases
 
