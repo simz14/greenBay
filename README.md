@@ -1,10 +1,6 @@
 <h1>Checkout this project:</h1>
 - https://green-bay-v1.vercel.app/
 
-<h2 align="left">General info:</h2>
-
-- I created this project to test my knowledge from Green Fox Academy, try something extra, and try to create a bigger project myself.
-
 <h2 align="left">Project description:</h2>
 <h3>This project is an e-commerce application that allows users to:</h3>
 
