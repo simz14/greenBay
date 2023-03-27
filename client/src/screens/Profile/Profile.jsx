@@ -59,7 +59,7 @@ const Profile = () => {
     setShowPurchases(true);
   };
   return (
-    <ProfileContainer>
+    <Container>
       <Header cartItems={cartItems} />
       <ProfileWrapper>
         <div className="links">
@@ -76,7 +76,7 @@ const Profile = () => {
         </ContentWrapper>
       </ProfileWrapper>
       <Footer />
-    </ProfileContainer>
+    </Container>
   );
 };
 export default Profile;
