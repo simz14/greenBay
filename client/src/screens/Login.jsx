@@ -69,13 +69,14 @@ const StyledImg = styled.img`
 
 const InputsWrapper = styled.div`
   display: grid;
-  width: 80%;
+  width: 50%;
   justify-self: end;
   border-radius: 15px;
   padding: 2rem 4rem;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
   @media (max-width: 400px) {
     padding: 2rem 2rem;
+    width: 70%;
   }
 `;
 
@@ -148,41 +149,39 @@ const Login = () => {
   return (
     <LoginContainer>
       <Header />
-      <Container>
-        <LoginWrapper>
-          <InfoWrapper>
-            <h1> Welcome back!</h1>
-            <p>Sign in to continue</p>
-          </InfoWrapper>
-          <InputsWrapper>
-            <StyledImg src={greenShape} />
-            <h1>Login</h1>
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              onBlur={() => handleEmailBlur()}
-              value={email}
-              type="text"
-              placeholder="email"
-              icon={<BiEnvelope />}
-            />
-            <Input
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={() => handlePasswordBlur()}
-              value={password}
-              type="password"
-              placeholder="password"
-              icon={<BiLockAlt />}
-            />
-            <Button onClick={() => handleLoginClick()} buttonName="Sign in" />
-            {succesMsg[0] && (
-              <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
-            )}
-            {failMsg[0] ? (
-              <InfoMessage className="error">{failMsg[1]}</InfoMessage>
-            ) : null}
-          </InputsWrapper>
-        </LoginWrapper>
-      </Container>
+      <LoginWrapper>
+        <InfoWrapper>
+          <h1> Welcome back!</h1>
+          <p>Sign in to continue</p>
+        </InfoWrapper>
+        <InputsWrapper>
+          <StyledImg src={greenShape} />
+          <h1>Login</h1>
+          <Input
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => handleEmailBlur()}
+            value={email}
+            type="text"
+            placeholder="email"
+            icon={<BiEnvelope />}
+          />
+          <Input
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={() => handlePasswordBlur()}
+            value={password}
+            type="password"
+            placeholder="password"
+            icon={<BiLockAlt />}
+          />
+          <Button onClick={() => handleLoginClick()} buttonName="Sign in" />
+          {succesMsg[0] && (
+            <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
+          )}
+          {failMsg[0] ? (
+            <InfoMessage className="error">{failMsg[1]}</InfoMessage>
+          ) : null}
+        </InputsWrapper>
+      </LoginWrapper>
       <Footer />
     </LoginContainer>
   );

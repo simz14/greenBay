@@ -24,9 +24,10 @@ const StyledInput = styled.input`
     width: 100%;
   }
   @media (max-width: 400px) {
-    font-size: 0.5em;
-    margin: 0.5rem 0;
+    font-size: 10px;
+    margin: 0.5rem 0px;
     width: 100%;
+    height: 2rem;
   }
 `;
 const Icon = styled.div`

@@ -45,7 +45,7 @@ const InfoWrapper = styled.div`
 `;
 
 const StyledImg = styled.img`
-  width: 80%;
+  width: 25rem;
   position: fixed;
   z-index: -9999;
   top: 10rem;
@@ -55,24 +55,25 @@ const StyledImg = styled.img`
     justify-self: center;
     flex-wrap: wrap;
     right: initial;
-    margin-top: 5rem;
+  }
+  @media (max-width: 700px) {
+    width: 20rem;
+  }
+  @media (max-width: 400px) {
+    width: 15rem;
   }
 `;
 
 const InputsWrapper = styled.div`
   display: grid;
-  width: 30%;
+  width: 50%;
   justify-self: end;
   border-radius: 15px;
   padding: 2rem 4rem;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
-  @media (max-width: 700px) {
-    padding: 1rem;
-    width: 60%;
-  }
   @media (max-width: 400px) {
-    padding: 1rem;
-    width: 100%;
+    padding: 2rem 2rem;
+    width: 70%;
   }
 `;
 const InfoMessage = styled.p`
@@ -129,53 +130,51 @@ const Register = () => {
   return (
     <RegisterContainer>
       <Header />
-      <Container>
-        <RegisterWrapper>
-          <InfoWrapper>
-            <h1>Registering is not possible😬</h1>
-            <h1> Welcome to GreenBay!</h1>
-            <p>Sign up to continue</p>
-          </InfoWrapper>
-          <InputsWrapper>
-            <StyledImg src={greenShape} />
-            <h1>Register</h1>
-            <Input
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-              type="text"
-              placeholder="username"
-              icon={<BiUser />}
-            />
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              onBlur={() => handleEmailBlur()}
-              value={email}
-              type="text"
-              placeholder="email"
-              icon={<BiEnvelope />}
-            />
-            <Input
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={() => handlePasswordBlur()}
-              value={password}
-              type="password"
-              placeholder="password"
-              icon={<BiLockAlt />}
-            />
-            <Button
-              disabled={true}
-              onClick={() => handleRegisterClick()}
-              buttonName="Sign up"
-            />
-            {succesMsg[0] && (
-              <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
-            )}
-            {failMsg[0] && (
-              <InfoMessage className="error">{failMsg[1]}</InfoMessage>
-            )}
-          </InputsWrapper>
-        </RegisterWrapper>
-      </Container>
+      <RegisterWrapper>
+        <InfoWrapper>
+          <h1>Registering is not possible😬</h1>
+          <h1> Welcome to GreenBay!</h1>
+          <p>Sign up to continue</p>
+        </InfoWrapper>
+        <InputsWrapper>
+          <StyledImg src={greenShape} />
+          <h1>Register</h1>
+          <Input
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            type="text"
+            placeholder="username"
+            icon={<BiUser />}
+          />
+          <Input
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => handleEmailBlur()}
+            value={email}
+            type="text"
+            placeholder="email"
+            icon={<BiEnvelope />}
+          />
+          <Input
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={() => handlePasswordBlur()}
+            value={password}
+            type="password"
+            placeholder="password"
+            icon={<BiLockAlt />}
+          />
+          <Button
+            disabled={true}
+            onClick={() => handleRegisterClick()}
+            buttonName="Sign up"
+          />
+          {succesMsg[0] && (
+            <InfoMessage className="success">{succesMsg[1]}</InfoMessage>
+          )}
+          {failMsg[0] && (
+            <InfoMessage className="error">{failMsg[1]}</InfoMessage>
+          )}
+        </InputsWrapper>
+      </RegisterWrapper>
       <Footer />
     </RegisterContainer>
   );
