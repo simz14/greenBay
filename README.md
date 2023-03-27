@@ -30,8 +30,7 @@
 
 <h3 align="left">Tools and technologies used in this project:</h3>
 <p align="left"> 
-<a  target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a>
-
+<a  target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a>
 <a  target="_blank" href="https://expressjs.com/" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a>
 <a  target="_blank" href="https://git-scm.com/" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a>  
 <a  target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
@@ -46,6 +45,6 @@
 
 <h3>🌱 Help me grow:</h3>
 
-- Thank you for coming to the end, I will continue to build other projects that interest me.
+- Thank you for coming to the end, I will continue to built other projects that interest me.
 
 - Any advice for future projects or ideas for improvement would be appreciated.
