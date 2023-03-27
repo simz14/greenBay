@@ -39,18 +39,10 @@ const LoginWrapper = styled.div`
 const InfoWrapper = styled.div`
   @media (max-width: 700px) {
     & h1 {
-      font-size: 1em;
+      font-size: 13px;
     }
     & p {
-      font-size: 0.5em;
-    }
-  }
-  @media (max-width: 400px) {
-    & h1 {
-      font-size: 0.5em;
-    }
-    & p {
-      font-size: 0.2em;
+      font-size: 11px;
     }
   }
 `;
@@ -77,18 +69,13 @@ const StyledImg = styled.img`
 
 const InputsWrapper = styled.div`
   display: grid;
-  width: 30%;
+  width: 80%;
   justify-self: end;
   border-radius: 15px;
   padding: 2rem 4rem;
   box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.1);
-  @media (max-width: 700px) {
-    padding: 1rem;
-    width: 60%;
-  }
   @media (max-width: 400px) {
-    padding: 1rem;
-    width: 80%;
+    padding: 2rem 2rem;
   }
 `;
 

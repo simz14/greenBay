@@ -11,7 +11,6 @@ import Button from "../../components/Button";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header/Header";
 import styled from "styled-components";
-import { Container } from "../../components/Container";
 import { CartContext } from "../../context/CartContext";
 import { ProductsContext } from "../../context/ProductsContext";
 import { validateSellData } from "../../utils/validation";
@@ -21,12 +20,15 @@ import SellImg from "../../assets/sellingImg.webp";
 import PopUp from "../../components/PopUp";
 import { SellingItemsContext } from "../../context/SellingItems";
 
-const SellContainer = styled.div``;
+const SellContainer = styled.div`s`;
 
 const SellWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
 
   & .heading {
     display: grid;
@@ -38,10 +40,6 @@ const SellWrapper = styled.div`
     }
   }
 
-  @media (max-width: 650px) {
-    display: flex;
-    flex-direction: column;
-  }
   & .MuiFormGroup-root {
     display: grid;
   }
@@ -71,6 +69,19 @@ const SellWrapper = styled.div`
       & img {
         height: 12rem;
       }
+    }
+  }
+  & .inputsForProduct {
+    display: flex;
+    flex-direction: row;
+    grid-column: 1/3;
+  }
+  @media (max-width: 600px) {
+    & .inputsForProduct {
+      display: flex;
+      flex-direction: column;
+      grid-column: 1/3;
+      gap: 1rem;
     }
   }
 `;
@@ -206,23 +217,23 @@ const Sell = () => {
   return (
     <SellContainer>
       <Header cartItems={cartItems} />
-      <Container>
-        <SellWrapper>
-          <PopUp
-            showHandler={setSuccessAdding}
-            show={successAdding}
-            title={"Your product has been added"}
-          />
+      <SellWrapper>
+        <PopUp
+          showHandler={setSuccessAdding}
+          show={successAdding}
+          title={"Your product has been added"}
+        />
 
-          <div className="gotYourBack">
-            <div>
-              <h1>You've got this.</h1>
-              <h1>We've got your back.</h1>
-            </div>
-            <img src={SellImg} />
+        <div className="gotYourBack">
+          <div>
+            <h1>You've got this.</h1>
+            <h1>We've got your back.</h1>
           </div>
-          <SuggestionList />
-          <h1 className="heading">Here you can add your item for sale </h1>
+          <img src={SellImg} />
+        </div>
+        <SuggestionList />
+        <h1 className="heading">Here you can add your item for sale </h1>
+        <div className="inputsForProduct">
           <FormWrapper>
             <TextField
               value={title}
@@ -303,8 +314,8 @@ const Sell = () => {
               {price ? <p>{price + "€"}</p> : <EmptyField></EmptyField>}
             </PreviewBox>
           </PreviewWrapper>
-        </SellWrapper>
-      </Container>
+        </div>
+      </SellWrapper>
       <Footer />
     </SellContainer>
   );

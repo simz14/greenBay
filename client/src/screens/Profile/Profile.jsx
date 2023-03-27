@@ -14,6 +14,7 @@ const ProfileWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   padding: 1rem;
+  margin-bottom: auto;
 
   @media (max-width: 800px) {
     & .links {
@@ -60,22 +61,20 @@ const Profile = () => {
   return (
     <ProfileContainer>
       <Header cartItems={cartItems} />
-      <Container>
-        <ProfileWrapper>
-          <div className="links">
-            <ProfileSideBar
-              showAccount={handleClickAccount}
-              showSelling={handleClickSelling}
-              showPurchases={handleClickPurchases}
-            />
-          </div>
-          <ContentWrapper>
-            {showAccount && <Account />}
-            {showSelling && <Selling />}
-            {showPurchases && <Purchases />}
-          </ContentWrapper>
-        </ProfileWrapper>
-      </Container>
+      <ProfileWrapper>
+        <div className="links">
+          <ProfileSideBar
+            showAccount={handleClickAccount}
+            showSelling={handleClickSelling}
+            showPurchases={handleClickPurchases}
+          />
+        </div>
+        <ContentWrapper>
+          {showAccount && <Account />}
+          {showSelling && <Selling />}
+          {showPurchases && <Purchases />}
+        </ContentWrapper>
+      </ProfileWrapper>
       <Footer />
     </ProfileContainer>
   );

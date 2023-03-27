@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const FooterContainer = styled.div`
   position: relative;
-  overflow: hidden;
   margin: 0 auto;
   width: 100%;
 `;

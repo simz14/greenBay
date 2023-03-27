@@ -36,24 +36,16 @@ const RegisterWrapper = styled.div`
 const InfoWrapper = styled.div`
   @media (max-width: 700px) {
     & h1 {
-      font-size: 1em;
+      font-size: 13px;
     }
     & p {
-      font-size: 0.5em;
-    }
-  }
-  @media (max-width: 400px) {
-    & h1 {
-      font-size: 0.5em;
-    }
-    & p {
-      font-size: 0.2em;
+      font-size: 11px;
     }
   }
 `;
 
 const StyledImg = styled.img`
-  width: 25rem;
+  width: 80%;
   position: fixed;
   z-index: -9999;
   top: 10rem;
@@ -64,12 +56,6 @@ const StyledImg = styled.img`
     flex-wrap: wrap;
     right: initial;
     margin-top: 5rem;
-  }
-  @media (max-width: 700px) {
-    width: 20rem;
-  }
-  @media (max-width: 400px) {
-    width: 15rem;
   }
 `;
 

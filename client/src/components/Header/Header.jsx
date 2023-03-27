@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/logo.svg";
 import DropDown from "./DropDown";
@@ -28,6 +28,7 @@ const HeaderWrapper = styled.div`
   border-radius: 15px;
   padding: 0.5rem;
   font-size: 13px;
+  position: relative;
 `;
 const BrandImage = styled.img`
   height: 1.5rem;
@@ -88,7 +89,7 @@ const UserAuthWrapper = styled.div`
 const Icons = styled.div`
   display: flex;
   gap: 1rem;
-  position: fixed;
+  position: relative;
   justify-self: end;
   z-index: 99999;
 `;
@@ -105,44 +106,12 @@ const CartCount = styled.span`
   margin-left: -10px;
 `;
 
-const CompWrapper = styled.div`
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: -1rem;
-  right: 0;
-`;
-
-const BcgClick = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-`;
-
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const { setUserId, setUsername, setIsAdmin } = useContext(UserContext);
   const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
-  const refMenu = useRef(null);
-  const refCart = useRef(null);
-
-  const checkClickOutsideMenu = (e) => {
-    if (refMenu.current.contains(e.target)) {
-      setShowMenu(false);
-    }
-  };
-
-  const checkClickOutsideCart = (e) => {
-    if (refCart.current.contains(e.target)) {
-      setShowCart(false);
-    }
-  };
 
   const handleClickMenu = () => {
     setShowMenu((prev) => !prev);
@@ -189,18 +158,8 @@ const Header = () => {
             </Icons>
           )}
 
-          {showMenu && (
-            <CompWrapper onClick={(e) => checkClickOutsideMenu(e)}>
-              <BcgClick ref={refMenu}></BcgClick>
-              <DropDown />
-            </CompWrapper>
-          )}
-          {showCart && (
-            <CompWrapper onClick={(e) => checkClickOutsideCart(e)}>
-              <BcgClick ref={refCart}></BcgClick>
-              <CartComponent />
-            </CompWrapper>
-          )}
+          {showMenu && <DropDown />}
+          {showCart && <CartComponent />}
         </HeaderWrapper>
       </Container>
     </HeaderContainer>

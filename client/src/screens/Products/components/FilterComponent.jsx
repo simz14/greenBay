@@ -77,21 +77,19 @@ const FilterComp = ({
     }
   };
   return (
-    <Container>
-      <FilterCompWrapper onClick={(e) => checkClickOutside(e)}>
-        <BcgClick ref={ref}></BcgClick>
-        <FormBox>
-          <StyledIcon onClick={() => setShowFilterComp(false)} />
-          <FilterForm
-            price={price}
-            setPrice={handleChangePirce}
-            filteredProducts={filteredProducts}
-            filteredCategories={filteredCategories}
-            filterHandler={filterHandler}
-          />
-        </FormBox>
-      </FilterCompWrapper>
-    </Container>
+    <FilterCompWrapper onClick={(e) => checkClickOutside(e)}>
+      <BcgClick ref={ref}></BcgClick>
+      <FormBox>
+        <StyledIcon onClick={() => setShowFilterComp(false)} />
+        <FilterForm
+          price={price}
+          setPrice={handleChangePirce}
+          filteredProducts={filteredProducts}
+          filteredCategories={filteredCategories}
+          filterHandler={filterHandler}
+        />
+      </FormBox>
+    </FilterCompWrapper>
   );
 };
 
